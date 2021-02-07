@@ -48,7 +48,20 @@ Properties are used to associate specific information with individual nodes.
 
 ## Traversing a graph
 
+3 different traversal ways: Walk, Trail, Path
+
+A _walk_ is an ordered alternating list of nodes and relationship. You can traverse relationships multiple times and visit the same nodes as many times as you wish.
+
+A _trail_ is a walk where no regionships are repeated, but nodes can be visited more than once.
+
+A _path_ is a trail where no nodes are repeated. That is all items are unique.
+
+
 ## What is a graph database?
+
+A graph database is an online database management system with Create, Read, Update and Delete (CRUD) operations working on a graph data model.
+
+
 
 ## Use cases for graph databases
 
