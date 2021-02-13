@@ -82,16 +82,61 @@ Exercise 4.2: Retrieve all people that were born in the 70’s.
 MATCH (p:Person) WHERE p.born>=1970 AND p.born<1980 RETURN p.name as `Person Name`, p.born as `Birth Year`
 ```
 
-
 Exercise 4.3: Retrieve the actors who acted in the movie The Matrix who were born after 1960.
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(:Movie {title:'The Matrix'})
+WHERE p.born>1960
+RETURN p.name as `Person Name`
+```
+
+OR
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE a.born > 1960 AND m.title = 'The Matrix'
+RETURN a.name as Name, a.born as `Year Born`
+```
 
 Exercise 4.4: Retrieve all movies by testing the node label and a property.
 
+Retrieve all movies released in 2000 by testing the node label and the released property, returning the movie titles.
+
+`MATCH (m:Movie) WHERE m.released=2000 RETURN m.title as Title`
+
+OR
+
+`MATCH (m) WHERE m:Movie AND m.released = 2000 RETURN m.title`
+
 Exercise 4.5: Retrieve all people that wrote movies by testing the relationship between two nodes.
+
+Retrieve all people that wrote movies by testing the relationship between two nodes, returning the names of the people and the titles of the movies.
+
+`MATCH (p:Person)-[r]->(m:Movie) RETURN p.name, type(r), m.title`
+
+OR
+
+```
+MATCH (a)-[rel]->(m)
+WHERE a:Person AND type(rel) = 'WROTE' AND m:Movie
+RETURN a.name as Name, type(rel), m.title as Movie
+```
 
 Exercise 4.6: Retrieve all people in the graph that do not have a property.
 
+Retrieve all people in the graph that do not have a born property, returning their names.
+
+Below is wrong query:
+
+`MATCH (p) WHERE p:Person AND p.born=NULL RETURN p.name`
+
+Should be:
+
+`MATCH (a:Person) WHERE NOT exists(a.born) RETURN a.name as Name`
+
 Exercise 4.7: Retrieve all people related to movies where the relationship has a property.
+
+
 
 Exercise 4.8: Retrieve all actors whose name begins with James.
 
