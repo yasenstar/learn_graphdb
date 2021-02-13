@@ -78,7 +78,7 @@ Exercise 4.2: Retrieve all people that were born in the 70’s.
 
 `MATCH (p:Person) WHERE p.born>=1970 AND p.born<1980 RETURN p.name as PersonName`
 
-`MATCH (p:Person) WHERE p.born>=1970 AND p.born<1980 RETURN p.name as `Person Name`, p.born as `Birth Year``
+`MATCH (p:Person) WHERE p.born>=1970 AND p.born<1980 RETURN p.name as \`Person Name\`, p.born as \`Birth Year\``
 
 
 Exercise 4.3: Retrieve the actors who acted in the movie The Matrix who were born after 1960.
