@@ -2,6 +2,8 @@ Command for testing:
 
 `:play 4.0-intro-neo4j-exercises`
 
+`:play https://guides.neo4j.com/4.0-intro-neo4j-exercises/12.html`
+
 # Exercise 1
 
 Retrive all Nodes: `MATCH (n) RETURN n`
@@ -976,24 +978,720 @@ CREATE (p)-[:DIRECTED]->(m)
 
 Create a new relationship, HELPED from Tom Hanks to Gary Sinise.
 
+Query to show two person and knwo there's no relationship between them:
 
+```
+MATCH (p1:Person)
+WHERE p1.name = 'Tom Hanks'
+MATCH (p2:Person)
+WHERE p2.name = 'Gary Sinise'
+RETURN p1, p2
+```
+
+Query of creating new relationship:
+
+```
+MATCH (p1:Person)
+WHERE p1.name = 'Tom Hanks'
+MATCH (p2:Person)
+WHERE p2.name = 'Gary Sinise'
+CREATE (p1)-[:HELPED]->(p2)
+RETURN p1, p2
+```
 
 ## Exercise 10.4: Query nodes and new relationships.
 
+Write a Cypher query to return all nodes connected to the movie, Forrest Gump, along with their relationships.
+
+My query:
+
+```
+MATCH (a)-[]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN a
+```
+
+Sample query, return all information:
+
+```
+MATCH (a)-[]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN a
+```
+
+Notice here that the HELPED relationship is also shown because Tom Hanks and Gary Sinise are connected and we have Connect result nodes selected in our Neo4j Browser settings.
+
 ## Exercise 10.5: Add properties to relationships.
+
+Add the roles property to the three ACTED_IN relationships that you just created to the movie, Forrest Gump using this information: Tom Hanks played the role, Forrest Gump. Robin Wright played the role, Jenny Curran. Gary Sinise played the role, Lieutenant Dan Taylor.
+
+Hint: You can set each relationship using separate MATCH clauses. You can also use a CASE clause to set the values. Look up in the documentation for how to use the CASE clause.
+
+My query:
+
+```
+MATCH (a)-[r:ACTED_IN]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+WHERE a.name = 'Tom Hanks' SET r.roles = 'Forrest Gump'
+WHERE a.name = 'Robin Wright' SET r.roles = 'Jenny Curran'
+WHERE a.name = 'Gary Sinise' SET r.roles = 'Lieutenant Dan Taylor'
+RETURN a,r
+```
+
+Got below error:
+
+```
+Invalid input 'H': expected 'i/I' (line 3, column 2 (offset: 65))
+"WHERE a.name = 'Tom Hanks' SET r.roles = 'Forrest Gump'"
+```
+
+Correct query, using `CASE`:
+
+```
+MATCH (a)-[r:ACTED_IN]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+SET r.roles =
+CASE a.name
+  WHEN 'Tom Hanks' THEN ['Forrest Gump']
+  WHEN 'Robin Wright' THEN ['Jenny Curran']
+  WHEN 'Gary Sinise' THEN ['Lieutenant Dan Taylor']
+END
+RETURN a,r
+```
 
 ## Exercise 10.6: Add a property to the HELPED relationship.
 
+Add a new property, research to the HELPED relationship between Tom Hanks and Gary Sinise and set this property’s value to war history.
+
+My query, should not using `CREATE`:
+
+```
+MATCH (p1:Person)-[r:HELPED]->(p2:Person)
+WHERE p1.name = 'Tom Hanks' AND p2.name = 'Gary Sinise'
+CREATE r.research = 'war history'
+RETURN p1,p2
+```
+
+Sample query:
+
+```
+MATCH (p1:Person)-[r:HELPED]->(p2:Person)
+WHERE p1.name = 'Tom Hanks' AND p2.name = 'Gary Sinise'
+SET r.research = 'war history'
+RETURN p1,p2
+```
+
 ## Exercise 10.7: View the current list of property keys in the graph.
+
+`CALL db.propertyKeys()`
 
 ## Exercise 10.8: View the current schema of the graph.
 
+`CALL db.schema.visualization()`
+
+`CALL db.schema.relTypeProperties`
+
+`CALL db.schema.nodeTypeProperties`
+
 ## Exercise 10.9: Retrieve the names and roles for actors.
+
+Query the graph to return the names and roles of actors in the movie, Forrest Gump.
+
+My query, incorrect since there's `null` in person's roles:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p.roles
+```
+
+Correct query, check `roles` of relationship:
+
+```
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p.name, r.roles
+```
 
 ## Exercise 10.10: Retrieve information about any specific relationships.
 
+Query the graph to retrieve information about any HELPED relationships.
+
+My query: `MATCH (m)-[:HELPED]->(n) RETURN m,n`, returns the two nodes and relationship
+
+Another: `MATCH (m)-[r:HELPED]->(n) RETURN m.name,r,n.name`, return one relationship
+
+Sample query:
+
+```
+MATCH (p1:Person)-[rel:HELPED]-(p2:Person)
+RETURN p1.name, rel, p2.name
+```
+
+Notice here that 2 results are returned. That is because we did not specify a direction for the relationship in the query. So there is a relationship from Tom Hanks and also to Gary Sinise, even though there is only one physical relationship in the graph. If you specify a direction for the relationship, only one result is returned.
+
 ## Exercise 10.11: Modify a property of a relationship.
+
+Modify the role that Gary Sinise played in the movie, Forrest Gump from Lieutenant Dan Taylor to Lt. Dan Taylor.
+
+Query checking the current roles in relationship ACTED_IN:
+
+```
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE p.name = 'Gary Sinise' AND m.title = 'Forrest Gump'
+RETURN r.roles
+```
+
+My query:
+
+```
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE p.name = 'Gary Sinise' AND m.title = 'Forrest Gump'
+SET r.roles = 'Lt. Dan Taylor'
+RETURN r.roles
+```
+
+Sample query, using `[]`:
+
+```
+MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump' AND p.name = 'Gary Sinise'
+SET rel.roles =['Lt. Dan Taylor']
+```
 
 ## Exercise 10.12: Remove a property from a relationship.
 
+Remove the research property from the HELPED relationship from Tom Hanks to Gary Sinise.
+
+My query, incorrect, should not use `DELETE`:
+
+```
+MATCH (p1:Person)-[r:HELPED]->(p2:Person)
+WHERE p1.name = 'Tom Hanks' AND p2.name = 'Gary Sinise'
+DELETE r.research
+RETURN r.research
+```
+
+Get error:
+
+```
+Neo.ClientError.Statement.TypeError
+Expected a Node, Relationship or Path, but got a UTF8StringValue
+```
+
+Correct query:
+
+```
+MATCH (p1:Person)-[rel:HELPED]->(p2:Person)
+WHERE p1.name = 'Tom Hanks' AND p2.name = 'Gary Sinise'
+REMOVE rel.research
+```
+
+After querying, the result will be `null` for `rel.research`
+
 ## Exercise 10.13: Confirm that your modifications were made to the graph.
+
+Query the graph to confirm that your modifications were made to the graph.
+
+My query: `MATCH (p)-[:HELPED]->(q) RETURN p,q`
+
+Sample query:
+
+```
+MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump'
+return p, rel, m
+```
+
+## Exercise 10: Creating Relationships (Taking it further - optional)
+
+Try adding or updating properties using the JSON-style syntax using = and +=.
+
+# Exercise 11: Deleting Nodes and Relationships
+
+In the previous exercise, you created relationships between Person and Movie nodes and you modified the properties for these relationships.
+
+In this exercise you will delete nodes and relationships from the graph.
+
+## Exercise 11.1: Delete a relationship.
+
+Recall that in the graph we have been working with, we have the HELPED relationship between Tom Hanks and Gary Sinise. We have decided that we no longer need this relationship in the graph.
+
+Delete the HELPED relationship from the graph.
+
+```
+MATCH (:Person)-[rel:HELPED]->(:Person)
+DELETE rel
+```
+
+## Exercise 11.2: Confirm that the relationship has been deleted.
+
+Query the graph to confirm that the relationship no longer exists.
+
+My query: `MATCH (p:Person)-[rel:HELPED]->(q:Person) RETURN p,q`
+
+Get `(no changes, no records)`
+
+## Exercise 11.3: Retrieve a movie and all of its relationships.
+
+Query the graph to display Forrest Gump and all of its relationships.
+
+My query:
+
+```
+MATCH (p)-[r]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p,r,m
+```
+
+Sample query (note: think no need to atd `:Person` since there's no such restriction):
+
+```
+MATCH (p:Person)-[rel]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p, rel, m
+```
+
+## Exercise 11.4: Try deleting a node without detaching its relationships.
+
+We want to remove the movie, Forrest Gump from the graph.
+
+Try deleting the Forrest Gump node without detaching its relationships.
+
+Do you receive an error?
+
+Query:
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+DELETE m
+```
+
+Get error:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Cannot delete node<171>, because it still has relationships. To delete this node, you must first delete its relationships.
+```
+
+## Exercise 11.5: Delete a Movie node, along with its relationships.
+
+Delete Forrest Gump, along with its relationships in the graph.
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+DETACH DELETE m
+```
+
+Result: `Deleted 1 node, deleted 4 relationships, completed after 3 ms.`
+
+## Exercise 11.6: Confirm that the Movie node has been deleted.
+
+Query the graph to confirm that the Forrest Gump node has been deleted.
+
+```
+MATCH (p)-[r]-(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p,r,m
+```
+
+Result: `(no changes, no records)`
+
+# Exercise 12: Merging Data in the Graph
+
+You have gained experience creating, modifying, and deleting nodes and relationships.
+
+In this exercise you will add and modify nodes and relationships in the graph by merging data. In some parts of the exercise, you will be creating duplicate nodes and relationships. You will see how in your real application, you should take care not to create duplicate nodes and relationships in your graphs.
+
+## Exercise 12.1: Use MERGE to create a Movie node.
+
+In this Part of the exercise, you will again create the movie, Forrest Gump, update the node, and then merge the data in the graph to create another node with a different label.
+
+Use MERGE to create (ON CREATE) a node of type Movie with the title property, Forrest Gump. If created, set the released property to 1994
+
+My query:
+
+```
+MERGE (m:Movie)
+SET m.title = 'Forrest Gump', m.released = 1994
+```
+
+Get error:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(0) already exists with label `Movie` and property `title` = 'Forrest Gump'
+```
+
+Correct query:
+
+```
+MERGE (m:Movie {title: 'Forrest Gump'})
+ON CREATE SET m.released = 1994
+RETURN m
+```
+
+## Exercise 12.2: Use MERGE to update a node.
+
+Use MERGE to update (ON MATCH) a node of type Movie with the title property, Forrest Gump. If found, set the tagline property to "Life is like a box of chocolates…​you never know what you’re gonna get.".
+
+```
+MERGE (m:Movie {title: 'Forrest Gump'})
+ON CREATE SET m.released = 1994
+ON MATCH SET m.tagline = "Life is like a box of chocolates...you never know what you’re gonna get."
+RETURN m
+```
+
+## Exercise 12.3: Use MERGE to create a Production node.
+
+Use MERGE to create (ON CREATE) a node of type Production with the title property, Forrest Gump. If created, set the property year to the value 1994.
+
+```
+MERGE (p:Production {title:'Forrest Gump'})
+ON CREATE SET p.year = 1994
+RETURN p
+```
+
+Result:
+
+```
+{
+  "identity": 173,
+  "labels": [
+    "Production"
+  ],
+  "properties": {
+"title": "Forrest Gump",
+"year": 1994
+  }
+}
+```
+
+## Exercise 12.4: Find all labels for nodes with a property value.
+
+Query the graph to find labels for nodes with the title property, Forrest Gump.
+
+My query (doesn't return `labels`): `MATCH (m {title:'Forrest Gump'}) RETURN m`
+
+Sample query:
+
+`MATCH (m {title:'Forrest Gump'}) RETURN labels(m)`
+
+OR
+
+```
+MATCH (m)
+WHERE m.title = 'Forrest Gump'
+RETURN labels(m)
+```
+
+## Exercise 12.5: Use MERGE to update a Production node.
+
+Use MERGE to update (ON MATCH) the existing Production node for Forrest Gump to add the company property with a value of Paramount Pictures.
+
+```
+MERGE (p:Production {title:'Forrest Gump'})
+ON MATCH SET p.company = 'Paramount Pictures'
+RETURN p
+```
+
+Result in table:
+
+```
+{
+  "identity": 173,
+  "labels": [
+    "Production"
+  ],
+  "properties": {
+"company": "Paramount Pictures",
+"title": "Forrest Gump",
+"year": 1994
+  }
+}
+```
+
+## Exercise 12.6: Use MERGE to add a label to a node.
+
+Use MERGE to add the OlderMovie label to the movie, Forrest Gump.
+
+My query, not correct:
+
+```
+MERGE (m:Movie {title:'Forrest Gump'})
+ON CREATE m:OlderMovie
+```
+
+Correct query:
+
+```
+MERGE (m:Movie {title:'Forrest Gump'})
+ON MATCH SET m:OlderMovie
+RETURN labels(m)
+```
+
+Result:
+
+```
+labels(m)
+["Movie", "OlderMovie"]
+```
+
+## Exercise 12.7: Use MERGE to create two nodes and a single relationship.
+
+In this Part of the exercise, you merge data to create relationships.
+
+Execute the following Cypher statement that uses MERGE to create two nodes and a single relationship
+
+`MERGE (p:Person {name: 'Robert Zemeckis'})-[:DIRECTED]->(m {title: 'Forrest Gump'})`
+
+This statement first finds all Person nodes that have only the name property value of Robert Zemeckis. It then finds all nodes with only the title property set to Forrest Gump. There are no Person or other nodes that have only these properties so the graph engine creates them. Then the graph engine creates the relationship between these two nodes. That is, this MERGE operation creates two nodes and a single relationship. If we had provided all of the property values for the nodes, we would not have created the extra nodes.
+
+In fact, you should never create nodes and relationships together like this! This example is here to show you how powerful Cypher can be. A best practice is to create nodes first, then relationships.
+
+Error message:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(151) already exists with label `Person` and property `name` = 'Robert Zemeckis'
+```
+
+## Exercise 12.8: Use the same MERGE statement to attempt to create two nodes and a single relationship.
+
+Repeat the execution of the previous statement.
+
+It should do nothing. A best practice is to always use MERGE to create relationships to ensure that there will be no duplication in the graph.
+
+`MERGE (p:Person {name: 'Robert Zemeckis'})-[:DIRECTED]->(m {title: 'Forrest Gump'})`
+
+## Exercise 12.9: Find the correct Person node to delete.
+
+Find the correct Person node to delete
+
+You query the nodes before you delete them to ensure you have the correct MATCH clauses.
+
+Execute this query:
+
+```
+MATCH (p:Person {name: 'Robert Zemeckis'})-[rel]-(x)
+WHERE NOT EXISTS (p.born)
+RETURN p, rel, x
+```
+
+Need remove `.born` beforehand:
+
+```
+MATCH (p:Person {name: 'Robert Zemeckis'})
+DELETE p.born
+RETURN p
+```
+
+## Exercise 12.10: Delete this Person node, along with its relationships.
+
+Delete this Person node, along with its relationships.
+
+```
+MATCH (p:Person {name: 'Robert Zemeckis'})--()
+WHERE NOT EXISTS (p.born)
+DETACH DELETE p
+```
+
+Result: `Deleted 1 node, deleted 2 relationships, completed after 1 ms.`
+
+## Exercise 12.11: Find the correct Forrest Gump node to delete.
+
+Find the correct Forrest Gump node to delete by executing this statement:
+
+```
+MATCH (m)
+WHERE m.title = 'Forrest Gump' AND labels(m) = []
+RETURN m, labels(m)
+```
+
+## Exercise 12.12: Delete the Forrest Gump node.
+
+Delete this Forrest Gump node.
+
+It should have no relationships, but you can specify DETACH just to be certain.
+
+```
+MATCH (m)
+WHERE m.title = 'Forrest Gump' AND labels(m)=[]
+DETACH DELETE m
+RETURN m, labels(m)
+```
+
+## Exercise 12.13: Use MERGE to create the DIRECTED relationship.
+
+Use MERGE to create the DIRECTED relationship between Robert Zemeckis and the Movie, Forrest Gump.
+
+My query:
+
+```
+MERGE (p:Movie {name:'Robert Zemeckis'})-[r]->(m:Movie {title:'Forrest Gump'})
+ON CREATE r:DIRECTED
+RETURN p,r,m
+```
+
+Get error message:
+
+```
+Neo.ClientError.Statement.SyntaxError
+Invalid input 'r': expected "SET" (line 2, column 11 (offset: 89))
+"ON CREATE r:DIRECTED"
+```
+
+Change to:
+
+```
+MERGE (p:Movie {name:'Robert Zemeckis'})-[r]->(m:Movie {title:'Forrest Gump'})
+SET r:DIRECTED
+RETURN p,r,m
+```
+
+Get error message:
+
+```
+Neo.ClientError.Statement.SyntaxError
+Exactly one relationship type must be specified for MERGE. Did you forget to prefix your relationship type with a ':'? (line 1, column 41 (offset: 40))
+"MERGE (p:Movie {name:'Robert Zemeckis'})-[r]->(m:Movie {title:'Forrest Gump'})"
+                                         ^
+```
+
+Change to:
+
+```
+MATCH (p:Movie {name:'Robert Zemeckis'})-[r]->(m:Movie {title:'Forrest Gump'})
+MERGE (p)-[r:DIRECTED]->(m)
+RETURN p,r,m
+```
+
+Get error message:
+
+```
+Neo.ClientError.Statement.SyntaxError
+Variable `r` already declared (line 2, column 12 (offset: 90))
+"MERGE (p)-[r:DIRECTED]->(m)"
+            ^
+```
+
+Corrected query:
+
+```
+MATCH (p:Person), (m:Movie)
+WHERE p.name = 'Robert Zemeckis' AND m.title = 'Forrest Gump'
+MERGE (p)-[:DIRECTED]->(m)
+```
+
+## Exercise 12.14: Use MERGE to create the ACTED_IN relationship.
+
+Use MERGE to create the ACTED_IN relationship between the actors, Tom Hanks, Gary Sinise, and Robin Wright and the Movie, Forrest Gump.
+
+My query:
+
+```
+MATCH (p:Person), (m:Movie {title:'Forrest Gump'})
+WHERE p.name = 'Tom Hanks' OR p.name = 'Gary Sinise' OR p.name = 'Robin Wright'
+MERGE (p)-[:ACTED_IN]->(m)
+```
+
+Result: `Created 3 relationships, completed after 8 ms.`
+
+Sample query is simpler:
+
+```
+MATCH (p:Person), (m:Movie)
+WHERE p.name IN ['Tom Hanks','Gary Sinise', 'Robin Wright']
+      AND m.title = 'Forrest Gump'
+MERGE (p)-[:ACTED_IN]->(m)
+```
+
+## Exercise 12.15: Modify the role relationship property.
+
+Modify the relationship property, role for their roles in Forrest Gump:
+
+- Tom Hanks is Forrest Gump
+- Gary Sinise is Lt. Dan Taylor
+- Robin Wright is Jenny Curran
+
+Hint: Use the CASE clause.
+
+```
+MATCH (p:Person)-[r:ACTED_IN]-(m:Movie {title:'Forrest Gump'})
+SET r.roles =
+CASE p.name
+  WHEN 'Tom Hanks' THEN ['Forrest Gump']
+  WHEN 'Robin Wright' THEN ['Jenny Curran']
+  WHEN 'Gary Sinise' THEN ['Lt. Dan Taylor']
+END
+RETURN p,r,m
+```
+
+## Exercise 12.16: Verify the update.
+
+Write a query to verify what you just updated in the graph.
+
+```
+MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p.name, rel.roles, m.title
+```
+
+# Exercise 13: Defining constraints on your data
+
+## Exercise 13.1: Add a uniqueness constraint to the graph.
+
+Suppose we want to ensure that every Person in the graph must have a unique name.
+
+Add a uniqueness constraint named PersonNameUniqueConstraint to the Person nodes in the graph.
+
+`CREATE CONSTRAINT PersonNameUniqueConstraint ON (p:Person) ASSERT p.name IS UNIQUE`
+
+Error message:
+
+```
+Neo.ClientError.Schema.ConstraintAlreadyExists
+Constraint already exists: Constraint( id=2, name='constraint_e26b1a8b', type='UNIQUENESS', schema=(:Person {name}), ownedIndex=1 )
+```
+
+Check existing CONSTRAINTS, realize this one already exists:
+
+```
+CALL db.constraints()
+```
+
+Result:
+
+| name | description | details |
+| --- | --- | --- |
+| "constraint_3044d997" |"CONSTRAINT ON ( movie:Movie ) ASSERT (movie.title) IS UNIQUE" |"Constraint( id=5, name='constraint_3044d997', type='UNIQUENESS', schema=(:Movie {title}), ownedIndex=4 )" |
+| "constraint_e26b1a8b" | CONSTRAINT ON ( person:Person ) ASSERT (person.name) IS UNIQUE" | "Constraint( id=2, name='constraint_e26b1a8b', type='UNIQUENESS', schema=(:Person {name}), ownedIndex=1 )" |
+
+
+## Exercise 13.2: Add an actor to the graph.
+
+## Exercise 13.3: Attempt to add an existence constraint to the Person nodes in the graph.
+
+## Exercise 13.4: Update Person nodes to have a born property.
+
+## Exercise 13.5: Add an existence constraint to the Person nodes in the graph.
+
+## Exercise 13.6: Add Sean Penn to the graph where you do not specify a value for born.
+
+## Exercise 13.7: Add an existence constraint to a relationship in the graph.
+
+## Exercise 13.8: Attempt to add a relationship that violates the constraint.
+
+## xercise 13.9: Add a node key to the graph.
+
+## Exercise 13.10: Add the movie node to the graph.
+
+## Exercise 13.11: Add a similar movie node with slightly different property values.
+
+## Exercise 13.12: Try adding the 2018 movie again.
+
+## Exercise 13.13: Display the list of constraints defined in the graph.
+
+## Exercise 13.14: Drop an existence constraint.
