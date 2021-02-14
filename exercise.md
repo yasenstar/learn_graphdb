@@ -1672,6 +1672,10 @@ Result:
 
 ## Exercise 13.2: Add an actor to the graph.
 
+Add Tom Hanks to the graph.
+
+
+
 ## Exercise 13.3: Attempt to add an existence constraint to the Person nodes in the graph.
 
 ## Exercise 13.4: Update Person nodes to have a born property.
