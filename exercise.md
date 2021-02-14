@@ -488,3 +488,512 @@ WHERE p.name = 'Tom Hanks'
 RETURN m.title as Movie, m.released as `Released Year`, date().year - m.released as `years Ago Released`, m.released - p.born as `Age of Tom`
 ```
 
+# Exercise 7: Controlling query processing
+
+In this exercise you will write queries that use WITH to chain query results and control processing during queries. You will write queries that use WITH to collect data and then return intermediate results. Then, you will use WITH to limit the number of results returned. Next, you will test the size of a collection, together with the WITH clause to control what results are returned. Then, you will chain results together to test the size to control the results returned. Finally, you will chain results together and unwind a collected list to produce results.
+
+## Exercise 7.1: Using WITH.
+
+Retrieve the actors who have acted in exactly five movies, returning the name of the actor, and the list of movies for that actor.
+
+My query, incorrect:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH count(m) = 5
+RETURN p.name as Actor, COLLECT(m.title) as `List of Movies`
+```
+
+Correct query:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, count(m) AS numMovies, COLLECT(m.title) AS `List of Movies`
+WHERE numMovies = 5
+RETURN p.name as Actor, `List of Movies`
+```
+
+## Exercise 7.2: Using WITH to limit results returned.
+
+Retrieve all actors that have not appeared in more than 3 movies. Return their names and list of movies
+
+My query, correct:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, count(m) as numOfMovies, COLLECT(m.title) as `List of Movies`
+WHERE numOfMovies <= 3
+RETURN p.name as Actor, `List of Movies`
+```
+
+## Exercise 7.3: Using the size of a retrieval to process the query.
+
+Retrieve the movies that have at least 2 directors, and optionally the names of people who reviewed the movies.
+
+My query:
+
+```
+MATCH (p1:Person)-[:DIRECTED]->(m:Movie)
+WITH p1, count(p1) as numOfDirectors, m.title as Movie
+OPTIONAL MATCH (p2:Person)-[:REVIEWED]->(m)
+WHERE numOfDirectors >= 2 AND EXISTS (p2.name)
+RETURN Movie, COLLECT(p2.name) as `List of Reviewers`
+```
+
+Correct query:
+
+```
+MATCH (m:Movie) with m, size((:Person)-[:DIRECTED]->(m)) AS Directors
+WHERE Directors >= 2
+OPTIONAL MATCH (p:Person)-[:REVIEWED]->(m)
+RETURN m.title, p.name
+```
+
+## Exercise 7.4: Testing the size of a list.
+
+Write a Cypher query that retrieves all actors that acted in movies, and collects the list of movies for any actor that acted in more than five movies. Return the name of the actor and the list.
+
+My query, not able to list the collection of the moview:
+
+```
+MATCH (p:Person)
+WITH p, size((p)-[:ACTED_IN]->(:Movie)) as numOfMovies
+WHERE numOfMovies > 5
+RETURN p.name as Actor
+```
+
+Correct query:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, COLLECT(m) AS Movies
+WHERE size(Movies) > 5
+RETURN p.name as Actor, Movies
+```
+
+## Exercise 7.5: Unwinding a list in the query chain.
+
+Modify the query you just wrote so that before the query processing ends, you unwind the list of movies and then return the name of the actor and the title of the associated movie
+
+Hint: Use two WITH clauses and test the size of the collected list using the size() function.
+
+Sample query using `UNWIND`:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, COLLECT(m) AS Movies
+WHERE size(Movies) > 5
+WITH p, Movies UNWIND Movies AS Movie
+RETURN p.name as Actor, Movie.title
+```
+
+Further `COLLECT` titles of movies:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, COLLECT(m) AS Movies
+WHERE size(Movies) > 5
+WITH p, Movies UNWIND Movies AS Movie
+RETURN p.name as Actor, COLLECT(Movie.title) AS MovieName
+```
+
+# Exercise 8: Controlling results returned
+
+In this exercise, you will write queries where you can customize what results are returned and if they will be sorted. First, you will write a query that eliminates duplication of rows returned. Then you write a query that sorts the data returned. Finally, you will write a query to limit the number of results returned.
+
+## Exercise 8.1: Execute a query that returns duplicate records.
+
+You want to know what actors acted in movies in the decade starting with the year 1990. First write a query to retrieve all actors that acted in movies during the 1990s, where you return the released date, the movie title, and the collected actor names for the movie. For now do not worry about duplication.
+
+My query, OK:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE 1990 <= m.released < 2000
+RETURN m.title, m.released, COLLECT(p.name) AS Actors
+```
+
+Sample query:
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.released >= 1990 AND m.released < 2000
+RETURN m.released, m.title, collect(a.name)
+```
+
+## Exercise 8.2: Modify the query to eliminate duplication.
+
+The results returned from the previous query include multiple rows for a movie released value. Next, modify the query so that the released date records returned are not duplicated. To implement this, you must add the collection of the movie titles to the results returned.
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.released >= 1990 AND m.released < 2000
+RETURN m.released, collect(m.title), collect(a.name)
+```
+
+## Exercise 8.3: Modify the query to eliminate more duplication.
+
+The results returned from the previous query returns the collection of movie titles with duplicates. That is because there are multiple actors per released year. Next, modify the query so that there is no duplication of the movies listed for a year.
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.released >= 1990 AND m.released < 2000
+RETURN m.released, collect(DISTINCT m.title), collect(a.name)
+```
+
+Note: `DISTINCT` should be within `collect`
+
+## Exercise 8.4: Sort results returned.
+
+Modify the query that you just wrote to order the results returned so that the more recent years are displayed first.
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.released >= 1990 AND m.released < 2000
+RETURN m.released, collect(DISTINCT m.title), collect(a.name)
+ORDER BY m.released DESC
+```
+
+## Exercise 8.5: Retrieve the top 5 ratings and their associated movies.
+
+Retrieve the top 5 ratings and their associated movies, returning the movie title and the rating.
+
+My query, do not know how to show "Top 5":
+
+```
+MATCH ()-[r:REVIEWED]->(m:Movie)
+RETURN m.title AS Movie, r.rating AS Rating
+ORDER BY r.rating DESC
+```
+
+Correct query, using `LIMIT x` clause:
+
+```
+MATCH ()-[r:REVIEWED]->(m:Movie)
+RETURN m.title AS Movie, r.rating AS Rating
+ORDER BY r.rating DESC LIMIT 5
+```
+
+## Exercise 8.6: Return the movies where an actor had the most roles.
+
+What movies did Tom Hanks act in? What roles did he play? Order the results by the movies where he played the most roles.
+
+My query, cannot find correct result:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[r]-(p)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title as Movie, COUNT(r)
+```
+
+Also incorect, should not use `r` as wild indicator of relations:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[r]-(p)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title as Movie, size(r.roles) AS Size, r.roles
+ORDER BY Size DESC
+```
+
+Correct query:
+
+```
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title as Movie, size(r.roles) AS Size, r.roles
+ORDER BY Size DESC
+```
+
+# Exercise 9: Creating Nodes
+
+In this exercise, you will write Cypher statements to create nodes. Then you will write Cypher statements to add and remove labels for nodes. Next, you will use Cypher to add properties to nodes. Finally, you will write Cypher statements to remove properties from nodes.
+
+## Exercise 9.1: Create a Movie node.
+
+Create a Movie node for the movie with the title, Forrest Gump.
+
+`CREATE (:Movie {title: 'Forrest Gump'})`
+
+## Exercise 9.2: Retrieve the newly-created node.
+
+Retrieve the node you just created by its title.
+
+My query: `MATCH (m:Movie) WHERE m.title = 'Forrest Gump' RETURN m`
+
+## Exercise 9.3: Create a Person node.
+
+Create a Person node for the person with the name, Robin Wright.
+
+`CREATE (:Person {name:'Robin Wright'})`
+
+## Exercise 9.4: Retrieve the newly-created node.
+
+Retrieve the Person node you just created by its name.
+
+`MATCH (p:Person) WHERE p.name='Robin Wright' RETURN p`
+
+## Exercise 9.5: Add a label to a node.
+
+Add the label OlderMovie to any Movie node that was released before 2010.
+
+```
+MATCH (m:Movie)
+WHERE m.released < 2010
+SET m:OlderMovie
+RETURN DISTINCT labels(m)
+```
+
+## Exercise 9.6: Retrieve the node using the new label.
+
+Retrieve all older movie nodes to test that the label was indeed added to these nodes.
+
+`MATCH (m:OlderMovie) RETURN m.title, m.released ORDER BY m.released DESC`
+
+## Exercise 9.7: Add the Female label to selected nodes.
+
+Add the label Female to all Person nodes that has a person whose name starts with Robin.
+
+My query, wrongly using `STARTS OF`, should be `STARTS WITH`, no need `RETURN`:
+
+```
+MATCH (p:Person)
+WHERE p.name STARTS OF 'Robin'
+SET p:Female
+RETURN DISTINCE labels(p)
+```
+
+Correct query:
+
+```
+MATCH (p:Person)
+WHERE p.name STARTS WITH 'Robin'
+SET p:Female
+```
+
+## Exercise 9.8: Retrieve all Female nodes.
+
+`MATCH (p:Female) RETURN p.name`
+
+Result:
+
+p.name
+"Robin Williams"
+"Robin Wright"
+
+Do you notice that not all of these nodes should be labeled Female?
+
+Here we see that there are two Person nodes. The Robin Williams node should not have the label Female.
+
+## Exercise 9.9: Remove the Female label from the nodes that have this label.
+
+We’ve decided to not use the Female label. Remove the Female label from the nodes that have this label.
+
+`MATCH (p:Female) REMOVE p:Female`
+
+## Exercise 9.10: View the current schema of the graph.
+
+`CALL db.schema.visualization()`
+
+## Exercise 9.11: Add properties to a movie.
+
+Add the following properties to the movie, Forrest Gump:
+
+- released: 1994
+- tagline: Life is like a box of chocolates…​you never know what you’re gonna get.
+- lengthInMinutes: 142
+
+Hint: This movie should also have the label OlderMovie.
+
+My query (note: this movie has not yet add the `OlderMovie` tag):
+
+```
+MATCH (m:OlderMovie)
+WHERE m.title = 'Forrest Gump'
+SET
+      m.released = 1994,
+      m.tagline = "Life is like a box of chocolates...you never know what you're gonna get."
+      m.lengthInMinutes = 142
+RETURN m.title, m.released, m.tagline, m.lengthInMinutes
+```
+
+Correct query:
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+SET
+      m:OlderMovie,
+      m.released = 1994,
+      m.tagline = "Life is like a box of chocolates...you never know what you're gonna get.",
+      m.lengthInMinutes = 142
+RETURN m.title, m.released, m.tagline, m.lengthInMinutes
+```
+
+## Exercise 9.12: Retrieve an OlderMovie node to confirm the label and properties.
+
+```
+MATCH (m:OlderMovie)
+WHERE m.title = 'Forrest Gump'
+RETURN m.title, m.released
+```
+
+## Exercise 9.13: Add properties to the person, Robin Wright.
+
+Add the following properties to the person, Robin Wright:
+
+- born: 1966
+- birthPlace: Dallas
+
+Using this query to check this person's `born` and `birthPlace` is `NULL` now:
+
+```
+MATCH (p:Person)
+WHERE p.name = 'Robin Wright'
+RETURN p.name, p.born, p.birthPlace
+```
+
+Set value to needed properties:
+
+```
+MATCH (p:Person)
+WHERE p.name = 'Robin Wright'
+SET
+      p.born = 1996,
+      p.birthPlace = 'Dallas'
+RETURN p.name, p.born, p.birthPlace
+```
+
+## Exercise 9.14: Retrieve an updated Person node.
+
+Retrieve this Person node to confirm that the properties have been properly set.
+
+```
+MATCH (p:Person)
+WHERE p.name = 'Robin Wright'
+RETURN p
+```
+
+## Exercise 9.15: Remove a property from a Movie node.
+
+Remove the lengthInMinutes property from the movie, Forrest Gump.
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+SET m.lengthInMinutes = null
+RETURN m
+```
+
+## Exercise 9.16: Retrieve the node to confirm that the property has been removed.
+
+Retrieve the Forrest Gump node to confirm that the property has been removed.
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN m
+```
+
+## Exercise 9.17: Remove a property from a Person node.
+
+Remove the birthPlace property from the person, Robin Wright.
+
+```
+MATCH (p:Person)
+WHERE p.name = 'Robin Wright'
+REMOVE p.birthPlace
+```
+
+## Exercise 9.18: Retrieve the node to confirm that the property has been removed.
+
+Retrieve the Robin Wright node to confirm that the property has been removed.
+
+```
+MATCH (p:Person)
+WHERE p.name = 'Robin Wright'
+RETURN p
+```
+
+## Exercise 9: Creating Nodes (Taking it further - optional)
+
+Add more labels to the Movie nodes to reflect the movie genre (action, drama, etc.).
+
+Query the database using different labels for movies.
+
+Try adding or updating properties using the JSON-style syntax using = and +=.
+
+Add properties to nodes using the JSON-style format where you add all of the properties to the node.
+
+Query the database to confirm your additions.
+
+Call the Cypher built-in method to retrieve all of the property keys in the graph.
+
+# Exercise 10: Creating Relationships
+
+In the previous exercise, you created nodes, added and removed both properties and labels from nodes. The connections between nodes, the relationships, are one of the most important parts of a Neo4j graph.
+
+In this exercise you will create relationships between nodes. Then you will add properties to relationships. Finally, you will remove properties from relationships.
+
+## Exercise 10.1: Create ACTED_IN relationships.
+
+In the last exercise, you created the node for the movie, Forrest Gump and the person, Robin Wright.
+
+Create the ACTED_IN relationship between the actors, Robin Wright, Tom Hanks, and Gary Sinise and the movie, Forrest Gump.
+
+Using below query to check there're no `ACTED_IN` to this movie:
+
+```
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Forrest Gump'
+RETURN p.name
+```
+
+Actual query:
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+MATCH (p:Person)
+WHERE p.name = 'Tom Hanks' OR p.name = 'Robin Wright' OR p.name = 'Gary Sinise'
+CREATE (p)-[:ACTED_IN]->(m)
+```
+
+Result is `Created 3 relationships, completed after 4 ms.`
+
+## Exercise 10.2: Create a DIRECTED relationship.
+
+Create the DIRECTED relationship between Robert Zemeckis and the movie, Forrest Gump.
+
+```
+MATCH (m:Movie)
+WHERE m.title = 'Forrest Gump'
+MATCH (p:Person)
+WHERE p.name = 'Robert Zemeckis'
+CREATE (p)-[:DIRECTED]->(m)
+```
+
+## Exercise 10.3: Create a HELPED relationship.
+
+Create a new relationship, HELPED from Tom Hanks to Gary Sinise.
+
+
+
+## Exercise 10.4: Query nodes and new relationships.
+
+## Exercise 10.5: Add properties to relationships.
+
+## Exercise 10.6: Add a property to the HELPED relationship.
+
+## Exercise 10.7: View the current list of property keys in the graph.
+
+## Exercise 10.8: View the current schema of the graph.
+
+## Exercise 10.9: Retrieve the names and roles for actors.
+
+## Exercise 10.10: Retrieve information about any specific relationships.
+
+## Exercise 10.11: Modify a property of a relationship.
+
+## Exercise 10.12: Remove a property from a relationship.
+
+## Exercise 10.13: Confirm that your modifications were made to the graph.
