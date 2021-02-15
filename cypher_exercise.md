@@ -2160,3 +2160,32 @@ CREATE DATABASE importcsv
 ```
 
 Note: Use the `:dbs` to list all available databases.
+
+## Exercise 16.1: Write the Cypher statement to read the actor data from a file.
+
+You are given the name of a file, http://data.neo4j.com/v4.0-intro-neo4j/actors.csv that you must load into your graph.
+
+Write the Cypher statement to read the actor data from this file.
+
+```
+LOAD CSV WITH HEADERS
+FROM 'http://data.neo4j.com/v4.0-intro-neo4j/actors.csv'
+AS line
+RETURN line.id, line.name, line.birthYear
+```
+
+## Exercise 16.2: Read the data and return it, ensuring that the data returned is properly formatted.
+
+## Exercise 16.3: Load the data into your graph.
+
+## Exercise 16.4: Write the Cypher statement to read the movie data from a file.
+
+## Exercise 16.5: Read the data and return it, ensuring that the data returned is properly formatted.
+
+## Exercise 16.6: Load the data into your graph.
+
+## Exercise 16.7: Write the Cypher statement to read the relationship data from a file.
+
+## Exercise 16.8: Read the data and return it, ensuring that the data returned is properly formatted.
+
+## Exercise 16.9: Load the data into your graph.
