@@ -1872,9 +1872,38 @@ Result: `Removed 1 constraint, completed after 3 ms.`
 
 # Exercise 14: Creating indexes
 
+Create a single-property index on the born property of a Person node naming the index PersonBornIndex.
+
+`CREATE INDEX PersonBornIndex FOR (p:Person) ON (p.born)`
+
+Get error message:
+
+```
+Neo.ClientError.Schema.IndexAlreadyExists
+There already exists an index (:Person {born}).
+```
+
+Using 'CALL db.indexes()`, find one existing index called `index_1d2d0abd` already set _PersonBorn_ index, which is duplicated.
+
+Run `DROP INDEX index_1d2d0abd` to delete this index, then execute above command again:
+
+`CREATE INDEX PersonBornIndex FOR (p:Person) ON (p.born)`
+
+Get expected output: `Added 1 index, completed after 2 ms.`
+
 ## Exercise 14.1: Create an index.
 
+View the indexes defined for the graph.
+
+Do you see indexes that you did not create with the CREATE INDEX statement?
+
+The other indexes have been created because you previously created a uniqueness constraint and a node key constraint, __both of which create indexes__. You will only be able to see the performance benefits of indexes with large graphs which is beyond the scope of this training.
+
+`CALL db.indexes()`
+
 ## Exercise 14.2: View index information.
+
+`CALL db.indexes()`
 
 ## Exercise 14.3: Drop an index.
 
