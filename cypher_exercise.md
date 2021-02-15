@@ -1907,10 +1907,256 @@ The other indexes have been created because you previously created a uniqueness 
 
 ## Exercise 14.3: Drop an index.
 
+Drop the single-property index you just created for the born property of the Person nodes.
+
+`DROP INDEX PersonBornIndex`, get result as `Removed 1 index, completed after 1 ms.`
+
 ## Exercise 14.4: Create a full-text schema index.
+
+Create a full-text schema index for the tagline property of the Movie nodes named MovieTaglineFTIndex.
+
+My query, incorrect: `CREATE INDEX MovieTaglineFTIndex FOR (m:Movie) ON m.tagline`
+
+Corrected query using `CALL db...`:
+
+`CALL db.index.fulltext.createNodeIndex('MovieTaglineFTIndex',['Movie'],['tagline'])`
 
 ## Exercise 14.5: View the index information.
 
+`CALL db.indexes()`
+
 ## Exercise 14.6: Perform a query that uses the full-text schema index.
 
+Write and execute a query to find all movies with taglines that contain the strings "real" or "world".
+
+My query:
+
+```
+MATCH (m:Movie)
+WHERE m.tagline CONTAINS ['real','world']
+RETURN m.title, m.tagline
+```
+
+Get below errory message:
+
+```
+Neo.ClientError.Statement.SyntaxError
+Type mismatch: expected String but was List<String> (line 2, column 26 (offset: 41))
+"WHERE m.tagline CONTAINS ['real','world']"
+                          ^
+```
+
+Correct query:
+
+```
+CALL db.index.fulltext.queryNodes('MovieTaglineFTIndex', 'real OR world') YIELD node
+RETURN node.title, node.tagline
+```
+
 ## Exercise 14.7: Drop the full-text schema index.
+
+`CALL db.index.fulltext.drop('MovieTaglineFTIndex')`
+
+# Exercise 15: Using Query best practices
+
+## Exercise 15.1: Execute a Cypher query as described.
+
+Suppose that you want to create Cypher statements that enable you to easily test against a number of values in the graph. You will be exploring the graph for people who reviewed movies and the actors in these movies. You do not want to hard-code the value for released for a Movie node in your query.
+
+Write and execute a Cypher query that returns the names of people who reviewed movies and the actors in these movies by returning the name of the reviewer, the movie title reviewed, the release date of the movie, the rating given to the movie by the reviewer, and the list of actors for that particular movie.
+
+My query, no information for Actors:
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+RETURN p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.names) AS Actors
+```
+
+Checked, wrongly pur `q.names`, should be `q.name`, corrected as below:
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+RETURN p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.name) AS Actors
+```
+
+Get expected output.
+
+Sample query:
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+RETURN DISTINCT p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.name) AS Actors
+```
+
+Get same outputs.
+
+## Exercise 15.2: Add a parameter to your session.
+
+Add a parameter named year to your session with a value of 2000.
+
+`:param year => 2000`
+
+Get result:
+
+```
+{
+  "year": 2000
+}
+See  :help param for usage of the :param command.
+```
+
+## Exercise 15.3: Modify the Cypher query you just wrote to use a parameter.
+
+Modify the Cypher query you just wrote to filter by the year parameter.
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+WHERE m.released = $year
+RETURN DISTINCT p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.name) AS Actors
+```
+
+## Exercise 15.4: Modify parameter value and retest your query.
+
+Modify the year parameter to be a different value, 2006: `:param year => 2006`
+
+Retest your query, now show the result base on the released year in 2006.
+
+## Exercise 15.5: Add a different parameter to your session.
+
+Suppose that you want to parameterize both the values in your query for released for a Movie node and the rating value for the REVIEWED relationship.
+
+Add a parameter named ratingValue to your session with a value of 65.
+
+My query: `:param ratingValue => 65`
+
+Sample query: `:param {year: 2006, ratingValue: 65}`
+
+## Exercise 15.6: Modify the query you wrote previously to use the second parameter.
+
+Modify the query you wrote previously to also filter the result returned by the rating for the movie.
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+WHERE m.released = $year AND r.rating >= $ratingValue
+RETURN DISTINCT p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.name) AS Actors
+```
+
+## Exercise 15.7: Modify the second parameter value and retest your query.
+
+Modify the ratingValue parameter to be a different value, 60, and retest your query.
+
+`:param ratingValue => 60`
+
+## Exercise 15.8: View the query plan for a Cypher statement.
+
+For this Part of the exercise, you will use the query that you wrote previously using Cypher parameters. It assumes that you have set the year and ratingValue Cypher parameters:
+
+```
+MATCH (p:Person)-[r:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(q:Person)
+WHERE m.released = $year AND r.rating >= $ratingValue
+RETURN DISTINCT p.name AS Reviewer, m.title AS Movie, m.released AS Released, r.rating AS Rating, COLLECT(q.name) AS Actors
+```
+
+Using below to View the query plan for this Cypher statement.
+
+```
+EXPLAIN MATCH (r:Person)-[rel:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(a:Person)
+WHERE m.released = $year AND
+      rel.rating > $ratingValue
+RETURN  DISTINCT r.name, m.title, m.released, rel.rating, collect(a.name)
+```
+
+## Exercise 15.9: View the metrics for the query when a statement executes.
+
+```
+PROFILE MATCH (r:Person)-[rel:REVIEWED]->(m:Movie)<-[:ACTED_IN]-(a:Person)
+WHERE m.released = $year AND
+      rel.rating > $ratingValue
+RETURN  DISTINCT r.name, m.title, m.released, rel.rating, collect(a.name)
+```
+
+## Exercise 15.10: Remove the labels from the nodes and relationships in the query and again view the metrics.
+
+Remove the labels from the nodes and relationships in the query and again view the metrics. Compare the db hits from the previous version of the statement.
+
+```
+PROFILE MATCH (r)-[rel]->(m)<-[:ACTED_IN]-(a)
+WHERE m.released = $year AND
+      rel.rating > $ratingValue
+RETURN  DISTINCT r.name, m.title, m.released, rel.rating, collect(a.name)
+```
+
+Explore the contents of each step of the query by opening each step.
+
+Perform other queries to view the steps of the queries.
+
+## Exercise 15.11: Open a second Neo4j Browser session.
+
+Recall that a query may run for a long time because:
+
+There are a lot of results to return
+
+The query takes a long time to execute in the graph engine.
+
+You will perform these steps to gain some experience with monitoring and killing queries by having your original Neo4j Browser window open and then opening another Neo4j Browser window.
+
+Open a second Neo4j Browser session in a Web browser. This session will be used for monitoring queries as they run.
+
+If you are using Neo4j Desktop, open a Web browser window and enter http://localhost:7474 which opens a second Neo4j Browser window that has access to the same graph.
+
+__Note__: If you are using a Neo4j Sandbox or Neo4j Aura, go the the Sandbox or Aura site and simply click on the Neo4j Browser to open a second window for that same graph.
+
+## Exercise 15.12: Execute a query that returns a lot of results and monitor.
+
+Execute this code in your original Neo4j Browser session that returns a lot of results. In the second Neo4j Browser window, monitor the running queries.
+
+Here is a very bad Cypher statement to use that returns a lot of results:
+
+`PROFILE MATCH (a)--(b)--(c)--(d)--(e)--(f)--(g) RETURN a1`
+
+What do you see in the second Neo4j Browser window where you are monitoring queries with the :queries command?
+
+When you first execute the query in the original Neo4j Browser window, you should see this in the second Neo4j Browser window:
+
+Initially, the query is running in the server. After a few moments, you will see that in the original Neo4j Browser window, the query appears to be running, but it has completed on the server:
+
+This is because the graph engine has completed the query and the results are still being streamed to the client.
+
+## Exercise 15.13: Execute a long-running query and monitor.
+
+Execute this long-running query in your original Neo4j Browser session and monitor the query in the second Neo4j Browser session.
+
+Here is a very bad Cypher statement that takes a lot of time to execute in the graph engine:
+
+```
+PROFILE MATCH (a), (b), (c), (d), (e) , (f), (g)
+RETURN count(id(a))
+```
+What do you see in the second Neo4j Browser window where you are monitoring queries with the :queries command?
+
+You should see this when you first start the query:
+
+It takes a VERY long time to complete on the server.
+
+Get error message then:
+
+```
+Neo.ClientError.Transaction.TransactionTimedOut
+The transaction has been terminated. Retry your operation in a new transaction, and you should see a successful result. The transaction has not completed within the specified timeout (dbms.transaction.timeout). You may want to retry with a longer timeout. 
+```
+
+After a while you will want to kill this long-running query.
+
+## Exercise 15.14: Kill a query.
+
+# Exercise 16: Importing data
+
+You will start with a new database named importcsv. Execute these commands in Neo4j Browser to create the database.
+
+```
+:USE system
+CREATE DATABASE importcsv
+:use importcsv
+```
+
+Note: Use the `:dbs` to list all available databases.
