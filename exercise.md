@@ -1674,28 +1674,212 @@ Result:
 
 Add Tom Hanks to the graph.
 
+`CREATE (p:Person {name:'Tom Hanks'})`
 
+Error Message due to constraint existing:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(71) already exists with label `Person` and property `name` = 'Tom Hanks'
+```
 
 ## Exercise 13.3: Attempt to add an existence constraint to the Person nodes in the graph.
 
+Suppose we want to ensure that every Person node in the graph has a born property.
+
+Attempt to add an existence constraint named PersonBornExistsConstraint to the Person nodes in the graph.
+
+```
+CREATE CONSTRAINT PersonBornExistsConstraint
+ON (p:Person) ASSERT EXISTS(p.born)
+```
+
+Get follow error message:
+
+```
+Neo.DatabaseError.Schema.ConstraintCreationFailed
+Unable to create Constraint( type='NODE PROPERTY EXISTENCE', schema=(:Person {born}) ):
+Node(129) with label `Person` must have the property `born`
+```
+
+What happens when you add the constraint? This is what you should see. This is because there are Person nodes in the graph that do not have born properties set.
+
 ## Exercise 13.4: Update Person nodes to have a born property.
+
+Update the existing Person nodes so that you set the born property to 0 for any nodes that do not exist.
+
+```
+MATCH (p:Person)
+WHERE NOT exists(p.born)
+SET p.born = 0
+```
+
+Result is `Set 5 properties, completed after 3 ms.`
 
 ## Exercise 13.5: Add an existence constraint to the Person nodes in the graph.
 
+Add an existence constraint named PersonBornExistsConstraint to the Person nodes in the graph. (as 13.3)
+
+```
+CREATE CONSTRAINT PersonBornExistsConstraint
+ON (p:Person) ASSERT EXISTS(p.born)
+```
+
+Result is `Added 1 constraint, completed after 6 ms.`
+
 ## Exercise 13.6: Add Sean Penn to the graph where you do not specify a value for born.
+
+Add Sean Penn to the graph where you do not specify a value for born.
+
+Query: `CREATE (p:Person {name:'Sean Penn'})`
+
+Get error massage as expected:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(176) with label `Person` must have the property `born`
+```
 
 ## Exercise 13.7: Add an existence constraint to a relationship in the graph.
 
+Suppose we want to ensure that every ACTED_IN relationship must have a value for the roles property.
+
+Add an existence constraint, ActedInRolesExistConstraint to the ACTED_IN relationship in the graph.
+
+My query:
+
+```
+CREATE CONSTRAINT ActedInRolesExistConstraint
+ON [r:ACTED_IN]
+ASSERT EXISTS(r.roles)
+```
+
+Get error message:
+
+```
+Neo.ClientError.Statement.SyntaxError
+Invalid input '[': expected whitespace, comment, '(' or RelationshipPatternSyntax (line 2, column 4 (offset: 49))
+"ON [r:ACTED_IN]"
+    ^
+```
+
+Correct query:
+
+```
+CREATE CONSTRAINT ActedInRolesExistConstraint
+ON ()-[r:ACTED_IN]-()
+ASSERT EXISTS(r.roles)
+```
+
+Result is `Added 1 constraint, completed after 10 ms.`
+
 ## Exercise 13.8: Attempt to add a relationship that violates the constraint.
 
-## xercise 13.9: Add a node key to the graph.
+Add an ACTED_IN relationship from the person, Emil Eifrem to the movie, Forrest Gump where the roles property is not set.
+
+My query: `CREATE (:Person {name:'Emil Eifrem'})-[:ACTED_IN]->(:Movie {title:'Forrest Gump'})`
+
+Get error message:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(8) already exists with label `Person` and property `name` = 'Emil Eifrem'
+```
+
+## Exercise 13.9: Add a node key to the graph.
+
+Suppose we want to ensure that the graph will never contain a movie with the same title and the same year. For example, the movie studio decides to release a movie with the title, Back to the Future in 2018. There already is a movie in the graph with this title that was released in 1985. We want to allow this. To implement this type of constraint on the graph, you must add a constraint as a node key since it uses two properties of the node.
+
+Note: If you have created a uniqueness constraint to the graph for the title property (as shown in the module content), you must first drop the constraint as it no longer makes sense if we are to allow duplicate titles in the graph. You must write and execute the statement to drop the constraint if it exists:
+
+`DROP CONSTRAINT MovieTitleConstraint`
+
+Add a node key, MovieTitleReleasedConstraint to the graph that will ensure that the combined values of title and released are unique for all Movie nodes.
+
+Get error message
+
+Use `CALL db.constraints()` to check what are the current Constraints, found the Unique Movie Title constraint has different name `constraint_3044d997`, then run `Drop CONSTRAINT constraint_3044d997`, get correct output `Removed 1 constraint, completed after 4 ms.`
+
+```
+CREATE CONSTRAINT MovieTitleReleasedConstraint
+ON (m:Movie)
+ASSERT (m.title, m.released) IS NODE KEY
+```
 
 ## Exercise 13.10: Add the movie node to the graph.
 
+Add the movie, Back to the Future with a released value of 1985 and a tagline value of Our future..
+
+`CREATE (:Movie {title:'Back to the Future', released:1985, tagline:'Our future..'})`
+
+Result is `Added 1 label, created 1 node, set 3 properties, completed after 2 ms.`
+
 ## Exercise 13.11: Add a similar movie node with slightly different property values.
+
+Add the movie, Back to the Future with a released value of 2018 and a tagline value of The future is ours..
+
+`CREATE (:Movie {title:'Back to the Future', released:2018, tagline:'The future is ours..'})`
+
+Error message:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(178) already exists with label `Movie` and property `title` = 'Back to the Future'
+```
+
+Back to 13.9, found the contraint had different name, then drop it, after that, get correct output as `Added 1 label, created 1 node, set 3 properties, completed after 2 ms.`
 
 ## Exercise 13.12: Try adding the 2018 movie again.
 
+`CREATE (:Movie {title:'Back to the Future', released:2018, tagline:'The future is ours..'})`
+
+Get following error message:
+
+```
+Neo.ClientError.Schema.ConstraintValidationFailed
+Node(180) already exists with label `Movie` and properties `title` = 'Back to the Future', `released` = 2018
+```
+
 ## Exercise 13.13: Display the list of constraints defined in the graph.
 
+`CALL db.constraints()`
+
+| name | description | details |
+|---|---|---|
+|"ActedInRolesExistConstraint" | "CONSTRAINT ON ()-[ acted_in:ACTED_IN ]-() ASSERT exists(acted_in.roles)" | "Constraint( id=8, name='ActedInRolesExistConstraint', type='RELATIONSHIP PROPERTY EXISTENCE', schema=-[:ACTED_IN {roles}]- )" |
+| "MovieTitleReleasedConstraint" | "CONSTRAINT ON ( movie:Movie ) ASSERT (movie.title, movie.released) IS NODE KEY" | "Constraint( id=10, name='MovieTitleReleasedConstraint', type='NODE KEY', schema=(:Movie {title, released}), ownedIndex=9 )" |
+| "PersonBornExistsConstraint" | "CONSTRAINT ON ( person:Person ) ASSERT exists(person.born)" | "Constraint( id=7, name='PersonBornExistsConstraint', type='NODE PROPERTY EXISTENCE', schema=(:Person {born}) )" |
+| "constraint_e26b1a8b" | "CONSTRAINT ON ( person:Person ) ASSERT (person.name) IS UNIQUE" | "Constraint( id=2, name='constraint_e26b1a8b', type='UNIQUENESS', schema=(:Person {name}), ownedIndex=1 )" |
+
+In Neo4j 4.2 and later you can use `SHOW CONSTRAINTS`, get following result, slightly different format:
+
+| id | name | type | entityType | labelsOrTypes | properties | ownedIndexId |
+|---|---|---|---|---|---|---|
+| 8 | "ActedInRolesExistConstraint" | "RELATIONSHIP_PROPERTY_EXISTENCE" | 	"RELATIONSHIP" | ["ACTED_IN"] | ["roles"] | null |
+| 10 | "MovieTitleReleasedConstraint" | "NODE_KEY" | "NODE" | ["Movie"] | ["title", "released"] | 9 |
+| 7 | "PersonBornExistsConstraint" | "NODE_PROPERTY_EXISTENCE" | "NODE" | ["Person"] | ["born"] | null |
+| 2 | "constraint_e26b1a8b" | "UNIQUENESS" | "NODE" | ["Person"] | ["name"] | 1|
+
 ## Exercise 13.14: Drop an existence constraint.
+
+Drop the constraint that requires the ACTED_IN relationship to have a property, roles.
+
+`DROP CONSTRAINT ActedInRolesExistConstraint`
+
+Result: `Removed 1 constraint, completed after 3 ms.`
+
+# Exercise 14: Creating indexes
+
+## Exercise 14.1: Create an index.
+
+## Exercise 14.2: View index information.
+
+## Exercise 14.3: Drop an index.
+
+## Exercise 14.4: Create a full-text schema index.
+
+## Exercise 14.5: View the index information.
+
+## Exercise 14.6: Perform a query that uses the full-text schema index.
+
+## Exercise 14.7: Drop the full-text schema index.
