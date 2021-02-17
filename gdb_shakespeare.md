@@ -1,5 +1,7 @@
 # Graph DB - Shakespeare Words
 
+# DB Creation
+
 Create the base of the DB:
 
 ```cypher
@@ -42,6 +44,8 @@ create (shakespeare:Author {firstname:'William', lastname:'Shakespeare'}),
        (shakespeare)-[:BORN_IN]->(stratford)
 ```
 
+## Index and Constraints
+
 __IMPORTANT TO KNOW:__
 
 Identifiers remains available __ONLY__ for the duration of the __CURRENT__ query scope, but no longer! Should we wish to give long-lived names to nodes, we can simply create an index for a particular label and key property combination.
@@ -53,6 +57,8 @@ For unique property values we can also specify constraints that assure uniquenes
 To ensure that all country names are unique, we can add an uniqueness constraint:
 
 `CREATE CONSTRAIT ON (c:Country) ASSERT c.name IS UNIQUE`
+
+## DB Query
 
 Query returns all the Shakespeare plays that have been performed at the Theatre Royal in Newcastle:
 
@@ -75,3 +81,45 @@ The result is:
 Memo:
 
 - The identifiers `newcastle`, `theater`, and `bard` are anchored to real nodes in the graph based on the specified lable and property values.
+
+## Constraining Matches via `WHERE`
+
+We add a `WHERE` clause that filters on above relationship's year property:
+
+```SQL
+MATCH (theater:Venue {name:'Theatre Royal'}),
+      (newcastle:City {name:'Newcastle'}),
+      (bard:Author {lastname:'Shakespeare'}),
+      (newcastle)<-[:STREET|CITY*1..2]-(theatre)<-[:VENUE]-()-[:PERFORMANCE_OF]->()
+      -[:PRODUCTION_OF]->(play)<-[w:WROTE_PLAY]-(bard)
+WHERE w.year > 1608
+RETURN DISTINCT play.title AS play
+```
+
+The result is:
+
+| play |
+|---|
+|"The Tempest"|
+
+## Processing Query Results
+
+If we want to rank the plays by the number of performances, we will need first to bind the `PERFORMANCE_OF` relationship in the `MATCH` clause to an identifier, called `p`, which we can then `count` and `order`:
+
+```
+MATCH (theater:Venue {name:'Theatre Royal'}),
+      (newcastle:City {name:'Newcastle'}),
+      (bard:Author {lastname:'Shakespeare'}),
+      (newcastle)<-[:STREET|CITY*1..2]-(theatre)<-[:VENUE]-()-[p:PERFORMANCE_OF]->()
+      -[:PRODUCTION_OF]->(play)<-[:WROTE_PLAY]-(bard)
+RETURN play.title AS play, count(p) AS performance_count
+ORDER BY performance_count DESC
+```
+
+The result now is
+
+| play | performance_count
+| --- | :---: |
+|"Julius Caesar"| 2 |
+|"The Tempest"| 1 |
+
