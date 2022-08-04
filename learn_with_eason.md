@@ -15,6 +15,9 @@ create
       (davidson)-[:TEACHER_OF]->(eason),
       (davidson)-[:TEACHER_OF]->(adhish),
       (davidson)-[:TEACHER_OF]->(justin),
+      (eason)-[:STUDENT_OF]->(davidson),
+      (adhish)-[:STUDENT_OF]->(davidson),
+      (justin)-[:STUDENT_OF]->(davidson)
 ```
 
 `create (esther:Person {name:'Mme. Esther',gender:'female',title:'Teacher',class:'French'})`
