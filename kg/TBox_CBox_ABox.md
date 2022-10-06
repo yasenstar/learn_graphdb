@@ -10,6 +10,6 @@ Definition of TBox: A __TBox__ is a set of "schema" axioms (sentences), e.g.:
 
 ```
 {Doctor $$\subseteq$$ Person,
- HappyParent $$\equiv$$ Person }
+ HappyParent {\displaystyle \equiv }  Person }
 ```
 
