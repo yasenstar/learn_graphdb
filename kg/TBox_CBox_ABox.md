@@ -9,7 +9,7 @@ Original: "A Translation Approach to Portable Ontology Specification", by Thomas
 Definition of TBox: A __TBox__ is a set of "schema" axioms (sentences), e.g.:
 
 ```
-{Doctor $$\subseteq Person,
+{Doctor $$\subseteq$$ Person,
  HappyParent $$\equiv$$ Person }
 ```
 
