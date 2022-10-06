@@ -8,7 +8,8 @@ Original: "A Translation Approach to Portable Ontology Specification", by Thomas
 
 Definition of TBox: A __TBox__ is a set of "schema" axioms (sentences), e.g.:
 
-$$
-f(x) = \int_{-\infty}^{\infty} \hat f(\xi)\,e^{2 \pi i \xi x} \, d\xi
-$$
+```
+{Doctor $$\subseteq Person,
+ HappyParent $$\equiv$$ Person }
+```
 
