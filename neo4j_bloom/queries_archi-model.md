@@ -10,7 +10,7 @@ Name: Show visualization schema
 call db.schema.visualization
 ```
 
-View of the schema:
+View of the schema - "Flower Schema":
 
 ![schema](archi-model-schema.png)
 
