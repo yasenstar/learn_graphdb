@@ -1,4 +1,4 @@
-# learn_graphdb
+# Learn Graph and Graph Database
 
 ## Graph Technology Landscape 2024
 
