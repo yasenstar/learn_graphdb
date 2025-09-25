@@ -325,4 +325,8 @@ Execute `MATCH (n) RETURN n`, get below full graph now:
 
 We can see some countries with Region relation are not linked to the bigger group, those may due to the node `Region`, and will have further investigation.
 
-After all, through above steps, we can build graph from numbers of CSV files
+After all, through above steps, we can build graph from numbers of CSV files, you can use this dumped database ([neo4j_import-test_20250925.dump](db_dump/neo4j_import-test_20250925.dump)) for exploring the result.
+
+---
+
+Date: 2025/09/25
