@@ -1,0 +1,6 @@
+Group_Code,Group_Name,Group_Description
+A,Tropical climates,"Tropical climates have an average temperature of 18 °C (64.4 °F) or higher every month of the year, with significant precipitation."
+B,Desert and semi-arid climates,Desert and semi-arid climates are defined by low precipitation in a region that does not fit the polar (EF or ET) criteria of no month with an average temperature greater than 10 °C (50 °F).
+C,Temperate climates,Temperate climates have the coldest month averaging between 0 °C (32 °F) (or −3 °C (26.6 °F)) and 18 °C (64.4 °F) and at least one month averaging above 10 °C (50 °F).
+D,Continental climates,Continental climates have at least one month averaging below 0 °C (32 °F) (or −3 °C (26.6 °F)) and at least one month averaging above 10 °C (50 °F).
+E,Polar and alpine climates,Polar and alpine climates has every month of the year with an average temperature below 10 °C (50 °F).

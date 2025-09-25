@@ -4,10 +4,9 @@
   - [Introduction on the Approach](#introduction-on-the-approach)
   - [Testing Scenarios](#testing-scenarios)
   - [Initialize Project and Database in Neo4j](#initialize-project-and-database-in-neo4j)
-  - [1. Load CSV to create new Node with some instances](#1-load-csv-to-create-new-node-with-some-instances)
-  - [2. Load CSV to create both two Nodes and mapping relationships together](#2-load-csv-to-create-both-two-nodes-and-mapping-relationships-together)
-  - [3. Load CSV to merge more instances to existing Node](#3-load-csv-to-merge-more-instances-to-existing-node)
-  - [4. Load CSV to merge more instances and more relationships to existing Node](#4-load-csv-to-merge-more-instances-and-more-relationships-to-existing-node)
+  - [Load CSV to create new Node with some instances](#load-csv-to-create-new-node-with-some-instances)
+  - [Load CSV to create both two Nodes and mapping relationships together](#load-csv-to-create-both-two-nodes-and-mapping-relationships-together)
+  - [Load Larger CSV with Multiple Columns (Sample: Climate\_Group)](#load-larger-csv-with-multiple-columns-sample-climate_group)
 
 ## Introduction on the Approach
 
@@ -47,7 +46,7 @@ In order to be able to load CSV from local directory, you need to find this sett
 
 Then `Apply` and `Close`.
 
-## 1. Load CSV to create new Node with some instances
+## Load CSV to create new Node with some instances
 
 Prepare initial [Region1.csv](csv/region1.csv), with 2 regions under Region header:
 
@@ -116,7 +115,7 @@ Result is now just 2 instances:
 
 ![load-region1-create-with-property-result](img/load-region1-create-with-property-result.png)
 
-## 2. Load CSV to create both two Nodes and mapping relationships together
+## Load CSV to create both two Nodes and mapping relationships together
 
 Create two column CSV [region-country1.csv](csv/region-country1.csv) which include all new regions (and countries) that not in [region1.csv](csv/region1.csv), as below:
 
@@ -146,8 +145,39 @@ Result is as below:
 
 ![load-region-country1-with-relation-result](img/load-region-country1-with-relation-result.png)
 
-This step shows that you can use `MERGE` to add new instances to existing Node.
+This step shows that you can use `MERGE` to add new instances to existing Node, and with combining using `CREATE` and `MERGE`, we can load the larger CSV dataset now, first, let's make one Climate Zone dictionary node
 
-## 3. Load CSV to merge more instances to existing Node
+## Load Larger CSV with Multiple Columns (Sample: Climate_Group)
 
-## 4. Load CSV to merge more instances and more relationships to existing Node
+In above steps, our Node csv files only have one single column, the real dataset may have more columns, let below:
+
+```CSV
+Group_Code,Group_Name,Group_Description
+A,Tropical climates,Tropical climates have an average temperature of 18 °C (64.4 °F) or higher every month of the year, with significant precipitation.
+B,Desert and semi-arid climates,Desert and semi-arid climates are defined by low precipitation in a region that does not fit the polar (EF or ET) criteria of no month with an average temperature greater than 10 °C (50 °F).
+C,Temperate climates,Temperate climates have the coldest month averaging between 0 °C (32 °F) (or −3 °C (26.6 °F)) and 18 °C (64.4 °F) and at least one month averaging above 10 °C (50 °F).
+D,Continental climates,Continental climates have at least one month averaging below 0 °C (32 °F) (or −3 °C (26.6 °F)) and at least one month averaging above 10 °C (50 °F).
+E,Polar and alpine climates,Polar and alpine climates has every month of the year with an average temperature below 10 °C (50 °F).
+```
+
+Shown as below:
+
+![climategroup-csv](img/climategroup-csv.png)
+
+Use below Cypher to load CSV:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/climategroup.csv' AS row
+CREATE (node:Climate_Group {
+    Climate_Group_Code: row.Group_Code,
+    Climate_Group_Name: row.Group_Name,
+    Climate_Group_Description: row.Group_Description
+})
+```
+
+![load-climate-group-dict](img/load-climate-group-dict.png)
+
+Using `MATCH (n:Climate_Group) RETURN n` to return first 10 instances of `Climate_Group`, as below and you may see properties in the right part when clicking one instance:
+
+![load-climate-group-dict-result](img/load-climate-group-dict-result.png)
+

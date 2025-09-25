@@ -1,0 +1,33 @@
+Zone_Code,Zone_Name,Group
+AF,Tropical rainforest climate,A
+AM,Tropical monsoon climate,A
+AW,Tropical web climate,A
+AS,Tropical savanna climate,A
+AD,Tropical dry climate,A
+BWH,Hot desert climate,B
+BWK,Cold desert climate,B
+BSH,Hot semi-arid climate,B
+BSK,Code semi-arid climate,B
+CFA,Humid subtropical climate,C
+CFB,Temperate oceanic climate,C
+CFC,Subpolar oceanic climate,C
+CWA,Monsoon-influenced humid subtropical climate,C
+CWB,Subtropical highland climate,C
+CWC,Code subtropical highland climate,C
+CSA,Hot-summer Mediterranean climate,C
+CSB,Warm-summer Mediterranean climate,C
+CSC,Cold-summer Mediterranean climate,C
+DFA,Hot-summer humid continental climate,D
+DFB,Warm-summer humid continental climate,D
+DFC,Subarctic climate,D
+DFD,Extremely code subarctic climate,D
+DWA,Monsoon-influenced hot-summer humid continental climate,D
+DWB,Monsoon-influenced warm-summer humid continental climate,D
+DWC,Monsoon-influenced subarctic climate,D
+DWD,Monsoon-influenced extremely code subarctic climate,D
+DSA,Mediterranean-influenced hot-summer humid continental climate,D
+DSB,Mediterranean-influenced warm-summer humid continental climate,D
+DSC,Mediterranean-influenced subarctic climate,D
+DSD,Mediterranean-influenced extremely code subarctic climate,D
+ET,Tundra climate,E
+EF,Ice cap climate,E
