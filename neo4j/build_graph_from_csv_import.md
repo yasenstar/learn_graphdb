@@ -7,6 +7,10 @@
   - [Load CSV to create new Node with some instances](#load-csv-to-create-new-node-with-some-instances)
   - [Load CSV to create both two Nodes and mapping relationships together](#load-csv-to-create-both-two-nodes-and-mapping-relationships-together)
   - [Load Larger CSV with Multiple Columns (Sample: Climate\_Group)](#load-larger-csv-with-multiple-columns-sample-climate_group)
+  - [Load Multi-Columns CSV with "Foreign Key" to Other Node](#load-multi-columns-csv-with-foreign-key-to-other-node)
+  - [Create Relationship via `MATCH`](#create-relationship-via-match)
+  - [Change Property Key in an Object](#change-property-key-in-an-object)
+  - [Load Country x Climate\_Zone Relationship into Group](#load-country-x-climate_zone-relationship-into-group)
 
 ## Introduction on the Approach
 
@@ -181,3 +185,100 @@ Using `MATCH (n:Climate_Group) RETURN n` to return first 10 instances of `Climat
 
 ![load-climate-group-dict-result](img/load-climate-group-dict-result.png)
 
+## Load Multi-Columns CSV with "Foreign Key" to Other Node
+
+Refer to [ClimateZone.csv](csv/climatezone.csv), which have below structure:
+
+![climatezone-to-group-mapping-csv](img/climatezone-to-group-mapping-csv.png)
+
+First 2 columns create dictionary for Climate_Zone, the 3rd column refers to Climate_Group, we need to add one new relation:
+
+`(Climate_Zone)-[:INGROUP]->(Climate_Group)`
+
+Using below query to create Node `Climate_Zone`:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/climategzone.csv' AS row
+CREATE (node: Climate_Zone {
+    Climate_Zone_Code: row.Zone_Code,
+    Climate_Zone_Name: row.Zone_Name,
+    Climate_Group_code: row.Group
+})
+```
+
+![load-climate-zone-dict](img/load-climate-zone-dict.png)
+
+Result as below:
+
+![load-climate-zone-dict-result](img/load-climate-zone-dict-result.png)
+
+## Create Relationship via `MATCH`
+
+Using below query to create the `:INGROUP` relation:
+
+```SQL
+MATCH (g:Climate_Group)
+MATCH (z:Climate_Zone {Climate_Group_code: g.Climate_Group_Code})
+CREATE (z)-[:INGROUP]->(g)
+```
+
+![create-climate-zone-group-relation](img/create-climate-zone-group-relation.png)
+
+Note: in early step when creating `Climate_Zone` node, I've typo mistake to have `Climate_Group_code` with lower case `c` in `code`, have to align that since Cypher query is case sensitive.
+
+Change `CREATE` line to `RETURN`, you can view the relationship creation result:
+
+![create-climate-zone-group-relation-result](img/create-climate-zone-group-relation-result.png)
+
+## Change Property Key in an Object
+
+For node `Climate_Zone`, let's practice `SET` to rename the property key `Climate_Group_code`, using below query:
+
+```SQL
+MATCH (z:Climate_Zone)
+WHERE z.Climate_Group_Code IS NULL
+SET z.Climate_Group_Code = z.Climate_Group_code
+REMOVE z.Climate_Group_code
+```
+
+Execute nad set 64 properties:
+
+![rename-property-key](img/rename-property-key.png)
+
+Result `MATCH (z:Climate_Zone) RETURN z` is now with corrected Property Key:
+
+![rename-property-key-result](img/rename-property-key-result.png)
+
+## Load Country x Climate_Zone Relationship into Group
+
+Get Weather and Climate information from https://weatherandclimate.com/countries, save as CSV file - [country-climatezone.csv](csv/country-climatezone.csv), with following 4 columns:
+
+![country-zone](img/country-zone-csv.png)
+
+Use below query to load this CSV file, merging to `Country` node:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/country-climatezone.csv' AS row
+MERGE (c:Country {
+    Country: row.Country
+})
+```
+
+![load-country-list-from-merge](img/load-country-list-from-merge.png)
+
+Result as below for `Country` node now:
+
+![load-country-list-from-merge-result](img/load-country-list-from-merge-result.png)
+
+Load `Climate_Zone` columns in `Country` node:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/country-climatezone.csv' AS row
+MATCH (c:Country {Country: row.Country})
+SET c.Climate_Zone = row.Climate_Zone
+RETURN c
+```
+
+After executing, new column added as one property:
+
+![Add_Climate-zone_Column](img/Add_Climate-zone_Column.png)

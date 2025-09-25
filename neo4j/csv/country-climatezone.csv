@@ -1,0 +1,247 @@
+﻿Country,Climate_Zone,Avg_F,Avg_C
+ Afghanistan,DSB,60.26,15.7
+ Albania,CSB,59.31,15.17
+ Algeria,BWH,68,20
+ American Samoa,AW,82.4,28
+ Andorra,CFB,44.91,7.17
+ Angola,AW,75.87,24.37
+ Anguilla,AW,71.02,21.68
+ Antigua and Barbuda,AF,80.85,27.14
+ Argentina,CFA,64.83,18.24
+ Armenia,DFB,50.72,10.4
+ Aruba,AW,81.54,27.52
+ Australia,BWH,68.67,20.37
+ Austria,DFB,47.88,8.82
+ Azerbaijan,BSK,58.05,14.47
+ Bahrain,BWH,82.36,27.98
+ Bangladesh,AW,81.93,27.74
+ Barbados,AM,81.7,27.61
+ Belarus,DFB,47.59,8.66
+ Belgium,CFB,52.54,11.41
+ Belize,AM,79.95,26.64
+ Benin,AW,84.42,29.12
+ Bermuda,CFA,72.16,22.31
+ Bhutan,CWB,60.08,15.6
+ Bolivia,AW,64.94,18.3
+ Bonaire,BS,81.16,27.31
+ Bosnia and Herzegovina,DFB,54.18,12.32
+ Botswana,BSH,76.21,24.56
+ Brazil,AW,78.3,25.72
+ British Indian Ocean Territory,AM,81.61,27.56
+ British Virgin Islands,AM,80.83,27.13
+ Brunei,AF,83.17,28.43
+ Bulgaria,DFB,56.12,13.4
+ Burkina Faso,BSH,88.05,31.14
+ Burundi,CWB,68.85,20.47
+ Cambodia,AM,84.15,28.97
+ Cameroon,AW,80.26,26.81
+ Canada,DFC,35.76,2.09
+ Cape Verde,BWH,75.74,24.3
+ Cayman Islands,AW,81.57,27.54
+ Central African Republic,AW,83.34,28.52
+ Chad,CFA,87.58,30.88
+ Chile,CSB,58.08,14.49
+ China,BSK,58.32,14.62
+ Christmas Island,AW,79.03,26.13
+ Cocos (Keeling) Islands,AF,,
+ Colombia,CFB,75.56,24.2
+ Comoros,AF,80.53,26.96
+ Cook Islands,AF,76.96,24.98
+ Costa Rica,CFB,74.43,23.57
+ Cote D'Ivoire,AW,82.42,28.01
+ Croatia,CFB,56.3,13.5
+ Cuba,AW,80.44,26.91
+ Curacao,AW,81.54,27.52
+ Cyprus,BSH,71.08,21.71
+ Czechia,CFB,50.13,10.07
+ Democratic Republic of the Congo,AM,80.28,26.82
+ Denmark,CFB,49.8,9.89
+ Djibouti,BWH,85.64,29.8
+ Dominica,AF,81.16,27.31
+ Dominican Republic,AF,78.93,26.07
+ Ecuador,CFB,63.07,17.26
+ Egypt,BWH,76.82,24.9
+ El Salvador,AW,81.16,27.31
+ Equatorial Guinea,AM,78.94,26.08
+ Eritrea,BWH,80.58,26.99
+ Estonia,DFB,45.52,7.51
+ Eswatini,CWA,69.39,20.77
+ Ethiopia,BSH,72.01,22.23
+ Falkland Islands,ET,46.13,7.85
+ Faroe Islands,CFC,46.29,7.94
+ Federated States of Micronesia,AF,83.37,28.54
+ Fiji,AF,79.68,26.49
+ Finland,DFC,42.15,5.64
+ France,CFB,54.39,12.44
+ French Guiana,AF,81.41,27.45
+ French Polynesia,AF,78.31,25.73
+ French Southern Territories,ET,71.46,21.92
+ Gabon,AW,80.06,26.7
+ Georgia,CFA,53.8,12.11
+ Germany,CFB,51.22,10.68
+ Ghana,AW,83.95,28.86
+ Gibraltar,CSA,64.4,18
+ Greece,CSA,62.64,17.02
+ Greenland,EF,13.87,-10.07
+ Grenada,AW,81.68,27.6
+ Guadeloupe,AF,81.1,27.28
+ Guam,AF,82.99,28.33
+ Guatemala,AM,71.1,21.72
+ Guernsey,CFB,54.5,12.5
+ Guinea,AW,80.71,27.06
+ Guinea-Bissau,AW,85.5,29.72
+ Guyana,AF,82.02,27.79
+ Haiti,AW,79.66,26.48
+ Honduras,AM,75.97,24.43
+ Hong Kong,CWA,75.4,24.11
+ Hungary,CFB,55.47,13.04
+ Iceland,ET,37.71,3.17
+ India,AW,78.75,25.97
+ Indonesia,AF,80.8,27.11
+ Iran,BWK,65.17,18.43
+ Iraq,BWH,80.19,26.77
+ Ireland,CFB,50.18,10.1
+ Isle of Man,CFB,51.15,10.64
+ Israel,BSH,72.84,22.69
+ Italy,CSA,58.05,14.47
+ Jamaica,AW,80.29,26.83
+ Japan,DFB,59.34,15.19
+ Jersey,CFB,54.45,12.47
+ Jordan,CFA,71.91,22.17
+ Kazakhstan,BSK,48.79,9.33
+ Kenya,AW,72.5,22.5
+ Kiribati,AF,81.68,27.6
+ Kosovo,CFB,54.25,12.36
+ Kuwait,BWH,83.89,28.83
+ Kyrgyzstan,DFB,49.3,9.61
+ Laos,CWA,77.7,25.39
+ Latvia,DFB,46.53,8.07
+ Lebanon,CSA,67.86,19.92
+ Lesotho,CWB,60.91,16.06
+ Liberia,AM,80.35,26.86
+ Libya,BWH,74.97,23.87
+ Liechtenstein,CFB,47.52,8.62
+ Lithuania,DFB,47.79,8.77
+ Luxembourg,CFB,50.11,10.06
+ Macau,CWA,75.87,24.37
+ Madagascar,CWB,74.98,23.88
+ Malawi,AW,73.44,23.02
+ Malaysia,AF,82.9,28.28
+ Maldives,AM,82.78,28.21
+ Mali,BWH,89.19,31.77
+ Malta,CSA,67.89,19.94
+ Marshall Islands,AF,82.69,28.16
+ Martinique,AF,81.64,27.58
+ Mauritania,BWH,85.57,29.76
+ Mauritius,AM,77.16,25.09
+ Mayotte,AW,80.91,27.17
+ Mexico,BSK,71.65,22.03
+ Moldova,DFB,54.66,12.59
+ Monaco,CSB,60.87,16.04
+ Mongolia,BSK,34.2,1.22
+ Montenegro,CFB,54.03,12.24
+ Montserrat,AM,81.07,27.26
+ Morocco,BSH,70.63,21.46
+ Mozambique,AW,78.12,25.62
+ Myanmar,AW,80.64,27.02
+ Namibia,BWH,76.03,24.46
+ Nauru,AF,83.05,28.36
+ Nepal,CWB,71.6,22
+ Netherlands,CFB,52.86,11.59
+ New Caledonia,CFA,74.19,23.44
+ New Zealand,CFB,55.53,13.07
+ Nicaragua,AM,79.66,26.48
+ Niger,BWH,89.67,32.04
+ Nigeria,AW,85.03,29.46
+ Niue,AF,78.84,26.02
+ Norfolk Island,CFA,,
+ Northern Mariana Islands,AF,82.54,28.08
+ North Korea,DWB,48.65,9.25
+ North Macedonia,CFB,55.92,13.29
+ Norway,DFC,41.05,5.03
+ Oman,BWH,84.56,29.2
+ Pakistan,BWH,69.6,20.89
+ Palau,AF,83.35,28.53
+ Palestine,CSA,72.68,22.6
+ Panama,AM,80.37,26.87
+ Papua New Guinea,AF,73.45,23.03
+ Paraguay,AW,77.11,25.06
+ Peru,AF,63.73,17.63
+ Philippines,AF,81,27.22
+ Pitcairn Islands,AF,73.71,23.17
+ Poland,CFB,51.08,10.6
+ Portugal,CSA,62.26,16.81
+ Puerto Rico,AM,80.53,26.96
+ Qatar,BWH,85.53,29.74
+ Republic of the Congo,AM,81.19,27.33
+ Reunion,AS,73.8,23.22
+ Romania,DFB,55.15,12.86
+ Russia,DFC,41.49,5.27
+ Rwanda,CFB,68.79,20.44
+ Saint Barthelemy,AW,80.85,27.14
+ Saint Helena,BWH,68.9,20.5
+ Saint Kitts and Nevis,AW,80.78,27.1
+ Saint Lucia,AF,81.99,27.77
+ Saint Martin,AW,80.73,27.07
+ Saint Pierre and Miquelon,DFB,43.84,6.58
+ Saint Vincent and the Grenadines,AF,80.1,26.72
+ Samoa,AW,81.77,27.65
+ San Marino,CFB,61.99,16.66
+ Sao Tome and Principe,AS,79.77,26.54
+ Saudi Arabia,BWH,80.62,27.01
+ Senegal,BSH,86.58,30.32
+ Serbia,CFB,55.85,13.25
+ Seychelles,AF,81.66,27.59
+ Sierra Leone,AM,81.7,27.61
+ Singapore,AF,77.18,25.1
+ Sint Maarten,AW,80.73,27.07
+ Slovakia,DFB,51.4,10.78
+ Slovenia,CFB,53.24,11.8
+ Solomon Islands,AF,81.97,27.76
+ Somalia,BWH,82.24,27.91
+ South Africa,BWK,70.2,21.22
+ South Georgia and South Sandwich Islands,ET,32.04,0.02
+ South Korea,DWB,56.48,13.6
+ South Sudan,AW,85.1,29.5
+ Spain,CSA,61.9,16.61
+ Sri Lanka,AF,81.43,27.46
+ Sudan,BSH,86.07,30.04
+ Suriname,AF,81.52,27.51
+ Svalbard And Jan Mayen,ET,28.4,-2
+ Sweden,DFB,45.05,7.25
+ Switzerland,DFC,48.38,9.1
+ Syria,BWH,71.17,21.76
+ Taiwan,CWB,75.97,24.43
+ Tajikistan,DSC,46.15,7.86
+ Tanzania,BSH,75.6,24.22
+ Thailand,AW,83.55,28.64
+ The Bahamas,AW,78.51,25.84
+ The Gambia,AW,85.24,29.58
+ Timor-Leste,AW,79.83,26.57
+ Togo,CFA,78.94,26.08
+ Tokelau,AF,83.39,28.55
+ Tonga,AF,78.31,25.73
+ Trinidad and Tobago,AM,81.9,27.72
+ Tunisia,BWH,69.96,21.09
+ Turkey,CSB,58.93,14.96
+ Turkmenistan,BSK,67.26,19.59
+ Turks and Caicos Islands,AS,80.11,26.73
+ Tuvalu,AF,83.7,28.72
+ Uganda,AM,74.25,23.47
+ Ukraine,DFB,52.48,11.38
+ United Arab Emirates,BWH,85.6,29.78
+ United Kingdom,CFB,51.35,10.75
+ United States,CFA,54.75,12.64
+ United States Minor Outlying Islands,AF,79.39,26.33
+ Uruguay,CFA,65.52,18.62
+ US Virgin Islands,AM,80.85,27.14
+ Uzbekistan,BWK,63.81,17.67
+ Vanuatu,AF,79.3,26.28
+ Vatican City,CSA,65.08,18.38
+ Venezuela,AM,79.97,26.65
+ Vietnam,CWA,79.25,26.25
+ Wallis and Futuna,AF,82.63,28.13
+ Western Sahara,BWH,80.13,26.74
+ Yemen,BWH,77.95,25.53
+ Zambia,CWA,73.99,23.33
+ Zimbabwe,BSH,72.91,22.73
