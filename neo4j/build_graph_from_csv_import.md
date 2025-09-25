@@ -11,6 +11,8 @@
   - [Create Relationship via `MATCH`](#create-relationship-via-match)
   - [Change Property Key in an Object](#change-property-key-in-an-object)
   - [Load Country x Climate\_Zone Relationship into Group](#load-country-x-climate_zone-relationship-into-group)
+  - [Add Country to Climate\_Zone Relationship](#add-country-to-climate_zone-relationship)
+  - [Completion of Country x Climate Mapping Graph](#completion-of-country-x-climate-mapping-graph)
 
 ## Introduction on the Approach
 
@@ -282,3 +284,45 @@ RETURN c
 After executing, new column added as one property:
 
 ![Add_Climate-zone_Column](img/Add_Climate-zone_Column.png)
+
+Now, add two new columns together (separated by `,` in `SET` clause):
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/country-climatezone.csv' AS row
+MATCH (c:Country {Country: row.Country})
+SET c.Avg_F = row.Avg_F, c.Avg_C = row.Avg_C
+RETURN c
+```
+
+![Load-2-more-columns-in-Country](img/Load-2-more-columns-in-Country.png)
+
+## Add Country to Climate_Zone Relationship
+
+Now we have complete `Country` node, the `Climate_Zone` column in this node plays the foreign-key role to link to the `Climate_Zone_Code` in `Climate_Zone` node.
+
+Full graph is now looks like:
+
+![graph-before-county-zone-mapping](img/graph-before-county-zone-mapping.png)
+
+To create relationship `(Country)-[:CLIMATES]->(Climante_Zone)`, using below query:
+
+```SQL
+MATCH (z:Climate_Zone), (c:Country)
+    WHERE c.Climate_Zone = z.Climate_Zone_Code
+    MERGE (c)-[:CLIMATES]->(z)
+RETURN c, z
+```
+
+Result is like below:
+
+![Add-Country-ClimateZone-Relation](img/Add-Country-ClimateZone-Relation.png)
+
+## Completion of Country x Climate Mapping Graph
+
+Execute `MATCH (n) RETURN n`, get below full graph now:
+
+![full-graph](img/full-graph.png)
+
+We can see some countries with Region relation are not linked to the bigger group, those may due to the node `Region`, and will have further investigation.
+
+After all, through above steps, we can build graph from numbers of CSV files
