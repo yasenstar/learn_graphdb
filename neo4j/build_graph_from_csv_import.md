@@ -57,10 +57,96 @@ Europe
 Asia
 ```
 
-Start the local dbsm `import_test`, 
+Start the local dbsm `import_test`, once it's loaded, click `Open` with Neo4j Browser, you should see below home screen:
 
+![Neo4j-Browser-Home](img/Neo4j-Browser-Home.png)
+
+Use below `CREATE` query:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/region1.csv' AS row
+CREATE (node:Region)
+```
+
+![load-region1-csv](img/load-region1-csv.png)
+
+Result is `Added 2 labels, created 2 nodes`
+
+Using `MATCH (n) RETURN n`, can see there're automatic `0` adn `1` as the label of the node `Region`:
+
+![check-region1-clean-load](img/check-region1-clean-load.png)
+
+This is not shown the value of regions, so we need to add property during CSV load, let's try to use `MERGE` first:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/region1.csv' AS row
+MERGE (node:Region {Region: row.Region})
+```
+
+![local-region1-again-with-merge](img/local-region1-again-with-merge.png)
+
+However, the two additional instances have been created so now you've 4 instance of `Region`:
+
+![check-after-region1-merge-load](img/check-after-region1-merge-load.png)
+
+From this comparison, we know that we should add every column as row property while first load, and the `merge` will create additional instances if not using certain match mechanism.
+
+Using below query to clear database:
+
+```SQL
+MATCH (n) DETACH DELETE n
+```
+
+![clear_database](img/clear_database.png)
+
+So, now the database is cleaned:
+
+![query empty db](img/query_empty_db.png)
+
+We can run the `CREATE` query with Property now, as below:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/region1.csv' AS row
+CREATE (node:Region {Region: row.Region})
+```
+
+![load-region1-create-with-property](img/load-region1-create-with-property.png)
+
+Result is now just 2 instances:
+
+![load-region1-create-with-property-result](img/load-region1-create-with-property-result.png)
 
 ## 2. Load CSV to create both two Nodes and mapping relationships together
+
+Create two column CSV [region-country1.csv](csv/region-country1.csv) which include all new regions (and countries) that not in [region1.csv](csv/region1.csv), as below:
+
+```CSV
+Region,Country
+North_America,USA
+South_America,Brazil
+South_America,Peru
+```
+
+The relation is `(Region)-[:INCLUDES]->(Country)`
+
+Execute below `CREATE` query:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D:/GitHub/LEARN_GRAPHDB/neo4j/csv/region-country1.csv' AS row
+MERGE (source:Region {Region: row.Region})
+CREATE (target:Country {Country: row.Country})
+CREATE (source)-[:INCLUDES]->(target)
+```
+
+Note: since we already have `Region` as Node which had been created in previous step's query, here we use `MERGE` on that node instead of `CREATE`.
+
+![load-region-country1-with-relation](img/load-region-country1-with-relation.png)
+
+Result is as below:
+
+![load-region-country1-with-relation-result](img/load-region-country1-with-relation-result.png)
+
+This step shows that you can use `MERGE` to add new instances to existing Node.
 
 ## 3. Load CSV to merge more instances to existing Node
 
