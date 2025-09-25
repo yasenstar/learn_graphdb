@@ -39,6 +39,14 @@ After database is created, click the three dots and choose Settings..., as below
 
 ![enter_dbms_settings](img/enter_dbms_settings.png)
 
+In order to be able to load CSV from local directory, you need to find this setting line and comment it:
+
+![server-directory-import-setting](img/server-directory-import-setting.png)
+
+![server-directory-import-setting_commented](img/server-directory-import-setting_commented.png)
+
+Then `Apply` and `Close`.
+
 ## 1. Load CSV to create new Node with some instances
 
 Prepare initial [Region1.csv](csv/region1.csv), with 2 regions under Region header:
@@ -49,6 +57,7 @@ Europe
 Asia
 ```
 
+Start the local dbsm `import_test`, 
 
 
 ## 2. Load CSV to create both two Nodes and mapping relationships together
