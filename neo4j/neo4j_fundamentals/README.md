@@ -16,6 +16,12 @@ You may find that I'll also make mistakes, however, that's the GOLDEN chance to 
 
 This is the first of the series course for gaining the deeper level Neo4j Graph Database certification, enjoy your learning!
 
+Here you may find the key information as well as Cypher queries per chapter:
+
+- [1. Graph Thinking](./1_Graph_Thinking.md)
+- [2. Querying Graphs](./2_Querying_Graphs.md)
+- [3. Exploring Neo4j](./3_Exploring_Neo4j.md)
+
 ---
 
 Updated at: September 27th, 2025
