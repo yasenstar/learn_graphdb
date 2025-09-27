@@ -18,7 +18,7 @@
 
 ```SQL
 create (:Person {name:"Michael"});
-create (:Person {name:"Sarah"});
+merge (:Person {name:"Sarah"});
 create (:Company {name:"Neo4j"});
 create (:Location {name:"Sweden"})
 ```
@@ -44,6 +44,19 @@ RETURN n
 ## Relationships
 
 ### One-Way Relationships
+
+Standard way to create one relationship a time:
+
+```SQL
+MATCH (p:Person {name:"Michael"})
+MATCH (c:Company {name:"Neo4j"})
+MATCH (l:Location {name:"Sweden"})
+CREATE (p)-[:WORKS_AT]->(c)
+CREATE (c)-[:FOUNDED_IN]->(l)
+RETURN p,c,l
+```
+
+You may create two relationship in one single line if they have common node:
 
 ```SQL
 MATCH (p:Person {name:"Michael"})
