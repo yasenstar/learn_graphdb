@@ -1,7 +1,7 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j&#xa;Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758942299560" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="1.4641001">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false" show_icons="BESIDE_NODES" associatedTemplateLocation="template:/light_sky_element_template.mm" show_tags="UNDER_NODES"/>
+<node TEXT="Neo4j&#xa;Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758942299560" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.6830134">
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -85,45 +85,47 @@
 </hook>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<node TEXT="1. Graph Thinking" FOLDED="true" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
-<node TEXT="1.1 What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1758938946699">
-<node TEXT="Neo4j is a graph database that stores data in a graph." ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1758939149988"/>
-<node TEXT="Data is stored as nodes and relationships instead of tables or documents" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1758939165382"/>
+<node TEXT="1. Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
+<node TEXT="1.1 What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1758938946699">
+<node TEXT="Overview" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1758974730319">
+<node TEXT="Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1758939149988"/>
+<node TEXT="Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1758939165382"/>
+</node>
 <node TEXT="Nodes, Relationships, Labels, and Properties" ID="ID_1148601110" CREATED="1758939169467" MODIFIED="1758939181086">
-<node TEXT="Nodes" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1758940477104">
-<node TEXT="Create Nodes with Labels" POSITION="bottom_or_right" ID="ID_476394202" CREATED="1758939783389" MODIFIED="1758939792054">
+<node TEXT="Nodes" FOLDED="true" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1758949066656" VGAP_QUANTITY="3 pt">
+<node TEXT="Create Nodes with Labels" FOLDED="true" POSITION="bottom_or_right" ID="ID_476394202" CREATED="1758939783389" MODIFIED="1758939792054">
 <node TEXT="create (:Person {name:&quot;Michael&quot;});&#xa;create (:Person {name:&quot;Sarah&quot;});&#xa;create (:Company {name:&quot;Neo4j&quot;});&#xa;create (:Location {name:&quot;Sweden&quot;})" ID="ID_468660802" CREATED="1758939792058" MODIFIED="1758939818939"/>
 </node>
-<node TEXT="If you want to correct/change one label, e.g. you mistake type &quot;Neorj&quot; for Company label, use SET" POSITION="bottom_or_right" ID="ID_926051400" CREATED="1758939927516" MODIFIED="1758939960502">
+<node TEXT="If you want to correct/change one label, e.g. you mistake type &quot;Neorj&quot; for Company label, use SET" FOLDED="true" POSITION="bottom_or_right" ID="ID_926051400" CREATED="1758939927516" MODIFIED="1758949066655">
 <node TEXT="match (c:Company {name:&quot;Neorj&quot;})&#xa;set c.name = &quot;Neo4j&quot;&#xa;return c" ID="ID_1550051631" CREATED="1758939960511" MODIFIED="1758939967337"/>
 </node>
-<node TEXT="Add additional labels to one node" POSITION="bottom_or_right" ID="ID_403230976" CREATED="1758940153598" MODIFIED="1758940168199">
+<node TEXT="Add additional labels to one node" FOLDED="true" POSITION="bottom_or_right" ID="ID_403230976" CREATED="1758940153598" MODIFIED="1758940168199">
 <node TEXT="MATCH (n {name:&quot;Michael&quot;})&#xa;SET n:Employee&#xa;RETURN n" ID="ID_1658475876" CREATED="1758940168203" MODIFIED="1758940174691"/>
 </node>
 </node>
-<node TEXT="Relationships" ID="ID_400190290" CREATED="1758940339296" MODIFIED="1758940343295">
-<node TEXT="One-Way Relationships" ID="ID_1901635414" CREATED="1758940444861" MODIFIED="1758940451712">
+<node TEXT="Relationships" FOLDED="true" ID="ID_400190290" CREATED="1758940339296" MODIFIED="1758940343295">
+<node TEXT="One-Way Relationships" FOLDED="true" ID="ID_1901635414" CREATED="1758940444861" MODIFIED="1758940451712">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})&#xa;MATCH (c:Company {name:&quot;Neo4j&quot;})&#xa;MATCH (l:Location {name:&quot;Sweden&quot;})&#xa;CREATE (p)-[:WORKS_AT]-&gt;(c)-[:FOUNDED_IN]-&gt;(l)&#xa;RETURN p,c,l" POSITION="bottom_or_right" ID="ID_666078939" CREATED="1758940343298" MODIFIED="1758940346313"/>
 </node>
-<node TEXT="Two-Way Relationships" ID="ID_1276696653" CREATED="1758940455606" MODIFIED="1758940460182">
+<node TEXT="Two-Way Relationships" FOLDED="true" ID="ID_1276696653" CREATED="1758940455606" MODIFIED="1758940460182">
 <node TEXT="MATCH (p1:Person {name:&quot;Michael&quot;}), (p2:Person {name:&quot;Sarah&quot;})&#xa;CREATE (p1)-[:LOVES]-&gt;(p2)-[:LOVES]-&gt;(p1)&#xa;RETURN p1,p2" ID="ID_199100928" CREATED="1758940460184" MODIFIED="1758940463218"/>
 <node TEXT="MATCH (p1:Person {name:&quot;Michael&quot;}), (p2:Person {name:&quot;Sarah&quot;})&#xa;CREATE (p1)-[:MARRIED_TO]-&gt;(p2)-[:MARRIED_TO]-&gt;(p1)&#xa;RETURN p1,p2" ID="ID_418717879" CREATED="1758940859767" MODIFIED="1758940901643"/>
 </node>
 </node>
 <node TEXT="Properties" ID="ID_1212036191" CREATED="1758940468039" MODIFIED="1758940471736">
-<node TEXT="For Node &quot;Michael&quot;" ID="ID_1352985116" CREATED="1758940650105" MODIFIED="1758940663866">
+<node TEXT="For Node &quot;Michael&quot;" FOLDED="true" ID="ID_1352985116" CREATED="1758940650105" MODIFIED="1758940663866">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})&#xa;SET p.firstName = &quot;Michael&quot;,&#xa;    p.lastName = &quot;Faraday&quot;,&#xa;    p.born = &quot;1971-09-22&quot;&#xa;RETURN p" ID="ID_1947806476" CREATED="1758940663871" MODIFIED="1758940666594"/>
 </node>
-<node TEXT="For Node &quot;Sarah&quot;" ID="ID_735781765" CREATED="1758940671250" MODIFIED="1758940719176">
+<node TEXT="For Node &quot;Sarah&quot;" FOLDED="true" ID="ID_735781765" CREATED="1758940671250" MODIFIED="1758940719176">
 <node TEXT="MATCH (p:Person {name:&quot;Sarah&quot;})&#xa;SET p.firstName = &quot;Sarah&quot;, p.lastName = &quot;Faraday&quot;, p.maidenName = &quot;Barnard&quot;&#xa;RETURN p" ID="ID_1627540435" CREATED="1758940719178" MODIFIED="1758940721444"/>
 </node>
-<node TEXT="For Node &quot;Neo4j&quot;" ID="ID_1730907362" CREATED="1758940726336" MODIFIED="1758940735896">
+<node TEXT="For Node &quot;Neo4j&quot;" FOLDED="true" ID="ID_1730907362" CREATED="1758940726336" MODIFIED="1758940735896">
 <node TEXT="MATCH (c:Company {name:&quot;Neo4j&quot;})&#xa;SET c.website = &quot;neo4j.com&quot;&#xa;RETURN c" ID="ID_711878334" CREATED="1758940735903" MODIFIED="1758940783773"/>
 </node>
-<node TEXT="For Node &quot;Sweden&quot;" ID="ID_355775280" CREATED="1758940785327" MODIFIED="1758940792936">
+<node TEXT="For Node &quot;Sweden&quot;" FOLDED="true" ID="ID_355775280" CREATED="1758940785327" MODIFIED="1758940792936">
 <node TEXT="MATCH (l:Location {name:&quot;Sweden&quot;})&#xa;SET l.capital = &quot;Stockholm&quot;, l.region = &quot;Europe&quot;&#xa;RETURN l" ID="ID_408614743" CREATED="1758940792940" MODIFIED="1758940842132"/>
 </node>
-<node TEXT="For Relation" ID="ID_1516438810" CREATED="1758940906167" MODIFIED="1758940913207">
+<node TEXT="For Relation" FOLDED="true" ID="ID_1516438810" CREATED="1758940906167" MODIFIED="1758940913207">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})-[w:WORKS_AT]-(c:Company {name:&quot;Neo4j&quot;})&#xa;SET w.position = &quot;Engineer&quot;&#xa;RETURN p,c" ID="ID_593772588" CREATED="1758940913213" MODIFIED="1758941028802"/>
 </node>
 </node>
@@ -171,7 +173,7 @@
 <node TEXT="3.1 Get Neo4j" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1758939002588">
 <node TEXT="Neo4j Community - Server and Desktop" ID="ID_108010029" CREATED="1758941616803" MODIFIED="1758941815499" LINK="https://neo4j.com/deployment-center/?gdb-selfmanaged&amp;community"/>
 </node>
-<node TEXT="3.2 Neo4j Tools" ID="ID_550067719" CREATED="1758939002760" MODIFIED="1758939007948">
+<node TEXT="3.2 Neo4j Tools" FOLDED="true" ID="ID_550067719" CREATED="1758939002760" MODIFIED="1758939007948">
 <node TEXT="Console" ID="ID_1930588753" CREATED="1758941867306" MODIFIED="1758941871143"/>
 <node TEXT="Import" ID="ID_948301347" CREATED="1758941871715" MODIFIED="1758941873613"/>
 <node TEXT="Explore" ID="ID_1980484565" CREATED="1758941873788" MODIFIED="1758941875646"/>

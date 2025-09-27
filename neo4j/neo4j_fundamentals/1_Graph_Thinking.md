@@ -123,7 +123,7 @@ RETURN l
 ```SQL
 MATCH (p:Person {name:"Michael"})-[w:WORKS_AT]-(c:Company {name:"Neo4j"})
 SET w.position = "Engineer"
-RETURN p,c
+RETURN p, w, c
 ```
 
 ---
