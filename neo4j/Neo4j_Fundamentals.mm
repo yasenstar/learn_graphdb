@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758938908509" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="1.4641001">
+<node TEXT="Neo4j Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758938908509" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.56447387">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false" show_icons="BESIDE_NODES" associatedTemplateLocation="template:/light_sky_element_template.mm" show_tags="UNDER_NODES"/>
     <tags category_separator="::"/>
 
@@ -85,7 +85,7 @@
 </hook>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<node TEXT="1. Graph Thinking" FOLDED="true" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
+<node TEXT="1. Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
 <node TEXT="1.1 What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1758938946699">
 <node TEXT="Neo4j is a graph database that stores data in a graph." ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1758939149988"/>
 <node TEXT="Data is stored as nodes and relationships instead of tables or documents" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1758939165382"/>
