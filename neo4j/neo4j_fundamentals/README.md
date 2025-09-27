@@ -22,6 +22,10 @@ Here you may find the key information as well as Cypher queries per chapter:
 - [2. Querying Graphs](./2_Querying_Graphs.md)
 - [3. Exploring Neo4j](./3_Exploring_Neo4j.md)
 
+The demo videso are posted on following platform for your checking:
+
+- [YouTube Channel - Yasen - Enterprise Architecture](https://www.youtube.com/playlist?list=PL6DEHvciXKeXjMDEhDVnZwljcpsoW2Yfp)
+
 ---
 
 Updated at: September 27th, 2025
