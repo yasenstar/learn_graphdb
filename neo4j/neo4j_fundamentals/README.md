@@ -6,6 +6,10 @@ Following are the level 1 structure of the course:
 
 ![neo4j_fundamentals_course_structure_level1](img/neo4j_fundamentals_course_structure_level1.png)
 
+The mindmap is created using Open Source tool called FreePlane.
+
+You may find the markdown format export of full mindmap here: [Neo4j_Fundamentals.md](Neo4j_Fundamentals.md).
+
 The most effective learning is act with your hands, so, do not just read and watch, prepare the tool and type all querying code together with me.
 
 You may find that I'll also make mistakes, however, that's the GOLDEN chance to learn more!
