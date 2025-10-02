@@ -11,6 +11,7 @@
   - [Properties](#properties)
     - [Add Properties into Node](#add-properties-into-node)
     - [Add Properties into Relationship](#add-properties-into-relationship)
+  - [Thinking in Graphse - Types of Databases](#thinking-in-graphse---types-of-databases)
 
 ## Nodes
 
@@ -125,6 +126,10 @@ MATCH (p:Person {name:"Michael"})-[w:WORKS_AT]-(c:Company {name:"Neo4j"})
 SET w.position = "Engineer"
 RETURN p, w, c
 ```
+
+## Thinking in Graphse - Types of Databases
+
+
 
 ---
 Updated at: September 27th, 2025

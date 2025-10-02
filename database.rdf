@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database/"
+     xml:base="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database">
+        <rdfs:comment>A columnar database is a type of database optimized for reading and aggregating data stored in columns instead of rows, making it well-suited for high-performance analytical workloads.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+        <rdfs:comment>A document database is a type of NoSQL database that stores and retrieves data as semi-structured documents, allowing for nested fields and flexible schemas.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+        <rdfs:comment>A graph database, a type of NoSQL database, employs graph structures with nodes, edges, and properties to store and query data. This structure makes graph databases ideal for analyzing and navigating relationships within the data.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+        <rdfs:comment>A NoSQL database that stores data in a dictionary-like format, using unique keys to access each piece of data, is known as a key-value database.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database">
+        <rdfs:comment>A NewSQL database is a modern, distributed SQL database that delivers horizontal scalability and high throughput without sacrificing data consistency or relational capabilities.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database">
+        <rdfs:comment>A NoSQL (Not Only SQL) database is a non-relational database designed for distributed data storage. It offers dynamic schemas and high scalability, ideal for large volumes of diverse or rapidly changing data.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Object-Oriented_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Object-Oriented_Database"/>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database">
+        <rdfs:comment>A relational database stores and allows access to related data points through structured schemas and SQL (Structured Query Language).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database">
+        <rdfs:comment>A time-series database is a type of database designed to store, index, and analyze data points associated with specific timestamps — typically collected at regular intervals over time.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Aerospike -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Aerospike">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_DynamoDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_DynamoDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_Neptune -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_Neptune">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_Redshift -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Amazon_Redshift">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Apache_Cassandra -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Apache_Cassandra">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Apache_HBase -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Apache_HBase">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#ArangoDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#ArangoDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#ClickHouse -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#ClickHouse">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#CockroachDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#CockroachDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#CouchDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#CouchDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Couchbase -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Couchbase">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Google_BigQuery -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Google_BigQuery">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Google_Cloud_Spanner -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Google_Cloud_Spanner">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#InfluxDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#InfluxDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MS_SQL_Server -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MS_SQL_Server">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MongoDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MongoDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MySQL -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#MySQL">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Neo4j -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Neo4j">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#OpenTSDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#OpenTSDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Oracel_Database -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Oracel_Database">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#PostgreSQL -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#PostgreSQL">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Prometheus -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Prometheus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Redis -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Redis">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Riak_KV -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Riak_KV">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TiDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TiDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TigerGraph -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TigerGraph">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TimescaleDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#TimescaleDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#VoltDB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#VoltDB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Firestore(Firebase) -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Firestore(Firebase)">
+        <rdf:type rdf:resource="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.bing.com/ck/a?!&amp;&amp;p=dbf51d8d26f1428648b93cf91bfc6a9ba0470c28108aab5bee69d9f2bb845eaaJmltdHM9MTc1OTM2MzIwMA&amp;ptn=3&amp;ver=2&amp;hsh=4&amp;fclid=29f76f40-893f-6a6d-34ac-7aa988486b30&amp;psq=types+of+databases&amp;u=a1aHR0cHM6Ly9lc3R1YXJ5LmRldi9ibG9nL3R5cGVzLW9mLWRhdGFiYXNlcy13aXRoLWV4YW1wbGVzLw</rdfs:comment>
+        <rdfs:label>Database</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Columnar_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Document_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Graph_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Key-Value_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NewSQL_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#NoSQL_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Object-Oriented_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Relational_Database"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/v0cn037/ontologies/2025/9/database#Time-Series_Database"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
