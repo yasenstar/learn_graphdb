@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j&#xa;Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758942299560" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.6830134">
+<node TEXT="Neo4j&#xa;Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1758942299560" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.9090909">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
@@ -86,7 +86,7 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <node TEXT="1. Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
-<node TEXT="1.1 What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1758938946699">
+<node TEXT="1.1 What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1758938946699">
 <node TEXT="Overview" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1758974730319">
 <node TEXT="Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1758939149988"/>
 <node TEXT="Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1758939165382"/>
@@ -131,7 +131,7 @@
 </node>
 </node>
 </node>
-<node TEXT="1.2 Thinking in Graphs" ID="ID_1905112000" CREATED="1758938947376" MODIFIED="1758938954260">
+<node TEXT="1.2 Thinking in Graphs" FOLDED="true" ID="ID_1905112000" CREATED="1758938947376" MODIFIED="1758938954260">
 <node TEXT="The O(n) problem" ID="ID_44727138" CREATED="1758941278573" MODIFIED="1758941284576"/>
 <node TEXT="NoSQL Databases" ID="ID_621071674" CREATED="1758941284820" MODIFIED="1758941292336"/>
 <node TEXT="Graphs" ID="ID_535340952" CREATED="1758941294940" MODIFIED="1758941296359"/>
@@ -144,7 +144,7 @@
 </node>
 </node>
 <node TEXT="2. Querying Graphs" FOLDED="true" POSITION="bottom_or_right" ID="ID_1877167235" CREATED="1758938962480" MODIFIED="1758938969256">
-<node TEXT="2.1 Reading Graphs" ID="ID_416361397" CREATED="1758938969259" MODIFIED="1758938973611">
+<node TEXT="2.1 Reading Graphs" FOLDED="true" ID="ID_416361397" CREATED="1758938969259" MODIFIED="1758938973611">
 <node TEXT="Using Cypher" ID="ID_1595522536" CREATED="1758941381956" MODIFIED="1758941391055">
 <node TEXT="&quot;movies&quot; graph: https://github.com/neo4j-graph-examples/movies" ID="ID_65710670" CREATED="1758941674051" MODIFIED="1758941689861" LINK="https://github.com/neo4j-graph-examples/movies"/>
 </node>
@@ -154,7 +154,7 @@
 <node TEXT="User Ratings" ID="ID_760660066" CREATED="1758941434076" MODIFIED="1758941437040"/>
 </node>
 </node>
-<node TEXT="2.2 Pattern Matching" ID="ID_425043506" CREATED="1758938973808" MODIFIED="1758938979881">
+<node TEXT="2.2 Pattern Matching" FOLDED="true" ID="ID_425043506" CREATED="1758938973808" MODIFIED="1758938979881">
 <node TEXT="Patterns" ID="ID_675450704" CREATED="1758941448139" MODIFIED="1758941455584">
 <node TEXT="Nodes" ID="ID_47471897" CREATED="1758941489044" MODIFIED="1758941490816"/>
 <node TEXT="Relationships" ID="ID_1363254898" CREATED="1758941490995" MODIFIED="1758941493206"/>
@@ -167,9 +167,10 @@
 <node TEXT="Create a Movie node" ID="ID_776169473" CREATED="1758941578252" MODIFIED="1758941587415"/>
 <node TEXT="Create a RATED relationship" ID="ID_1208797752" CREATED="1758941587564" MODIFIED="1758941596063"/>
 </node>
+<node TEXT="Create Own Nodes/Relation" ID="ID_877994601" CREATED="1759480267736" MODIFIED="1759480277631"/>
 </node>
 </node>
-<node TEXT="3. Exploring Neo4j" FOLDED="true" POSITION="bottom_or_right" ID="ID_852576041" CREATED="1758938985952" MODIFIED="1758938993361">
+<node TEXT="3. Exploring Neo4j" POSITION="bottom_or_right" ID="ID_852576041" CREATED="1758938985952" MODIFIED="1758938993361">
 <node TEXT="3.1 Get Neo4j" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1758939002588">
 <node TEXT="Neo4j Community - Server and Desktop" ID="ID_108010029" CREATED="1758941616803" MODIFIED="1758941815499" LINK="https://neo4j.com/deployment-center/?gdb-selfmanaged&amp;community"/>
 </node>
@@ -181,7 +182,7 @@
 </node>
 <node TEXT="3.3 Congratulations and Next Steps" ID="ID_986304821" CREATED="1758939008090" MODIFIED="1758939019011"/>
 </node>
-<node TEXT="4. Course Summary" FOLDED="true" POSITION="bottom_or_right" ID="ID_1110223901" CREATED="1758939019896" MODIFIED="1758939024464">
+<node TEXT="4. Course Summary" POSITION="bottom_or_right" ID="ID_1110223901" CREATED="1758939019896" MODIFIED="1758939024464">
 <node TEXT="4.1 Course Summary" ID="ID_719388378" CREATED="1758939024468" MODIFIED="1758939029674"/>
 <node TEXT="4.2 Share Your Achievement" ID="ID_135771524" CREATED="1758939029864" MODIFIED="1758939036506"/>
 </node>

@@ -5,9 +5,11 @@ Fundamentals
 
 ## 1.1 What is Neo4j?
 
-### Neo4j is a graph database that stores data in a graph.
+### Overview
 
-### Data is stored as nodes and relationships instead of tables or documents
+#### Neo4j is a graph database that stores data in a graph.
+
+#### Data is stored as nodes and relationships instead of tables or documents
 
 ### Nodes, Relationships, Labels, and Properties
 
@@ -139,6 +141,8 @@ RETURN p,c
 #### Create a Movie node
 
 #### Create a RATED relationship
+
+### Create Own Nodes/Relation
 
 # 3. Exploring Neo4j
 
