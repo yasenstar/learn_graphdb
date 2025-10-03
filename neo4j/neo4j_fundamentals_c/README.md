@@ -4,7 +4,7 @@
 
 Following are the level 1 structure of the course:
 
-![neo4j_fundamentals_course_structure_level1](img/neo4j_fundamentals_course_structure_level1.png)
+![neo4j_fundamentals_course_structure_level1](img/Neo4j_Fundamentals_c.png)
 
 The mindmap is created using Open Source tool called FreePlane.
 
@@ -28,4 +28,4 @@ The demo videso are posted on following platform for your checking:
 
 ---
 
-Updated at: September 27th, 2025
+Updated at: Oct 3rd, 2025
