@@ -151,4 +151,4 @@ Using `MATCH (n) RETURN n` to query as below:
 ![sample graph](img/sample_graph.png)
 
 ---
-Updated at: September 27th, 2025
+Updated at: Oct 3rd, 2025
