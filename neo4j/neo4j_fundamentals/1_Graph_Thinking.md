@@ -129,7 +129,26 @@ RETURN p, w, c
 
 ## Thinking in Graphse - Types of Databases
 
+The full query to create the graph in the course:
 
+```SQL
+MERGE (a1:Article {name: "Blog Post"})-[:REFERS_TO]->(t:Technology {name: "Database"})
+MERGE (a1)-[:WRITTEN_BY]->(p:Person {name: "Emil Eifrem"})
+MERGE (a1)-[:ABOURT]->(c:Company {name: "Neo4j"})
+MERGE (a1)-[:REFERS_TO]->(a2:Article {name: "Documentation"})
+MERGE (a1)-[:PUBLISHED_ON]->(w:Website {name: "neo4j.com"})
+MERGE (a2)-[:PUBLISHED_ON]->(w)
+MERGE (c)-[:OWNER_OF]->(w)
+MERGE (c)-[:FOUNDER]->(p)-[:WORKS_AT]->(c)
+MERGE (c)-[:LOCATED]->(l1:Location {name: "London"})
+MERGE (l1)-[:CAPITAL_OF]->(l2:Location {name: "United Kingdom"})
+MERGE (c)-[:FOUNDED]->(l3:Location {name: "Malmo"})
+MERGE (c)-[:LOCATED]->(l3)
+```
+
+Using `MATCH (n) RETURN n` to query as below:
+
+![sample graph](img/sample_graph.png)
 
 ---
 Updated at: September 27th, 2025
