@@ -86,7 +86,7 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <node TEXT="1. 图形化思考&#xa;Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1759496634870">
-<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
+<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
 <node TEXT="总览&#xa;Overview" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759496793397">
 <node TEXT="Neo4j是一种将数据储存于图形中的图形数据库&#xa;Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1759496835045"/>
 <node TEXT="有别于关系型数据库中数据以表的方式存储，和其他NoSQL数据库中直接存储文档对象，图像数据库以解读和关系的方式存储数据&#xa;Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1759496925423"/>
@@ -136,7 +136,7 @@
 <node TEXT="NoSQL Databases" ID="ID_621071674" CREATED="1758941284820" MODIFIED="1758941292336"/>
 <node TEXT="Graphs" ID="ID_535340952" CREATED="1758941294940" MODIFIED="1758941296359"/>
 </node>
-<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
+<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" FOLDED="true" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
 <node TEXT="1736 to the Present Day" ID="ID_476811426" CREATED="1758941301460" MODIFIED="1758941307743"/>
 <node TEXT="Uncover Patterns in your Data" ID="ID_1677546627" CREATED="1758941307940" MODIFIED="1758941314406"/>
 <node TEXT="Knowledge Graphs &amp; Generative AI" ID="ID_1135835687" CREATED="1758941321124" MODIFIED="1758941329471"/>
@@ -171,7 +171,7 @@
 </node>
 </node>
 <node TEXT="3. Neo4j概览&#xa;Exploring Neo4j" POSITION="bottom_or_right" ID="ID_852576041" CREATED="1758938985952" MODIFIED="1759496659531">
-<node TEXT="3.1 获取和安装Neo4j&#xa;Get Neo4j" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1759496727455">
+<node TEXT="3.1 获取和安装Neo4j&#xa;Get Neo4j" FOLDED="true" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1759496727455">
 <node TEXT="Neo4j Community - Server and Desktop" ID="ID_108010029" CREATED="1758941616803" MODIFIED="1758941815499" LINK="https://neo4j.com/deployment-center/?gdb-selfmanaged&amp;community"/>
 </node>
 <node TEXT="3.2 Neo4j的相关工具&#xa;Neo4j Tools" FOLDED="true" ID="ID_550067719" CREATED="1758939002760" MODIFIED="1759496746685">
