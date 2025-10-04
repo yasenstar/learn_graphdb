@@ -22,4 +22,4 @@ You may find that I'll also make mistakes, however, that's the GOLDEN chance to 
 
 ---
 
-Updated at: Oct 3rd, 2025
+Updated at: 2025-10-04
