@@ -8,15 +8,17 @@
 
 The most effective learning is act with your hands, so, do not just read and watch, prepare the tool and type all querying code together with me.
 
+最有效的学习方法是动手实践，所以，不要只是阅读和观看，准备好工具，和我一起输入所有查询代码。
+
 You may find that I'll also make mistakes, however, that's the GOLDEN chance to learn more!
+
+你会发现我也当然可能犯错，但这正是学习更多知识的绝佳机会！
 
 这是Neo4j和图像数据库的系列课程的第一个课题，欢迎学习！
 
-Here you may find the key information as well as Cypher queries per chapter:
-
-- [1. Graph Thinking](./1_Graph_Thinking.md)
-- [2. Querying Graphs](./2_Querying_Graphs.md)
-- [3. Exploring Neo4j](./3_Exploring_Neo4j.md)
+- [1. 图形化思考](./1_图形化思考.md)
+- [2. 查询图像数据库](./2_查询图像数据库.md)
+- [3. Neo4j概览](./3_Neo4j概览.md)
 
 ---
 
