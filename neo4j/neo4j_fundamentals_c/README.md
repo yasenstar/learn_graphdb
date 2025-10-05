@@ -20,6 +20,7 @@ You may find that I'll also make mistakes, however, that's the GOLDEN chance to 
 - [2. 查询图像数据库](./2_查询图像数据库.md)
 - [3. Neo4j概览](./3_Neo4j概览.md)
 
+相关演示都在Neo4j桌面版2.0.3上面测试通过。
 ---
 
 Updated at: 2025-10-04
