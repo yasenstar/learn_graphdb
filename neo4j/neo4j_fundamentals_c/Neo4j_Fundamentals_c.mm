@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j&#xa;图像数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1759496614977" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.9090909">
+<node TEXT="Neo4j&#xa;图像数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1759496614977" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="1.21">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
@@ -86,33 +86,33 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <node TEXT="1. 图形化思考&#xa;Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1759496634870">
-<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
-<node TEXT="总览&#xa;Overview" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759496793397">
+<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
+<node TEXT="总览&#xa;Overview" FOLDED="true" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759496793397">
 <node TEXT="Neo4j是一种将数据储存于图形中的图形数据库&#xa;Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1759496835045"/>
 <node TEXT="有别于关系型数据库中数据以表的方式存储，和其他NoSQL数据库中直接存储文档对象，图像数据库以解读和关系的方式存储数据&#xa;Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1759496925423"/>
 </node>
 <node TEXT="节点，关系，标签和属性&#xa;Nodes, Relationships, Labels, and Properties" ID="ID_1148601110" CREATED="1758939169467" MODIFIED="1759496951304">
-<node TEXT="节点&#xa;Nodes" FOLDED="true" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1759496958203" VGAP_QUANTITY="3 pt">
-<node TEXT="Create Nodes with Labels" FOLDED="true" POSITION="bottom_or_right" ID="ID_476394202" CREATED="1758939783389" MODIFIED="1758939792054">
+<node TEXT="节点&#xa;Nodes" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1759496958203" VGAP_QUANTITY="3 pt">
+<node TEXT="创建有标签的节点" FOLDED="true" POSITION="bottom_or_right" ID="ID_476394202" CREATED="1758939783389" MODIFIED="1759649393797">
 <node TEXT="create (:Person {name:&quot;Michael&quot;});&#xa;create (:Person {name:&quot;Sarah&quot;});&#xa;create (:Company {name:&quot;Neo4j&quot;});&#xa;create (:Location {name:&quot;Sweden&quot;})" ID="ID_468660802" CREATED="1758939792058" MODIFIED="1758939818939"/>
-</node>
 <node TEXT="If you want to correct/change one label, e.g. you mistake type &quot;Neorj&quot; for Company label, use SET" FOLDED="true" POSITION="bottom_or_right" ID="ID_926051400" CREATED="1758939927516" MODIFIED="1758949066655">
 <node TEXT="match (c:Company {name:&quot;Neorj&quot;})&#xa;set c.name = &quot;Neo4j&quot;&#xa;return c" ID="ID_1550051631" CREATED="1758939960511" MODIFIED="1758939967337"/>
 </node>
-<node TEXT="Add additional labels to one node" FOLDED="true" POSITION="bottom_or_right" ID="ID_403230976" CREATED="1758940153598" MODIFIED="1758940168199">
+</node>
+<node TEXT="给现有节点添加新标签" FOLDED="true" POSITION="bottom_or_right" ID="ID_403230976" CREATED="1758940153598" MODIFIED="1759649421997">
 <node TEXT="MATCH (n {name:&quot;Michael&quot;})&#xa;SET n:Employee&#xa;RETURN n" ID="ID_1658475876" CREATED="1758940168203" MODIFIED="1758940174691"/>
 </node>
 </node>
 <node TEXT="关系&#xa;Relationships" FOLDED="true" ID="ID_400190290" CREATED="1758940339296" MODIFIED="1759496962747">
-<node TEXT="One-Way Relationships" FOLDED="true" ID="ID_1901635414" CREATED="1758940444861" MODIFIED="1758940451712">
+<node TEXT="单向关系" FOLDED="true" ID="ID_1901635414" CREATED="1758940444861" MODIFIED="1759649435155">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})&#xa;MATCH (c:Company {name:&quot;Neo4j&quot;})&#xa;MATCH (l:Location {name:&quot;Sweden&quot;})&#xa;CREATE (p)-[:WORKS_AT]-&gt;(c)-[:FOUNDED_IN]-&gt;(l)&#xa;RETURN p,c,l" POSITION="bottom_or_right" ID="ID_666078939" CREATED="1758940343298" MODIFIED="1758940346313"/>
 </node>
-<node TEXT="Two-Way Relationships" FOLDED="true" ID="ID_1276696653" CREATED="1758940455606" MODIFIED="1758940460182">
+<node TEXT="双向关系" FOLDED="true" ID="ID_1276696653" CREATED="1758940455606" MODIFIED="1759649441218">
 <node TEXT="MATCH (p1:Person {name:&quot;Michael&quot;}), (p2:Person {name:&quot;Sarah&quot;})&#xa;CREATE (p1)-[:LOVES]-&gt;(p2)-[:LOVES]-&gt;(p1)&#xa;RETURN p1,p2" ID="ID_199100928" CREATED="1758940460184" MODIFIED="1758940463218"/>
 <node TEXT="MATCH (p1:Person {name:&quot;Michael&quot;}), (p2:Person {name:&quot;Sarah&quot;})&#xa;CREATE (p1)-[:MARRIED_TO]-&gt;(p2)-[:MARRIED_TO]-&gt;(p1)&#xa;RETURN p1,p2" ID="ID_418717879" CREATED="1758940859767" MODIFIED="1758940901643"/>
 </node>
 </node>
-<node TEXT="属性&#xa;Properties" ID="ID_1212036191" CREATED="1758940468039" MODIFIED="1759496966989">
+<node TEXT="属性&#xa;Properties" FOLDED="true" ID="ID_1212036191" CREATED="1758940468039" MODIFIED="1759496966989">
 <node TEXT="For Node &quot;Michael&quot;" FOLDED="true" ID="ID_1352985116" CREATED="1758940650105" MODIFIED="1758940663866">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})&#xa;SET p.firstName = &quot;Michael&quot;,&#xa;    p.lastName = &quot;Faraday&quot;,&#xa;    p.born = &quot;1971-09-22&quot;&#xa;RETURN p" ID="ID_1947806476" CREATED="1758940663871" MODIFIED="1758940666594"/>
 </node>
@@ -170,8 +170,8 @@
 <node TEXT="Create Own Nodes/Relation" ID="ID_877994601" CREATED="1759480267736" MODIFIED="1759480277631"/>
 </node>
 </node>
-<node TEXT="3. Neo4j概览&#xa;Exploring Neo4j" POSITION="bottom_or_right" ID="ID_852576041" CREATED="1758938985952" MODIFIED="1759496659531">
-<node TEXT="3.1 获取和安装Neo4j&#xa;Get Neo4j" FOLDED="true" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1759496727455">
+<node TEXT="3. Neo4j概览&#xa;Exploring Neo4j" FOLDED="true" POSITION="bottom_or_right" ID="ID_852576041" CREATED="1758938985952" MODIFIED="1759496659531">
+<node TEXT="3.1 获取和安装Neo4j&#xa;Get Neo4j" ID="ID_205788607" CREATED="1758938993365" MODIFIED="1759496727455">
 <node TEXT="Neo4j Community - Server and Desktop" ID="ID_108010029" CREATED="1758941616803" MODIFIED="1758941815499" LINK="https://neo4j.com/deployment-center/?gdb-selfmanaged&amp;community"/>
 </node>
 <node TEXT="3.2 Neo4j的相关工具&#xa;Neo4j Tools" FOLDED="true" ID="ID_550067719" CREATED="1758939002760" MODIFIED="1759496746685">
@@ -182,7 +182,7 @@
 </node>
 <node TEXT="3.3 祝贺与下一步&#xa;Congratulations and Next Steps" ID="ID_986304821" CREATED="1758939008090" MODIFIED="1759496760428"/>
 </node>
-<node TEXT="4. 课程回顾&#xa;Course Summary" POSITION="bottom_or_right" ID="ID_1110223901" CREATED="1758939019896" MODIFIED="1759496672129">
+<node TEXT="4. 课程回顾&#xa;Course Summary" FOLDED="true" POSITION="bottom_or_right" ID="ID_1110223901" CREATED="1758939019896" MODIFIED="1759496672129">
 <node TEXT="4.1 课程总结&#xa;Course Summary" ID="ID_719388378" CREATED="1758939024468" MODIFIED="1759496768963"/>
 <node TEXT="4.2 分享你的成就&#xa;Share Your Achievement" ID="ID_135771524" CREATED="1758939029864" MODIFIED="1759496781550"/>
 </node>
