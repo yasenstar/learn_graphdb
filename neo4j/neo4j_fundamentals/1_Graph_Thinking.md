@@ -150,5 +150,11 @@ Using `MATCH (n) RETURN n` to query as below:
 
 ![sample graph](img/sample_graph.png)
 
+How does the graph database (Neo4j) solve the `O(n)` problem as data grows compared to RDBMs？（Refer from [here](https://dba.stackexchange.com/questions/345622/how-does-the-graph-database-neo4j-solve-the-on-problem-as-data-grows-compa))
+
+In traditional RDBMS, joining two or more tables, in the usual best case scenario of an Indexed Nested Loop Join (INLJ), the cost can be approximated to one or more O(log n) index lookups, plus the O(n) time needed to join all of the data records to the main table, e.g.: joining three tables with INLJ has a cost of O(log n * log n * n).
+
+In contrast, joins is where Graph Database really shines. Because, native Graph Databases solve this problem using the concept of index-free adjacency, meaning that nodes directly store references (pointers) to related (neighboring) nodes. This means that queries traverse relationships directly, rather than relying on lookups. So, even for deep traversals and in presence of lookups, performance scales logarithmically instead of linearly, and is very hard to reach O(log n) time complexity.
+
 ---
-Updated at: Oct 3rd, 2025
+Updated at: 2025-10-05
