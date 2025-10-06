@@ -25,6 +25,7 @@ Here you may find the key information as well as Cypher queries per chapter:
 The demo videso are posted on following platform for your checking:
 
 - [YouTube Channel - Yasen - Enterprise Architecture](https://www.youtube.com/playlist?list=PL6DEHvciXKeXjMDEhDVnZwljcpsoW2Yfp)
+- Packaged videos are published in [here Udemy](https://www.udemy.com/course/graph-database-neo4j-fundamentals/?referralCode=A1B6F8575B9981D1F770)
 
 ---
 
