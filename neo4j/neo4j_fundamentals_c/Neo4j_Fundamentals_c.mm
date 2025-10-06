@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j&#xa;图像数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1759496614977" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="1.21">
+<node TEXT="Neo4j&#xa;图像数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1759496614977" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="1.1">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
@@ -9,7 +9,7 @@
 <font SIZE="24"/>
 <stylenode LOCALIZED_TEXT="styles.predefined" POSITION="bottom_or_right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="default" ID="ID_4172522" ICON_SIZE="12 pt" FORMAT_AS_HYPERLINK="false" COLOR="#051552" BACKGROUND_COLOR="#5cd5e8" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_WIDTH_LIKE_EDGE="false" BORDER_WIDTH="1.7 px" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#1164b0" BORDER_DASH_LIKE_EDGE="true" BORDER_DASH="SOLID" VGAP_QUANTITY="3 pt">
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_4172522" STARTINCLINATION="115.875 pt;0 pt;" ENDINCLINATION="115.875 pt;28.5 pt;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
+<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_4172522" STARTINCLINATION="116.25 pt;0 pt;" ENDINCLINATION="116.25 pt;28.5 pt;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" SIZE="10" BOLD="false" STRIKETHROUGH="false" ITALIC="false"/>
 <edge STYLE="bezier" COLOR="#051552" WIDTH="2" DASH="SOLID"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/auto"/>
@@ -86,13 +86,13 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <node TEXT="1. 图形化思考&#xa;Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1759496634870">
-<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
-<node TEXT="总览&#xa;Overview" FOLDED="true" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759496793397">
+<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
+<node TEXT="总览 Overview" FOLDED="true" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759674621123">
 <node TEXT="Neo4j是一种将数据储存于图形中的图形数据库&#xa;Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1759496835045"/>
 <node TEXT="有别于关系型数据库中数据以表的方式存储，和其他NoSQL数据库中直接存储文档对象，图像数据库以解读和关系的方式存储数据&#xa;Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1759496925423"/>
 </node>
 <node TEXT="节点，关系，标签和属性&#xa;Nodes, Relationships, Labels, and Properties" ID="ID_1148601110" CREATED="1758939169467" MODIFIED="1759496951304">
-<node TEXT="节点&#xa;Nodes" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1759496958203" VGAP_QUANTITY="3 pt">
+<node TEXT="节点&#xa;Nodes" FOLDED="true" ID="ID_1909384021" CREATED="1758940474581" MODIFIED="1759496958203" VGAP_QUANTITY="3 pt">
 <node TEXT="创建有标签的节点" FOLDED="true" POSITION="bottom_or_right" ID="ID_476394202" CREATED="1758939783389" MODIFIED="1759649393797">
 <node TEXT="create (:Person {name:&quot;Michael&quot;});&#xa;create (:Person {name:&quot;Sarah&quot;});&#xa;create (:Company {name:&quot;Neo4j&quot;});&#xa;create (:Location {name:&quot;Sweden&quot;})" ID="ID_468660802" CREATED="1758939792058" MODIFIED="1758939818939"/>
 <node TEXT="If you want to correct/change one label, e.g. you mistake type &quot;Neorj&quot; for Company label, use SET" FOLDED="true" POSITION="bottom_or_right" ID="ID_926051400" CREATED="1758939927516" MODIFIED="1758949066655">
@@ -112,7 +112,7 @@
 <node TEXT="MATCH (p1:Person {name:&quot;Michael&quot;}), (p2:Person {name:&quot;Sarah&quot;})&#xa;CREATE (p1)-[:MARRIED_TO]-&gt;(p2)-[:MARRIED_TO]-&gt;(p1)&#xa;RETURN p1,p2" ID="ID_418717879" CREATED="1758940859767" MODIFIED="1758940901643"/>
 </node>
 </node>
-<node TEXT="属性&#xa;Properties" FOLDED="true" ID="ID_1212036191" CREATED="1758940468039" MODIFIED="1759496966989">
+<node TEXT="属性&#xa;Properties" ID="ID_1212036191" CREATED="1758940468039" MODIFIED="1759496966989">
 <node TEXT="For Node &quot;Michael&quot;" FOLDED="true" ID="ID_1352985116" CREATED="1758940650105" MODIFIED="1758940663866">
 <node TEXT="MATCH (p:Person {name:&quot;Michael&quot;})&#xa;SET p.firstName = &quot;Michael&quot;,&#xa;    p.lastName = &quot;Faraday&quot;,&#xa;    p.born = &quot;1971-09-22&quot;&#xa;RETURN p" ID="ID_1947806476" CREATED="1758940663871" MODIFIED="1758940666594"/>
 </node>
@@ -136,11 +136,11 @@
 <node TEXT="NoSQL Databases" ID="ID_621071674" CREATED="1758941284820" MODIFIED="1758941292336"/>
 <node TEXT="Graphs" ID="ID_535340952" CREATED="1758941294940" MODIFIED="1758941296359"/>
 </node>
-<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" FOLDED="true" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
-<node TEXT="1736 to the Present Day" ID="ID_476811426" CREATED="1758941301460" MODIFIED="1758941307743"/>
-<node TEXT="Uncover Patterns in your Data" ID="ID_1677546627" CREATED="1758941307940" MODIFIED="1758941314406"/>
-<node TEXT="Knowledge Graphs &amp; Generative AI" ID="ID_1135835687" CREATED="1758941321124" MODIFIED="1758941329471"/>
-<node TEXT="Routing" ID="ID_1048319255" CREATED="1758941361963" MODIFIED="1758941364789"/>
+<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
+<node TEXT="从1736年到今天" ID="ID_476811426" CREATED="1758941301460" MODIFIED="1759723241612"/>
+<node TEXT="发现你的数据中的模式" ID="ID_1677546627" CREATED="1758941307940" MODIFIED="1759723226468"/>
+<node TEXT="知识图谱与生成式AI" ID="ID_1135835687" CREATED="1758941321124" MODIFIED="1759723257653"/>
+<node TEXT="路由" ID="ID_1048319255" CREATED="1758941361963" MODIFIED="1759723261337"/>
 </node>
 </node>
 <node TEXT="2. 查询图形数据库&#xa;Querying Graphs" FOLDED="true" POSITION="bottom_or_right" ID="ID_1877167235" CREATED="1758938962480" MODIFIED="1759496649534">

@@ -29,4 +29,4 @@ The demo videso are posted on following platform for your checking:
 
 ---
 
-Updated at: September 27th, 2025
+Updated at: 2025-10-06
