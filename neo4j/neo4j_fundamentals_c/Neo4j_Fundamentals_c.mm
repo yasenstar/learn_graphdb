@@ -86,7 +86,7 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <node TEXT="1. 图形化思考&#xa;Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1759496634870">
-<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
+<node TEXT="1.1 Neo4j是什么？&#xa;What is Neo4j?" FOLDED="true" ID="ID_1102836801" CREATED="1758938941448" MODIFIED="1759496687991">
 <node TEXT="总览 Overview" FOLDED="true" ID="ID_818570903" CREATED="1758974727354" MODIFIED="1759674621123">
 <node TEXT="Neo4j是一种将数据储存于图形中的图形数据库&#xa;Neo4j is a graph database that stores data in a graph." POSITION="bottom_or_right" ID="ID_1946364406" CREATED="1758939137105" MODIFIED="1759496835045"/>
 <node TEXT="有别于关系型数据库中数据以表的方式存储，和其他NoSQL数据库中直接存储文档对象，图像数据库以解读和关系的方式存储数据&#xa;Data is stored as nodes and relationships instead of tables or documents" POSITION="bottom_or_right" ID="ID_13729904" CREATED="1758939150242" MODIFIED="1759496925423"/>
