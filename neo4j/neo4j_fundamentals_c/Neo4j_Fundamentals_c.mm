@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Neo4j&#xa;图像数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1759496614977" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.9090909">
+<node TEXT="Neo4j&#xa;图形数据库入门" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1761528348716" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.9090909">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
@@ -136,7 +136,7 @@
 <node TEXT="NoSQL Databases" ID="ID_621071674" CREATED="1758941284820" MODIFIED="1758941292336"/>
 <node TEXT="Graphs" ID="ID_535340952" CREATED="1758941294940" MODIFIED="1758941296359"/>
 </node>
-<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
+<node TEXT="1.3 图形无处不在&#xa;Graphs Are Everywhere" FOLDED="true" ID="ID_1284007330" CREATED="1758938954456" MODIFIED="1759496711126">
 <node TEXT="从1736年到今天" ID="ID_476811426" CREATED="1758941301460" MODIFIED="1759723241612"/>
 <node TEXT="发现你的数据中的模式" ID="ID_1677546627" CREATED="1758941307940" MODIFIED="1759723226468"/>
 <node TEXT="知识图谱与生成式AI" ID="ID_1135835687" CREATED="1758941321124" MODIFIED="1759723257653"/>
@@ -154,7 +154,7 @@
 <node TEXT="User Ratings" ID="ID_760660066" CREATED="1758941434076" MODIFIED="1758941437040"/>
 </node>
 </node>
-<node TEXT="2.2 模式匹配" FOLDED="true" ID="ID_425043506" CREATED="1758938973808" MODIFIED="1759723442774">
+<node TEXT="2.2 模式匹配" ID="ID_425043506" CREATED="1758938973808" MODIFIED="1759723442774">
 <node TEXT="模式 Patterns" ID="ID_675450704" CREATED="1758941448139" MODIFIED="1759727687927">
 <node TEXT="节点 Nodes" ID="ID_47471897" CREATED="1758941489044" MODIFIED="1759727701982"/>
 <node TEXT="关系 Relationships" ID="ID_1363254898" CREATED="1758941490995" MODIFIED="1759727705749"/>
