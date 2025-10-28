@@ -81,4 +81,10 @@ RETURN p
 
 ## 2.9 Deleting Data
 
+In Neo4j database, you can delete nodes, relationships, properties and labels. The keyword is `DELETE`.
+
+Neo4j provides a feature where you CANNOT delete a node if it has incoming or outgoing relationships, to delete both relationship and the node, use `DETACH DELETE` to the node.
+
+To remove the label, keyword is `REMOVE`.
+
 ## 2.10 Deleting Emil
