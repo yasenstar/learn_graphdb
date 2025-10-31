@@ -9,3 +9,8 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
 ## Information on Graph
 
 - [Everything is Connected: Graph Neural Networks](https://arxiv.org/abs/2301.08210), see [localfile](./graph_kb/2301.08210.pdf)
+
+## My Learnings on Graph
+
+- Neo4j Graph Database
+  - [Neo4j Fundamentals - English](neo4j/neo4j_fundamentals/)
