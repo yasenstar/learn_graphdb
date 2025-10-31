@@ -4,7 +4,7 @@
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
 <hook NAME="MapStyle" background="#eeeeeeff">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false" show_icons="BESIDE_NODES" associatedTemplateLocation="template:/light_grey_template.mm" show_tags="UNDER_NODES"/>
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_grey_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -94,7 +94,7 @@
   </body>
 </html></richcontent>
 <node TEXT="01. Reading Data from Neo4j" POSITION="bottom_or_right" ID="ID_1925844165" CREATED="1761585766835" MODIFIED="1761585773850">
-<node TEXT="1.1 Introduction to Cypher" POSITION="bottom_or_right" ID="ID_1738184379" CREATED="1761585780915" MODIFIED="1761585802132">
+<node TEXT="1.1 Introduction to Cypher" FOLDED="true" POSITION="bottom_or_right" ID="ID_1738184379" CREATED="1761585780915" MODIFIED="1761585802132">
 <node TEXT="What is Cypher?" ID="ID_223254297" CREATED="1761585966059" MODIFIED="1761585970659"/>
 <node TEXT="How Cypher works" ID="ID_413963782" CREATED="1761586003487" MODIFIED="1761586009459">
 <node TEXT="Cypher works by matching patterns in the data." ID="ID_1710301154" CREATED="1761586012411" MODIFIED="1761586028358"/>
