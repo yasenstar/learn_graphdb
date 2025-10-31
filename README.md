@@ -16,6 +16,7 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
   - [Neo4j Fundamentals (English)](neo4j/neo4j_fundamentals/)
   - [Neo4j Fundamentals (Chinese)](neo4j/neo4j_fundamentals_c/)
   - [Cypher Fundamentals (English)](neo4j/cypher/cypher_fundamentals/)
+  - [Graph Data Modeling Fundamentals (English)](neo4j/graph_data_modeling/)
 
 ---
 
