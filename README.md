@@ -13,4 +13,10 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
 ## My Learnings on Graph
 
 - Neo4j Graph Database
-  - [Neo4j Fundamentals - English](neo4j/neo4j_fundamentals/)
+  - [Neo4j Fundamentals (English)](neo4j/neo4j_fundamentals/)
+  - [Neo4j Fundamentals (Chinese)](neo4j/neo4j_fundamentals_c/)
+  - [Cypher Fundamentals (English)](neo4j/cypher/cypher_fundamentals/)
+
+---
+
+Updated at: 2025-10-31
