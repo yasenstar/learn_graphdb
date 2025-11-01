@@ -3,6 +3,9 @@
 - [Graph Data Modeling Fundamentals](#graph-data-modeling-fundamentals)
   - [01 Getting Started](#01-getting-started)
     - [Why Model?](#why-model)
+    - [The Domain](#the-domain)
+    - [Types of Models](#types-of-models)
+    - [Style Guidelines for Modeling](#style-guidelines-for-modeling)
   - [02 Modeling Nodes](#02-modeling-nodes)
   - [03 Modeling Relationships](#03-modeling-relationships)
   - [04 Testing the Model](#04-testing-the-model)
@@ -27,10 +30,54 @@ flowchart TD
     S5["Step 5: Test the use cases, incvluding performance against the graph"]
     S6["Step 6: Refactor (improve) the graph data model due to a change in the key use cases or for performance reasons."]
     S7["Step 7: Implement the refactoring on the graph and retest using Cypher."]
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S1
 ```
 
+Graph Data Modeling is an iterative process:
+- your initial graph data model is a starting point, but as you learn more about the use cases or if the use cases change, the initial graph data model will need to change.
+- in addition, you may find that especially when the graph scales, you will need to modify the graph (`refactor`) to achieve the best performance for your key use cases.
+
+### The Domain
+
+Before you begin the data modeling process, you must:
+- Identify the stakeholders and developers of the application.
+- With the stakeholders and developers:
+  - Describe the application in detail
+  - Identify the users of the application (people, systems)
+  - Agree upon the use cases for the application
+  - Rank the importance of the use cases
+
+What makes the domain interesting are the connections or relationships between nodes in a graph.
+
+Most use cases for an application can be enumerated by a comprehensive list of questions. The use cases help to define how the application will behave at runtime.
+
+### Types of Models
+
+When performing the graph data modeling process for an application, you need two types of models at least:
+- Data Model: describes the labels, relationships, and properties for the graph, it does not have specific data that will be created in the graph.
+![sample data model](img/sample-data-model.png)
+- Instance Model: to test the model against the use cases, you need to have a set of sample data that you can use to see if the use cases can be answered with the model.
+![sample instance model](img/sample-instance-model.png)
+
+### Style Guidelines for Modeling
+
+In Neo4j, `labels`, `relationship types`, and `property keys` are case-sensitive, unlike Cypher `keywords` which are case-insensitive.
+
+A Neo4j best practice is to use the following when you name the elements of the graph:
+- A `label` is a single identifier that begins with a capital letter and can be CamelCase
+  - Examples: Person, Company, GitHubRepo
+- A `relationship type` is a single identifier that is in all capital letters with the underscore character
+  - Examples: FOLLOWS, MARRIED_TO, ACTORED_IN
+- A `property key` for a node or a relationship is a single identifier that begins with a lower-case letter and can be camelCase
+  - Examples: deptId, firstName
+
+CamelCase: https://en.wikipedia.org/wiki/Camel_case
+
+camelCase: https://en.wikipedia.org/wiki/Camel_case
+
 ## 02 Modeling Nodes
+
+
 
 ## 03 Modeling Relationships
 
