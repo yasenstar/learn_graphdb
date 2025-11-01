@@ -7,7 +7,12 @@
     - [Types of Models](#types-of-models)
     - [Style Guidelines for Modeling](#style-guidelines-for-modeling)
   - [02 Modeling Nodes](#02-modeling-nodes)
+    - [Defining Nodes](#defining-nodes)
+    - [Creating Nodes](#creating-nodes)
+    - [Identifying a New Label](#identifying-a-new-label)
+    - [Creating More Nodes](#creating-more-nodes)
   - [03 Modeling Relationships](#03-modeling-relationships)
+    - [Defining Relationships](#defining-relationships)
   - [04 Testing the Model](#04-testing-the-model)
   - [05 Refactoring the Graph](#05-refactoring-the-graph)
   - [06 Eliminating Duplicate Data](#06-eliminating-duplicate-data)
@@ -59,6 +64,16 @@ When performing the graph data modeling process for an application, you need two
 - Instance Model: to test the model against the use cases, you need to have a set of sample data that you can use to see if the use cases can be answered with the model.
 ![sample instance model](img/sample-instance-model.png)
 
+Use below Cypher command in Neo4j to check the Data Model:
+
+```SQL
+CALL db.schema.visualization
+```
+
+For Movie graph (v5.26), below is the schema (data model):
+
+![movie data model schema](img/movie_db_schema.png)
+
 ### Style Guidelines for Modeling
 
 In Neo4j, `labels`, `relationship types`, and `property keys` are case-sensitive, unlike Cypher `keywords` which are case-insensitive.
@@ -77,9 +92,58 @@ camelCase: https://en.wikipedia.org/wiki/Camel_case
 
 ## 02 Modeling Nodes
 
+`Nodes` are the fundamental building blocks that represent the entities in your domain.
 
+### Defining Nodes
+
+Entities are the dominant nouns in your application use cases, they will be the labeled nodes in the graph data model.
+
+Label names are using CamelCase format.
+
+Node can have properties, whcih are used to:
+- uniquely identify a nodd
+- answer specific details of the use cases for the applications
+- return data
+
+As example in Movie graph, the properties are used to:
+- Anchor (where to begin the query):
+  - `MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) RETURN m`
+- Traverse the graph (navigation):
+  - `MATCH (p:Person)-[:ACTED_IN]-(m:Movie {title: 'Apollo 13'})-[:RATED]-(u:User) RETURN p, u`
+- Return data from the query:
+  - `MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) RETURN m.title, m.released`
+
+You can use below Cypher to retrieve list of node properties:
+
+```SQL
+CALL db.schema.nodeTypeProperties
+```
+
+![movie schema nodeTypeProperties](img/movie_db_schema_nodeTypeProperties.png)
+
+### Creating Nodes
+
+### Identifying a New Label
+
+### Creating More Nodes
+
+Note on the case sentitivity: the property names and values are case-sensitive!
 
 ## 03 Modeling Relationships
+
+Relationships are what connect nodes and give the graph a power, allowing you to traverse and query connected data efficiently.
+
+### Defining Relationships
+
+Connections are the **verbs** in use cases.
+
+At a glance, cconnections are strightforward things, but their micro- and macro-design are arguably the most critical factors in graph performance.
+
+According to naming relationships, we use the Neo4j best practice of all capital letters/underscore characters.
+
+When you create a relationship in Neo4j, a direction must either be specified explicitly or inferred by the left-to-right direction in the pattern specified. While, at the runtime, during a query, direction is typically not required.
+
+A relationship is typically between 2 different nodes, but it can also be to the same node.
 
 ## 04 Testing the Model
 
