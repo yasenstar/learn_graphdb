@@ -40,6 +40,7 @@
     - [Specializing `RATED` Relationships](#specializing-rated-relationships)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
     - [Intermediat Nodes](#intermediat-nodes)
+    - [Adding a Role Node](#adding-a-role-node)
   - [09 Course Summary](#09-course-summary)
 
 ## 01 Getting Started
@@ -367,7 +368,12 @@ Intermediate nodes allow you to add context and additional information to relati
 
 ### Intermediat Nodes
 
+### Adding a Role Node
 
+```SQL
+MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+MERGE (x:)
+``
 
 ## 09 Course Summary
 
