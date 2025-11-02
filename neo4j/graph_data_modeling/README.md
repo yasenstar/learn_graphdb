@@ -23,9 +23,23 @@
     - [Refactoring 重构](#refactoring-重构)
     - [Labels in the Graph](#labels-in-the-graph)
     - [Adding the Actor Label](#adding-the-actor-label)
+    - [Retesting after Refactoring](#retesting-after-refactoring)
+    - [Retesting with Actor Label](#retesting-with-actor-label)
+    - [Adding the Director Label](#adding-the-director-label)
+    - [Avoid These Labels](#avoid-these-labels)
   - [06 Eliminating Duplicate Data](#06-eliminating-duplicate-data)
+    - [Duplicate Data](#duplicate-data)
+    - [Adding Language Data](#adding-language-data)
+    - [Refactoring Duplicate Data](#refactoring-duplicate-data)
+    - [Adding Language Nodes](#adding-language-nodes)
+    - [Adding Genre Nodes](#adding-genre-nodes)
+    - [Eliminating Complex Data in Nodes](#eliminating-complex-data-in-nodes)
   - [07 Using Specific Relationships](#07-using-specific-relationships)
+    - [Relationships in the Graph](#relationships-in-the-graph)
+    - [Specializing `ACTED_IN` and `DIRECTED` Relationships](#specializing-acted_in-and-directed-relationships)
+    - [Specializing `RATED` Relationships](#specializing-rated-relationships)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
+    - [Intermediat Nodes](#intermediat-nodes)
   - [09 Course Summary](#09-course-summary)
 
 ## 01 Getting Started
@@ -220,11 +234,140 @@ SET p.Actor
 
 ### Adding the Actor Label
 
+### Retesting after Refactoring
+
+After refactoring, you should revisit all queries for your use cases.
+
+### Retesting with Actor Label
+
+### Adding the Director Label
+
+```SQL
+MATCH (p:Person) 
+WHERE exists ((p)-[:DIRECTED]->()) 
+SET p:Director
+```
+
+### Avoid These Labels
+
+"**Semantically Orthogonal**" is a fancy term that means that labels should have nothing to do with one another.
+
+You should be careful not to use the same type of label in different contexts. e.g. using the region for all types of nodes is not useful for most queries.
+
+You also want to avoid labeling your nodes to represent hierarchies.
+
 ## 06 Eliminating Duplicate Data
+
+By converting repeated property values into dedicated nodes, you can improve query performance, reduce storage overhead, and make your model more maintainable.
+
+### Duplicate Data
+
+You should take care to avoid duplicating data in your graph.
+
+### Adding Language Data
+
+### Refactoring Duplicate Data
+
+Below steps refactoring properties as nodes:
+1. Take the property value for each `Movie` node and create a `Language` node
+2. Create the `IN_LANGUAGE` relationship between that `Movie` node and the `Language` node
+3. Remove the languages property from the `Movie` node
+
+### Adding Language Nodes
+
+```SQL
+MATCH (m:Movie)
+UNWIND m.languages AS language
+
+MERGE (l:Language {name:language})
+MERGE (m)-[:IN_LANGUAGE]->(l)
+SET m.languages = null
+```
+
+The Cypher `UNWIND` clause separates each element fo the `languages` property list into a separate row value that is processed later in the query.
+
+### Adding Genre Nodes
+
+```language=cypher
+MATCH (m:Movie)
+UNWIND m.genres as genre
+MERGE (g:Genre {name:genre})
+MERGE (m)-[:IN_GENRE]->(g)
+SET m.genres = null
+```
+
+### Eliminating Complex Data in Nodes
+
+If there is a high amount of duplicate data in the nodes or if key questions of your use cases would perform better if all nodes need not be retrieved to get at the complex data, then you might consider refactoring the graph.
 
 ## 07 Using Specific Relationships
 
+### Relationships in the Graph
+
+Neo4j - as a native graph database - is implemented to traverse relationships quickly. In some cases, ikt is more performant to query the graph based upon relationship types, rather than properties in the nodes.
+
+The `apoc.merge.relationship` procedure allows to **dynamically** create relationships in the graph.
+
+### Specializing `ACTED_IN` and `DIRECTED` Relationships
+
+```SQL
+MATCH (n:Actor)-[:ACTED_IN]->(m:Movie)
+CALL apoc.merge.relationship(
+  n,
+  'ACTED_IN_' + left(m.released,4),
+  {},
+  {},
+  m ,
+  {}
+) YIELD rel
+RETURN count(*) AS `Number of relationships merged`;
+```
+
+```SQL
+MATCH (n:Actor)-[:DIRECTED]->(m:Movie)
+CALL apoc.merge.relationship(
+  n,
+  'DIRECTED_' + left(m.released,4),
+  {},
+  {},
+  m ,
+  {}
+) YIELD rel
+RETURN count(*) AS `Number of relationships merged`;
+```
+
+### Specializing `RATED` Relationships
+
+From this original query:
+
+```SQL
+MATCH (u:User)-[r:RATED]->(m:Movie)
+WHERE m.title = 'Apollo 134' AND r.rating = 5
+RETURN u.name as Reviewer
+```
+
+Refactor into below specialized `RATED` relationship:
+
+```SQL
+MATCH (u:User)-[:RATED]->(m:Movie)
+CALL apoc.merge.relationship(
+  u,
+  'RATED_' + r.rating,
+  {},
+  {},
+  m,
+  {}
+) YIELD rel
+RETURN COUNT(*) AS `Number of relationships added`;
+```
+
 ## 08 Adding Intermediate Nodes
+
+Intermediate nodes allow you to add context and additional information to relationships, making your model more expressive and powerful.
+
+### Intermediat Nodes
+
+
 
 ## 09 Course Summary
 
