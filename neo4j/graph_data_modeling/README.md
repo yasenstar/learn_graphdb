@@ -13,8 +13,16 @@
     - [Creating More Nodes](#creating-more-nodes)
   - [03 Modeling Relationships](#03-modeling-relationships)
     - [Defining Relationships](#defining-relationships)
+    - [Creating Initial Relationships](#creating-initial-relationships)
+    - [Identifying a New Relationships](#identifying-a-new-relationships)
+    - [Creating More Relationships](#creating-more-relationships)
   - [04 Testing the Model](#04-testing-the-model)
+    - [Testing during Data Modeling](#testing-during-data-modeling)
+    - [Testing with Instance Model](#testing-with-instance-model)
   - [05 Refactoring the Graph](#05-refactoring-the-graph)
+    - [Refactoring 重构](#refactoring-重构)
+    - [Labels in the Graph](#labels-in-the-graph)
+    - [Adding the Actor Label](#adding-the-actor-label)
   - [06 Eliminating Duplicate Data](#06-eliminating-duplicate-data)
   - [07 Using Specific Relationships](#07-using-specific-relationships)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
@@ -145,9 +153,72 @@ When you create a relationship in Neo4j, a direction must either be specified ex
 
 A relationship is typically between 2 different nodes, but it can also be to the same node.
 
+Properties for a relationship are used to enrich how two nodes are related. When you define a property for a relationship, it is because your use cases ask a specific question about how two nodes are related, not just that they are related.
+
+### Creating Initial Relationships
+
+### Identifying a New Relationships
+
+### Creating More Relationships
+
 ## 04 Testing the Model
 
+Testing is a critical step to ensure that your model supports all the required queries and use cases efficiently before moving to production.
+
+### Testing during Data Modeling
+
+arrow.app: https://arrows.app/ is the tool that you can design the data model.
+
+To ensure the graph can satisfy every use case, you must test the use cases against the graph.
+
+### Testing with Instance Model
+
 ## 05 Refactoring the Graph
+
+Refactoring is an essential skill as your understanding of the domain evolves and new requirements emerge.
+
+### Refactoring 重构
+
+Refactoring is the process of changing the data model and the graph.
+
+There are 3 reasons why you would refactor:
+1. The graph as modeled does not answer all of the use cases.
+2. A new use case has come up that you must account for in your data model.
+3. The Cypher for the use cases does not perform optimally, especially when the graph scales.
+
+Steps for refactoring are as below:
+
+```mermaid
+flowchart TD
+1[Step 1: Design the new data model]
+2[Step 2: Write Cypher code to transform the existing graph to implement the new data model]
+3[Step 3: Retest all use cases, possibly with updated Cypher code]
+1-->2-->3
+```
+
+### Labels in the Graph
+
+Labels at Runtime: node labels serve as an anchor point for a query, by specifying a label, we are specifying a subset of one or more nodes with which to start a query. Using a label helps to reduce the amount of data that is retrieved.
+
+DO NOT overuse labels, a best practice is to limit the number of labels for a node to 4.
+
+You can use `PROFILE` keyword to see the performance for a question, like below example:
+
+```SQL
+PROFILE MATCH (p:Person)-[:ACTED_IN]-()
+WHERE p.born < "1950"
+RETURN p.name
+```
+
+Refactor the graph to add `Actor` to `Person` nodes:
+
+```SQL
+MATCH (p:Person)
+WHERE exists ((p)-[:ACTED_IN]-())
+SET p.Actor
+```
+
+### Adding the Actor Label
 
 ## 06 Eliminating Duplicate Data
 

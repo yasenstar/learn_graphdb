@@ -9,6 +9,7 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
 ## Information on Graph
 
 - [Everything is Connected: Graph Neural Networks](https://arxiv.org/abs/2301.08210), see [localfile](./graph_kb/2301.08210.pdf)
+- arrow.app: https://arrows.app/ is the tool that you can design the data model.
 
 ## My Learnings on Graph
 
