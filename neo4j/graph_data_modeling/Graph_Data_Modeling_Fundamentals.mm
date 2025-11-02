@@ -3,8 +3,8 @@
 <node TEXT="Graph Data Modeling&#xa;Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1761934465898">
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<hook NAME="MapStyle" background="#fdf6e3ff" zoom="0.75131476">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false" show_icons="BESIDE_NODES" associatedTemplateLocation="template:/light_solarized_template.mm" show_tags="UNDER_NODES" showTagCategories="false"/>
+<hook NAME="MapStyle" background="#fdf6e3ff" zoom="1.1">
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_solarized_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -87,12 +87,12 @@
 </stylenode>
 </map_styles>
 </hook>
-<node TEXT="01 Getting Started" POSITION="bottom_or_right" ID="ID_1447196901" CREATED="1761934524856" MODIFIED="1761934530947">
+<node TEXT="01 Getting Started" FOLDED="true" POSITION="bottom_or_right" ID="ID_1447196901" CREATED="1761934524856" MODIFIED="1762120743070" VGAP_QUANTITY="3 pt">
 <node TEXT="01.01 What is Graph Data Modeling?" ID="ID_1197064197" CREATED="1761934530953" MODIFIED="1761934538971"/>
-<node TEXT="01.02 The Domain" ID="ID_379828268" CREATED="1761934539314" MODIFIED="1761934545859"/>
+<node TEXT="01.02 The Domain" ID="ID_379828268" CREATED="1761934539314" MODIFIED="1762120743068"/>
 <node TEXT="01.03 Purpose of the Model" ID="ID_43517696" CREATED="1761934546262" MODIFIED="1761934554169"/>
 </node>
-<node TEXT="02 Modeling Nodes" POSITION="bottom_or_right" ID="ID_890538699" CREATED="1761934555379" MODIFIED="1761934562914">
+<node TEXT="02 Modeling Nodes" FOLDED="true" POSITION="bottom_or_right" ID="ID_890538699" CREATED="1761934555379" MODIFIED="1761934562914">
 <node TEXT="02.01 Modeling Nodes" ID="ID_1124824924" CREATED="1761934581526" MODIFIED="1761934586191"/>
 <node TEXT="02.02 Creating Nodes" ID="ID_1022605602" CREATED="1761934586341" MODIFIED="1761934589959"/>
 <node TEXT="02.03 Identifying a New Label" ID="ID_926263235" CREATED="1761934590120" MODIFIED="1761934599864"/>
@@ -104,11 +104,11 @@
 <node TEXT="03.03 Identifying a New Relationship" ID="ID_1935050581" CREATED="1761934732595" MODIFIED="1761934740354"/>
 <node TEXT="03.04 Creating More Relationships" ID="ID_122112224" CREATED="1761934740529" MODIFIED="1761934748320"/>
 </node>
-<node TEXT="04 Testing the Model" POSITION="bottom_or_right" ID="ID_1609078491" CREATED="1761934749544" MODIFIED="1761934763198">
+<node TEXT="04 Testing the Model" FOLDED="true" POSITION="bottom_or_right" ID="ID_1609078491" CREATED="1761934749544" MODIFIED="1761934763198">
 <node TEXT="04.01 Testing" ID="ID_1970290868" CREATED="1761934756148" MODIFIED="1761934767819"/>
 <node TEXT="04.02 Testing with Instance Model" ID="ID_636976911" CREATED="1761934767964" MODIFIED="1761934774943"/>
 </node>
-<node TEXT="05 Refactoring the Graph" POSITION="bottom_or_right" ID="ID_1293543401" CREATED="1761934778902" MODIFIED="1761934785216">
+<node TEXT="05 Refactoring the Graph" FOLDED="true" POSITION="bottom_or_right" ID="ID_1293543401" CREATED="1761934778902" MODIFIED="1761934785216">
 <node TEXT="05.01 Refactoring" ID="ID_103469363" CREATED="1761934785223" MODIFIED="1761934789461"/>
 <node TEXT="05.02 Labels in the Graph" ID="ID_151145658" CREATED="1761934789626" MODIFIED="1761934795028"/>
 <node TEXT="05.03 Adding the Actor Label" ID="ID_563539405" CREATED="1761934795176" MODIFIED="1761934803878"/>
@@ -117,7 +117,7 @@
 <node TEXT="05.06 Adding the Director Label" ID="ID_1786201093" CREATED="1761934821141" MODIFIED="1761934832846"/>
 <node TEXT="05.07 Avoid These Labels" ID="ID_1961778664" CREATED="1761934833051" MODIFIED="1761934839638"/>
 </node>
-<node TEXT="06 Eliminating Duplicate Data" POSITION="bottom_or_right" ID="ID_82977789" CREATED="1761934840628" MODIFIED="1761934848248">
+<node TEXT="06 Eliminating Duplicate Data" FOLDED="true" POSITION="bottom_or_right" ID="ID_82977789" CREATED="1761934840628" MODIFIED="1761934848248">
 <node TEXT="06.01 Eliminating Duplicate Data" ID="ID_1228160947" CREATED="1761934848253" MODIFIED="1761934855747"/>
 <node TEXT="06.02 Adding Language Data" ID="ID_1693078657" CREATED="1761934855942" MODIFIED="1761934861691"/>
 <node TEXT="06.03 Refactoring Duplicate Data" ID="ID_1538393554" CREATED="1761934861851" MODIFIED="1761934886684"/>
@@ -125,12 +125,12 @@
 <node TEXT="06.05 Adding Genre (类型) Nodes" ID="ID_1157849810" CREATED="1761934889158" MODIFIED="1761934929631"/>
 <node TEXT="06.06 Eliminating Complex Data in Nodes" ID="ID_1477358279" CREATED="1761934896816" MODIFIED="1761934907276"/>
 </node>
-<node TEXT="07 Using Specific Relationships" POSITION="bottom_or_right" ID="ID_1707720719" CREATED="1761935613555" MODIFIED="1761935620932">
+<node TEXT="07 Using Specific Relationships" FOLDED="true" POSITION="bottom_or_right" ID="ID_1707720719" CREATED="1761935613555" MODIFIED="1761935620932">
 <node TEXT="07.01 Specific Relationships" ID="ID_1901786998" CREATED="1761935620934" MODIFIED="1761935627057"/>
 <node TEXT="07.02 Specializing ACTED_IN and DIRECTED Relationships" ID="ID_1011392462" CREATED="1761935627216" MODIFIED="1761935642177"/>
 <node TEXT="07.03 Specializing RATED Relationships" ID="ID_1023072495" CREATED="1761935642339" MODIFIED="1761935652589"/>
 </node>
-<node TEXT="08 Adding Intermediate Nodes" POSITION="bottom_or_right" ID="ID_561010634" CREATED="1761935654983" MODIFIED="1761935662679">
+<node TEXT="08 Adding Intermediate Nodes" FOLDED="true" POSITION="bottom_or_right" ID="ID_561010634" CREATED="1761935654983" MODIFIED="1761935662679">
 <node TEXT="08.01 Intermediate Nodes" ID="ID_1080149835" CREATED="1761935662686" MODIFIED="1761935670091"/>
 <node TEXT="08.02 Adding a Role Node" ID="ID_1678994119" CREATED="1761935670282" MODIFIED="1761935676872"/>
 </node>
