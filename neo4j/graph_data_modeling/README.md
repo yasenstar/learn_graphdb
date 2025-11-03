@@ -55,7 +55,7 @@ flowchart TD
     S2["Step 2: Develop the initial graph data model"]
     S3["Step 3: Test the use cases against the initial data model."]
     S4["Step 4: Create the graph (instance model) with test data using Cypher"]
-    S5["Step 5: Test the use cases, incvluding performance against the graph"]
+    S5["Step 5: Test the use cases, including performance against the graph"]
     S6["Step 6: Refactor (improve) the graph data model due to a change in the key use cases or for performance reasons."]
     S7["Step 7: Implement the refactoring on the graph and retest using Cypher."]
     S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S1
