@@ -2,6 +2,7 @@
 
 - [Learning Neo4j](#learning-neo4j)
   - [Neo4j Graph Examples](#neo4j-graph-examples)
+  - [My Learnings on Neo4j Graph](#my-learnings-on-neo4j-graph)
 
 ## Neo4j Graph Examples
 
@@ -11,6 +12,14 @@ The sub-project https://github.com/neo4j-graph-examples/recommendations contains
 
 [Cypher for Creating Movies Graph](./movies.md)
 
+## My Learnings on Neo4j Graph
+
+- Neo4j Graph Database
+  - [Neo4j Fundamentals (English)](neo4j/neo4j_fundamentals/)
+  - [Neo4j Fundamentals (Chinese)](neo4j/neo4j_fundamentals_c/)
+  - [Cypher Fundamentals (English)](neo4j/cypher/cypher_fundamentals/)
+  - [Graph Data Modeling Fundamentals (English)](neo4j/graph_data_modeling/) - learning
+
 ---
 
-Updated at: 2025-10-27
+Updated at: 2025-11-03
