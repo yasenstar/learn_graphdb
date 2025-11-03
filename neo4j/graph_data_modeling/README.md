@@ -83,7 +83,11 @@ Most use cases for an application can be enumerated by a comprehensive list of q
 
 When performing the graph data modeling process for an application, you need two types of models at least:
 - Data Model: describes the labels, relationships, and properties for the graph, it does not have specific data that will be created in the graph.
+
 ![sample data model](img/sample-data-model.png)
+
+![sample data model by arrows.app](img/Graph_Data_Model_Sample_20251103.png)
+
 - Instance Model: to test the model against the use cases, you need to have a set of sample data that you can use to see if the use cases can be answered with the model.
 ![sample instance model](img/sample-instance-model.png)
 
