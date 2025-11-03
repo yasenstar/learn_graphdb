@@ -15,10 +15,10 @@ The sub-project https://github.com/neo4j-graph-examples/recommendations contains
 ## My Learnings on Neo4j Graph
 
 - Neo4j Graph Database
-  - [Neo4j Fundamentals (English)](neo4j/neo4j_fundamentals/)
-  - [Neo4j Fundamentals (Chinese)](neo4j/neo4j_fundamentals_c/)
-  - [Cypher Fundamentals (English)](neo4j/cypher/cypher_fundamentals/)
-  - [Graph Data Modeling Fundamentals (English)](neo4j/graph_data_modeling/) - learning
+  - [Neo4j Fundamentals (English)](neo4j_fundamentals/)
+  - [Neo4j Fundamentals (Chinese)](neo4j_fundamentals_c/)
+  - [Cypher Fundamentals (English)](cypher/cypher_fundamentals/)
+  - [Graph Data Modeling Fundamentals (English)](graph_data_modeling/) - learning
 
 ---
 
