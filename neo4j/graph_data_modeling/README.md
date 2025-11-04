@@ -6,6 +6,7 @@
     - [The Domain](#the-domain)
     - [Types of Models](#types-of-models)
     - [Style Guidelines for Modeling](#style-guidelines-for-modeling)
+    - [Practice](#practice)
   - [02 Modeling Nodes](#02-modeling-nodes)
     - [Defining Nodes](#defining-nodes)
     - [Creating Nodes](#creating-nodes)
@@ -116,6 +117,45 @@ A Neo4j best practice is to use the following when you name the elements of the 
 CamelCase: https://en.wikipedia.org/wiki/Camel_case
 
 camelCase: https://en.wikipedia.org/wiki/Camel_case
+
+### Practice
+
+Creating Sample Nodes:
+
+```SQL
+MERGE (p1:Person {name:'Tom Hanks', tmdbId: 31, born: "1956-07-09"});
+MERGE (p2:Person {name:'Meg Ryan', tmdbId: 5344, born: "1961-11-19"});
+MERGE (p3:Person {name:'Danny De Vito', tmdbId: 518, born: "1944-11-17"});
+MERGE (p4:Person {name:'Jack Nicholson', tmdbId: 514, born: "1937-04-22"});
+MERGE (m1:Movie {title:"Apollo 13", tmdbId: 568, released:"1995-06-30", imdbRating:7.6});
+MERGE (m2:Movie {title:"Sleepless in Seattle", tmdbId: 858, released:"1993-06-25", imdbRating:6.8});
+MERGE (m3:Movie {title:"Hoffa", tmdbId: 10410, released:"1992-12-25", imdbRating:6.6});
+```
+
+Create Relationships:
+
+```SQL
+MATCH (p1:Person {name: 'Tom Hanks'}), (m1:Movie {title: "Apollo 13"}), (m2:Movie {title:"Sleepless in Seattle"})
+MERGE (m2)<-[r2:ACTED_IN {role:'Sam Baldwin'}]-(p1)-[r1:ACTED_IN {role:'Jim Lovell'}]->(m1)
+RETURN m1,m2,p1,r1,r2
+```
+
+```SQL
+MATCH (p2:Person {name:"Meg Ryan"}),(p3:Person {name:"Danny De Vito"}), (p4:Person {name:"Jack Nicholson"}), (m2:Movie {title:"Sleepless in Seattle"}), (m3:Movie {title:"Hoffa"})
+MERGE (p2)-[r3:ACTED_IN {role:'Annie Reed'}]->(m2)
+MERGE (p3)-[r4:ACTED_IN {role:'Bobby Ciaro'}]->(m3)<-[r5:ACTED_IN {role:'Jimmy Hoffa'}]-(p4)
+RETURN p2, p3, p4, m2, m3, r3, r4, r5
+```
+
+Combined as --
+
+```SQL
+MATCH (p1:Person {name: 'Tom Hanks'}), (p2:Person {name:"Meg Ryan"}),(p3:Person {name:"Danny De Vito"}), (p4:Person {name:"Jack Nicholson"}), (m1:Movie {title: "Apollo 13"}), (m2:Movie {title:"Sleepless in Seattle"}), (m3:Movie {title:"Hoffa"})
+MERGE (m2)<-[r2:ACTED_IN {role:'Sam Baldwin'}]-(p1)-[r1:ACTED_IN {role:'Jim Lovell'}]->(m1)
+MERGE (p2)-[r3:ACTED_IN {role:'Annie Reed'}]->(m2)
+MERGE (p3)-[r4:ACTED_IN {role:'Bobby Ciaro'}]->(m3)<-[r5:ACTED_IN {role:'Jimmy Hoffa'}]-(p4)
+RETURN p1, p2, p3, p4, m1, m2, m3, r1, r2, r3, r4, r5
+```
 
 ## 02 Modeling Nodes
 
