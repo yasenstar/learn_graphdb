@@ -14,6 +14,9 @@
     - [Creating More Nodes](#creating-more-nodes)
   - [03 Modeling Relationships](#03-modeling-relationships)
     - [Defining Relationships](#defining-relationships)
+      - [Relationships in the Movie graph](#relationships-in-the-movie-graph)
+      - [Properties for Relationships](#properties-for-relationships)
+      - [Relationships Properties in the Movie Graph](#relationships-properties-in-the-movie-graph)
     - [Creating Initial Relationships](#creating-initial-relationships)
     - [Identifying a New Relationships](#identifying-a-new-relationships)
     - [Creating More Relationships](#creating-more-relationships)
@@ -239,7 +242,7 @@ SET u.name = "Clinton Spencer"
 
 The data model after Chapter 1 so far is as below:
 
-![data model ch1](img/data-model_ch1.png)
+![data model ch2](img/data-model_ch2.png)
 
 ## 03 Modeling Relationships
 
@@ -258,6 +261,30 @@ When you create a relationship in Neo4j, a direction must either be specified ex
 A relationship is typically between 2 different nodes, but it can also be to the same node.
 
 Properties for a relationship are used to enrich how two nodes are related. When you define a property for a relationship, it is because your use cases ask a specific question about how two nodes are related, not just that they are related.
+
+#### Relationships in the Movie graph
+
+Data Model:
+
+![first relation - data model](img/ch3_adding-first-relationships.png)
+
+Instance Model:
+
+![first relation - instance model](img/ch3_adding-first-relationships-instance.png)
+
+#### Properties for Relationships
+
+![Properties for Relationship](img/ch3_relationship-properties.jpg)
+
+#### Relationships Properties in the Movie Graph
+
+Data Model:
+
+![before challenge - data model](img/ch3_before-challenge1-data-model.png)
+
+Instance Model:
+
+![before challenge - instance model](img/ch3_before-challenge1-instance-model.png)
 
 ### Creating Initial Relationships
 
