@@ -237,6 +237,10 @@ MERGE (u:User {userId: 105})
 SET u.name = "Clinton Spencer"
 ```
 
+The data model after Chapter 1 so far is as below:
+
+![data model ch1](img/data-model_ch1.png)
+
 ## 03 Modeling Relationships
 
 Relationships are what connect nodes and give the graph a power, allowing you to traverse and query connected data efficiently.
