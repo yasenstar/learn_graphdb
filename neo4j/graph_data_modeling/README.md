@@ -180,6 +180,12 @@ As example in Movie graph, the properties are used to:
 - Return data from the query:
   - `MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) RETURN m.title, m.released`
 
+```SQL
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks'
+RETURN p.name AS Actor, m.title AS `Movie Title`, m.released AS `Released Date`
+```
+
 You can use below Cypher to retrieve list of node properties:
 
 ```SQL
@@ -190,11 +196,46 @@ CALL db.schema.nodeTypeProperties
 
 ### Creating Nodes
 
+Creating first `Person` node:
+
+```SQL
+MERGE (:Person {name:'Tom Hanks', tmdbId:31, born:'1956-07-09'})
+```
+
+Create 3 more `Person` nodes:
+
+```SQL
+MERGE (:Person {name:'Mge Ryan', tmdbId:5344, born:'1961-11-19'})
+MERGE (:Person {name:'Danny DeVito', tmdbId:518, born:'1944-11-17'})
+MERGE (:Person {name:'Jack Nicholson', tmdbId:514, born:'1937-04-22'})
+```
+
+Create 3 `Movie` nodes:
+
+```SQL
+MERGE (:Person {name:'Mge Ryan', tmdbId:5344, born:'1961-11-19'})
+MERGE (:Person {name:'Danny DeVito', tmdbId:518, born:'1944-11-17'})
+MERGE (:Person {name:'Jack Nicholson', tmdbId:514, born:'1937-04-22'})
+```
+
 ### Identifying a New Label
 
 ### Creating More Nodes
 
 Note on the case sentitivity: the property names and values are case-sensitive!
+
+Method 1 - Creating Label in Single Line
+
+```SQL
+MERGE (s:User {userId: 534, name: "Sandy Jones"})
+```
+
+Method 2 - Creating Label in Multiple Line, with `SET`
+
+```SQL
+MERGE (u:User {userId: 105})
+SET u.name = "Clinton Spencer"
+```
 
 ## 03 Modeling Relationships
 
