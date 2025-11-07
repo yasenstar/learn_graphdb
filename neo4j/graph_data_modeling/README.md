@@ -317,6 +317,31 @@ Result:
 
 ### Creating More Relationships
 
+```SQL
+MATCH (apollo:Movie {title: 'Apollo 13'})
+MATCH (sleep:Movie {title: 'Sleepless in Seattle'})
+MATCH (hoffa:Movie {title: "Hoffa"})
+
+MATCH (sandy:User {name: 'Sandy Jones'})
+MATCH (clinton:User {name: 'Clinton Spencer'})
+
+MERGE (sandy)-[r1:RATED {rating: 5}]->(apollo)
+MERGE (sandy)-[r2:RATED {rating: 4}]->(sleep)
+MERGE (clinton)-[r3:RATED {rating: 3}]->(apollo)
+MERGE (clinton)-[r4:RATED {rating: 3}]->(sleep)
+MERGE (clinton)-[r5:RATED {rating: 3}]->(hoffa)
+
+RETURN apollo, sleep, hoffa, sandy, clinton, r1, r2, r3, r4, r5
+```
+
+Result:
+
+![Create More Relations](img/ch3.4_create-more-relationships.png)
+
+After this chapter, using `MATCH (n)-[r]-(m) RETURN n, r, m` to display full graph - nodes and relationships - so far:
+
+![full graph after ch3](img/graph_till_end_of_ch3.png)
+
 ## 04 Testing the Model
 
 Testing is a critical step to ensure that your model supports all the required queries and use cases efficiently before moving to production.
