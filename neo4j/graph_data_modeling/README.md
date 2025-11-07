@@ -288,6 +288,31 @@ Instance Model:
 
 ### Creating Initial Relationships
 
+```SQL
+MATCH (apollo:Movie {title: 'Apollo 13'})
+MATCH (sleep:Movie {title: 'Sleepless in Seattle'})
+MATCH (hoffa:Movie {title: "Hoffa"})
+
+MATCH (tom:Person {name: "Tom Hanks"})
+MATCH (meg:Person {name: "Meg Ryan"})
+MATCH (danny:Person {name: 'Danny DeVito'})
+MATCH (jack:Person {name: 'Jack Nicholson'})
+
+MERGE (tom)-[a1:ACTED_IN {role: 'Jim Lovell'}]->(apollo)
+MERGE (tom)-[a2:ACTED_IN {role: 'Sam Baldwin'}]->(sleep)
+MERGE (meg)-[a3:ACTED_IN {role: 'Annie Reed'}]->(sleep)
+MERGE (danny)-[a4:ACTED_IN {role: 'Bobby Ciaro'}]->(hoffa)
+MERGE (jack)-[a5:ACTED_IN {role: 'Jimmy Hoffa'}]->(hoffa)
+
+MERGE (danny)-[d:DIRECTED]->(hoffa)
+
+RETURN apollo, sleep, hoffa, tom, meg, danny, jack, a1, a2, a3, a4, a5, d
+```
+
+Result:
+
+![Create Initial Relationships](img/ch3.2_create-initial-relations.png)
+
 ### Identifying a New Relationships
 
 ### Creating More Relationships
