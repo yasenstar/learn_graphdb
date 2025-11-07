@@ -485,6 +485,12 @@ SET p.Actor
 
 ### Adding the Actor Label
 
+```SQL
+MATCH (p:Person)
+WHERE exists ((p)-[:ACTED_IN]-())
+SET p:Actor
+```
+
 ### Retesting after Refactoring
 
 After refactoring, you should revisit all queries for your use cases.
