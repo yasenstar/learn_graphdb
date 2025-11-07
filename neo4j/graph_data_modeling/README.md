@@ -354,6 +354,90 @@ To ensure the graph can satisfy every use case, you must test the use cases agai
 
 ### Testing with Instance Model
 
+Use case #1: What `person` `acted in` a `movie`?
+
+```SQL
+MATCH (p:Person)-[a:ACTED_IN]->(m:Movie)
+WHERE m.title CONTAINS "Seattle"
+RETURN p.name AS Actor, m.title
+```
+
+Use case #2: What `person` `directed` a `movie`?
+
+```SQL
+MATCH (p:Person)-[d:DIRECTED]->(m:Movie)
+WHERE m.title CONTAINS "Hoffa"
+RETURN p.name AS Director, m.title AS Movie
+```
+
+Use case #3: What `movies` did a `person` `act in`?
+
+```SQL
+MATCH (p:Person)-[a:ACTED_IN]->(m:Movie)
+WHERE p.name = "Tom Hanks"
+RETURN p.name AS Actor, m.title AS Movie
+```
+
+Use case #4: How many `users` `rated` a `movie`?
+
+```SQL
+MATCH (u:User)-[r:RATED]->(m:Movie {title: "Apollo 13"})
+RETURN COUNT(DISTINCT u)
+// RETURN u.name, r.rating
+```
+
+Use case #5: Who was the youngest `person` to `act in` a `movie`?
+
+```SQL
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.title = "Hoffa"
+RETURN p.name, p.born ORDER BY p.born DESC LIMIT 1
+```
+
+Use case #6: What `role` did a `person` `play in` a `movie`?
+
+```SQL
+MATCH (p:Person)-[a:ACTED_IN]->(m:Movie)
+WHERE m.title = "Sleepless in Seattle" AND p.name = "Meg Ryan"
+RETURN p.name, a.role AS Role
+```
+
+Use case #7: What is the highest `rated` `movie` in a particular `year` according to imDB?
+
+```SQL
+MATCH (u:User)-[r:RATED]->(m:Movie)
+WHERE m.released STARTS WITH "1995"
+RETURN m.title, r.rating AS Rating ORDER BY r.rating DESC
+```
+
+```SQL
+MERGE (casino:Movie {title: 'Casino', tmdbId: 524, released: '1995-11-22', imdbRating: 8.2, genres: ['Drama','Crime']})
+MERGE (martin:Person {name: 'Martin Scorsese', tmdbId: 1032})
+MERGE (martin)-[:DIRECTED]->(casino)
+```
+
+```SQL
+MATCH (m:Movie)
+WHERE m.released STARTS WITH '1995'
+RETURN  m.title as Movie, m.imdbRating as Rating ORDER BY m.imdbRating DESC LIMIT 1
+```
+
+Use case #8: What `drama` `movies` did an `actor` `act in?
+
+```SQL
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = "Tom Hanks" AND "Drama" IN m.genres
+RETURN m.title
+```
+
+Use case #9: What `users` gave a `movie` a `rating` of 5?
+
+```SQL
+MATCH (u:User)-[r:RATED]->(m:Movie)
+WHERE r.rating = 5 AND m.title = "Apollo 13"
+RETURN u.name, m.title
+```
+
 ## 05 Refactoring the Graph
 
 Refactoring is an essential skill as your understanding of the domain evolves and new requirements emerge.
