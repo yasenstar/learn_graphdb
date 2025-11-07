@@ -1,5 +1,17 @@
 # Learn Graph and Graph Database
 
+- [Learn Graph and Graph Database](#learn-graph-and-graph-database)
+  - [Classification of Databases](#classification-of-databases)
+  - [Graph Technology Landscape 2024](#graph-technology-landscape-2024)
+  - [Information on Graph](#information-on-graph)
+  - [My Learnings on Graph](#my-learnings-on-graph)
+
+## Classification of Databases
+
+![DB Classification](img/database_classification.png)
+
+Check the source [RDF ontology here](./database.rdf).
+
 ## Graph Technology Landscape 2024
 
 Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/), below is a nice landscape for a whole picture on the players in this graph area:
@@ -21,4 +33,4 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
 
 ---
 
-Updated at: 2025-10-31
+Updated at: 2025-11-07
