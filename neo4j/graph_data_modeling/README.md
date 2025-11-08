@@ -626,6 +626,12 @@ The `apoc.merge.relationship` procedure allows to **dynamically** create relatio
 
 ### Specializing `ACTED_IN` and `DIRECTED` Relationships
 
+Use case #12: What `movies` did an `actor act` in for a particular `year`?
+
+| Query before Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (p:Actor)-[:ACTED_IN]-(m:Movie)<br>WHERE p.name = 'Tom Hanks' AND<br>m.released STARTS WITH '1995'<br>RETURN m.title AS Movie | ![#12_before](img/usecase12_profile_before.png)
+
 ```SQL
 MATCH (n:Actor)-[:ACTED_IN]->(m:Movie)
 CALL apoc.merge.relationship(
