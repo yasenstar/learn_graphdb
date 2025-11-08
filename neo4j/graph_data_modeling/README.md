@@ -620,6 +620,8 @@ RETURN pc
 
 Neo4j - as a native graph database - is implemented to traverse relationships quickly. In some cases, ikt is more performant to query the graph based upon relationship types, rather than properties in the nodes.
 
+Relationships are fast to traverse and they do not take up a lot of space in the graph.
+
 The `apoc.merge.relationship` procedure allows to **dynamically** create relationships in the graph.
 
 ### Specializing `ACTED_IN` and `DIRECTED` Relationships
