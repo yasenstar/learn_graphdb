@@ -593,7 +593,26 @@ MERGE (pc)-[p:PRODUCED]->(m)
 RETURN m, p, pc
 ```
 
+Refactoring to eleminate complex data structure:
 
+```SQL
+MATCH (pc:ProductionCompany)
+MERGE (a:Address {address1:pc.address1, city:pc.city, postalCode:pc.postalCode})
+MERGE (s:State {name:pc.state})
+MERGE (c:Country {name:pc.country})
+MERGE (pc)-[r1:LOCATED_AT]->(a)
+MERGE (a)-[r2:IN_STATE]->(s)
+MERGE (s)-[r3:IN_COUNTRY]->(c)
+RETURN pc, a, s, c, r1, r2, r3
+```
+
+Clean up properties in old `ProductionCompany` nodes:
+
+```SQL
+MATCH (pc:ProductionCompany)
+SET pc.address1 = null, pc.city = null, pc.state = null, pc.postalCode = null, pc.country = null
+RETURN pc
+```
 
 ## 07 Using Specific Relationships
 
