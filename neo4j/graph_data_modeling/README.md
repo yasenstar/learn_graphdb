@@ -630,7 +630,7 @@ Use case #12: What `movies` did an `actor act` in for a particular `year`?
 
 | Query before Specializing Relatiohship | Performance from PROFILE |
 | --- | --- |
-| MATCH (p:Actor)-[:ACTED_IN]-(m:Movie)<br>WHERE p.name = 'Tom Hanks' AND<br>m.released STARTS WITH '1995'<br>RETURN m.title AS Movie | ![#12_before](img/usecase12_profile_before.png)
+| MATCH (p:Actor)-[:ACTED_IN]-(m:Movie)<br>WHERE p.name = 'Tom Hanks' AND m.released STARTS WITH '1995'<br>RETURN m.title AS Movie | ![#12_before](img/usecase12_profile_before.png) |
 
 ```SQL
 MATCH (n:Actor)-[:ACTED_IN]->(m:Movie)
@@ -645,6 +645,16 @@ CALL apoc.merge.relationship(
 RETURN count(*) AS `Number of relationships merged`;
 ```
 
+| Query after Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (p:Person)-[:ACTED_IN_1995]->(m:Movie)<br>WHERE p.name = 'Tom Hanks'<br>RETURN m.title AS Movie | ![#12_after](img/usecase12_profile_after.png) |
+
+Use case #13: What `actors` or `directors` `worked in` a particular `year`?
+
+| Query before Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (p:Person)--(m:Movie)<br>WHERE m.released STARTS WITH '1995'<br>RETURN DISTINCT p.name as `Actor or Director` | ![#13_before](img/usecase13_profile_before.png) |
+
 ```SQL
 MATCH (n:Actor)-[:DIRECTED]->(m:Movie)
 CALL apoc.merge.relationship(
@@ -657,6 +667,10 @@ CALL apoc.merge.relationship(
 ) YIELD rel
 RETURN count(*) AS `Number of relationships merged`;
 ```
+
+| Query after Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (p:Person)-[:ACTED_IN_1995\|:DIRECTED_1995]->()<br>RETURN p.name AS `Actor or Director` | ![#13_after](img/usecase13_profile_after.png) |
 
 ### Specializing `RATED` Relationships
 
