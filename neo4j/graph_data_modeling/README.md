@@ -523,6 +523,26 @@ You should take care to avoid duplicating data in your graph.
 
 ### Adding Language Data
 
+```SQL
+MATCH (apollo:Movie {title: 'Apollo 13'})
+MATCH (sleep:Movie {title: 'Sleepless in Seattle'})
+MATCH (hoffa:Movie {title: 'Hoffa'})
+MATCH (casino:Movie {title: 'Casino'})
+SET apollo.language = ['English']
+SET sleep.language = ['English']
+SET hoffa.language = ['English', 'Italian', 'Latin']
+SET casino.language = ['English']
+RETURN apollo, sleep, hoffa, casino
+```
+
+To validate Use case #11: What movies are available in a particular language?
+
+```SQL
+MATCH (m:Movie)
+WHERE 'Italian' IN m.language
+RETURN m.title
+```
+
 ### Refactoring Duplicate Data
 
 Below steps refactoring properties as nodes:
@@ -556,6 +576,24 @@ SET m.genres = null
 ### Eliminating Complex Data in Nodes
 
 If there is a high amount of duplicate data in the nodes or if key questions of your use cases would perform better if all nodes need not be retrieved to get at the complex data, then you might consider refactoring the graph.
+
+Creating new `ProductionCompany` nodes:
+
+```SQL
+MATCH (m:Movie {title: 'Hoffa'})
+MERGE (pc:ProductionCompany {address1: '10351 Santa Monica Blvd', city: 'Los Angeles', state: 'CA', postalCode: 90049, country: 'US', name: 'Jersey Films'})
+MERGE (pc)-[p:PRODUCED]->(m)
+RETURN m, p, pc
+```
+
+```SQL
+MATCH (m:Movie {title: 'Apollo 13'})
+MERGE (pc:ProductionCompany {address1: '150 S El Camino Drive', city: 'Beverly Hills', state: 'CA', postalCode: 90212, country: 'US', name: 'Imagine Entertainment'})
+MERGE (pc)-[p:PRODUCED]->(m)
+RETURN m, p, pc
+```
+
+
 
 ## 07 Using Specific Relationships
 
