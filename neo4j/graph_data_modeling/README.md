@@ -41,7 +41,9 @@
   - [07 Using Specific Relationships](#07-using-specific-relationships)
     - [Relationships in the Graph](#relationships-in-the-graph)
     - [Specializing `ACTED_IN` and `DIRECTED` Relationships](#specializing-acted_in-and-directed-relationships)
-    - [Specializing `RATED` Relationships](#specializing-rated-relationships)
+      - [Use case #12: What `movies` did an `actor act` in for a particular `year`?](#use-case-12-what-movies-did-an-actor-act-in-for-a-particular-year)
+      - [Use case #13: What `actors` or `directors` `worked in` a particular `year`?](#use-case-13-what-actors-or-directors-worked-in-a-particular-year)
+    - [Specializing `RATED` Relationships (Use case #9)](#specializing-rated-relationships-use-case-9)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
     - [Intermediat Nodes](#intermediat-nodes)
     - [Adding a Role Node](#adding-a-role-node)
@@ -626,7 +628,7 @@ The `apoc.merge.relationship` procedure allows to **dynamically** create relatio
 
 ### Specializing `ACTED_IN` and `DIRECTED` Relationships
 
-Use case #12: What `movies` did an `actor act` in for a particular `year`?
+#### Use case #12: What `movies` did an `actor act` in for a particular `year`?
 
 | Query before Specializing Relatiohship | Performance from PROFILE |
 | --- | --- |
@@ -649,7 +651,7 @@ RETURN count(*) AS `Number of relationships merged`;
 | --- | --- |
 | MATCH (p:Person)-[:ACTED_IN_1995]->(m:Movie)<br>WHERE p.name = 'Tom Hanks'<br>RETURN m.title AS Movie | ![#12_after](img/usecase12_profile_after.png) |
 
-Use case #13: What `actors` or `directors` `worked in` a particular `year`?
+#### Use case #13: What `actors` or `directors` `worked in` a particular `year`?
 
 | Query before Specializing Relatiohship | Performance from PROFILE |
 | --- | --- |
@@ -672,7 +674,11 @@ RETURN count(*) AS `Number of relationships merged`;
 | --- | --- |
 | MATCH (p:Person)-[:ACTED_IN_1995\|:DIRECTED_1995]->()<br>RETURN p.name AS `Actor or Director` | ![#13_after](img/usecase13_profile_after.png) |
 
-### Specializing `RATED` Relationships
+### Specializing `RATED` Relationships (Use case #9)
+
+| Query before Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (u:User)-[r:RATED]->(m:Movie)<br>WHERE m.title = 'Apollo 13' AND r.rating = 5<br>RETURN u.name AS Reviewer, m.title | ![#09_before](img/usecase09_profile_before.png) |
 
 From this original query:
 
@@ -696,6 +702,14 @@ CALL apoc.merge.relationship(
 ) YIELD rel
 RETURN COUNT(*) AS `Number of relationships added`;
 ```
+
+| Query after Specializing Relatiohship | Performance from PROFILE |
+| --- | --- |
+| MATCH (u:User)-[r:RATED_5]->(m:Movie)<br>WHERE m.title = 'Apollo 13'<br>RETURN u.name AS Reviewer, m.title | ![#09_after](img/usecase09_profile_after.png) |
+
+After above refactoring on specialing relationships, here is the latest schema:
+
+![schema_after_chapter7](img/schema_after_chapter7.png)
 
 ## 08 Adding Intermediate Nodes
 
