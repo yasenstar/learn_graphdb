@@ -791,9 +791,24 @@ Schema so far:
 ### Adding a Role Node
 
 ```SQL
-MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
-MERGE (x:)
+MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
+MERGE (x:Role {name:r.role})
+MERGE (a)-[r1:PLAYED]->(x)
+MERGE (x)-[r2:IN_MOVIE]->(m)
+RETURN a, r, m, x, r1, r2
 ```
+
+Add `INTERACTED_WITH` relationship:
+
+```SQL
+MERGE (r1:Role)-[i1:IN_MOVIE]->(m:Movie)<-[i2:IN_MOVIE]-(r2:Role)
+MERGE (r1)-[w:INTERACTED_WITH]->(r2)
+RETURN r1, i1, m, i2, r2, w
+```
+
+Schema after chapter 8:
+
+![schema after 8.2](img/schema_after_chapter8.2.png)
 
 ## 09 Course Summary
 
