@@ -51,6 +51,7 @@
       - [Example of Adding intermediate nodes for sharing data](#example-of-adding-intermediate-nodes-for-sharing-data)
     - [Adding a Role Node](#adding-a-role-node)
   - [09 Course Summary](#09-course-summary)
+  - [Demo Course](#demo-course)
 
 ## 01 Getting Started
 
@@ -813,6 +814,24 @@ Schema after chapter 8:
 ## 09 Course Summary
 
 Complete DB Dump is here: [data-modeling-2025-11-09T02-43-32.dump](../db_dump/data-modeling-2025-11-09T02-43-32.dump), enjoy!
+
+---
+
+## Demo Course
+
+This is the 3rd packaged courses that you may find in Udemy now, after `Neo4j Fundamentals` and `Cypher Fundamentals`, use below link to enroll the course and start learning now:
+
+English Language Version:
+
+- [1. Neo4j Fundamentals - Demo and Hands On Practice](https://www.udemy.com/course/graph-database-neo4j-fundamentals/?referralCode=A1B6F8575B9981D1F770)
+- [2. Cypher Fundamentals - Demo and Hands On Practice](https://www.udemy.com/course/graph-database-2-neo4j-cypher-fundamentals-learn-by-hand/?referralCode=C9E7F41F45B9E097078D)
+- [3. Graph Data Modeling Fundamentals (this one) - Demo and Hands On Practice](https://www.udemy.com/course/graph-database-3-neo4j-graph-data-modeling-fundamentals/?referralCode=E1A967D24DC1380C0750)
+
+Chinese Language Version:
+
+- [1. 图形数据库 1 - Neo4j基础入门 - 实操与练习](https://www.udemy.com/course/neo4j-fundamental-chn/?referralCode=741F6AF4EADD83261F20)
+
+Welcome to help promoting then! Looking forward to hear your comments and questions.
 
 ---
 
