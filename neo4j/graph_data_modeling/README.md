@@ -754,6 +754,36 @@ The graph before we factor it:
 
 ![sharedata before](img/8.1-sharedata.png)
 
+Query to create the instance model:
+
+```SQL
+MATCH (u1:User {name:'Mary Smith'})
+SET u1.email = 'mary.smith@gmail.com'
+MERGE (u2:User {name:'Lucy Smith', email:'lucy.smith@gmail.com'})
+MERGE (u3:User {name:'David Smith', email:'david.smith@gmail.com'})
+MERGE (u4:User {name:'John Smith', email:'John.smith@gmail.com'})
+MERGE (u1)-[e1:EMAILED {message:'xxxxx'}]->(u2)
+MERGE (u1)-[e2:CCD {message:'xxxxx'}]->(u3)
+MERGE (u1)-[e3:CCD {message:'xxxxx'}]->(u4)
+RETURN u1, u2, u3, u4, e1, e2, e3
+```
+
+Refactor to create intermediate nodes - `Email`:
+
+![8.1-sharedata-handling](img/8.1-sharedata-handling.png)
+
+```SQL
+MATCH (u1:User {name:'Mary Smith'})
+SET u1.email = 'mary.smith@gmail.com'
+MERGE (u2:User {name:'Lucy Smith', email:'lucy.smith@gmail.com'})
+MERGE (u3:User {name:'David Smith', email:'david.smith@gmail.com'})
+MERGE (u4:User {name:'John Smith', email:'John.smith@gmail.com'})
+MERGE (u1)-[e1:EMAILED {message:'xxxxx'}]->(u2)
+MERGE (u1)-[e2:CCD {message:'xxxxx'}]->(u3)
+MERGE (u1)-[e3:CCD {message:'xxxxx'}]->(u4)
+RETURN u1, u2, u3, u4, e1, e2, **e3**
+```
+
 Schema so far:
 
 ![schema after 8.1](img/schema_after_chapter8.1.png)
