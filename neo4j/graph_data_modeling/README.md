@@ -681,14 +681,6 @@ RETURN count(*) AS `Number of relationships merged`;
 | --- | --- |
 | MATCH (u:User)-[r:RATED]->(m:Movie)<br>WHERE m.title = 'Apollo 13' AND r.rating = 5<br>RETURN u.name AS Reviewer, m.title | ![#09_before](img/usecase09_profile_before.png) |
 
-From this original query:
-
-```SQL
-MATCH (u:User)-[r:RATED]->(m:Movie)
-WHERE m.title = 'Apollo 134' AND r.rating = 5
-RETURN u.name as Reviewer
-```
-
 Refactor into below specialized `RATED` relationship:
 
 ```SQL
