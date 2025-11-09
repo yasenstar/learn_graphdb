@@ -48,6 +48,7 @@
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
     - [Intermediat Nodes](#intermediat-nodes)
       - [Example of Adding intermediate node for handling hyperedges](#example-of-adding-intermediate-node-for-handling-hyperedges)
+      - [Example of Adding intermediate nodes for sharing data](#example-of-adding-intermediate-nodes-for-sharing-data)
     - [Adding a Role Node](#adding-a-role-node)
   - [09 Course Summary](#09-course-summary)
 
@@ -747,12 +748,22 @@ RETURN p, e1, e2, s1, s2, c, w1, w2, r1, r2, r3, r4
 
 ![model_after_hyperedge-handling](img/8.1-hyperedge-handling.png)
 
+#### Example of Adding intermediate nodes for sharing data
+
+The graph before we factor it:
+
+![sharedata before](img/8.1-sharedata.png)
+
+Schema so far:
+
+![schema after 8.1](img/schema_after_chapter8.1.png)
+
 ### Adding a Role Node
 
 ```SQL
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
 MERGE (x:)
-``
+```
 
 ## 09 Course Summary
 
