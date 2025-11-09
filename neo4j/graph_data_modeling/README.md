@@ -47,6 +47,7 @@
     - [Data Model (Visualized) So Far](#data-model-visualized-so-far)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
     - [Intermediat Nodes](#intermediat-nodes)
+      - [Example of Adding intermediate node for handling hyperedges](#example-of-adding-intermediate-node-for-handling-hyperedges)
     - [Adding a Role Node](#adding-a-role-node)
   - [09 Course Summary](#09-course-summary)
 
@@ -711,6 +712,40 @@ After above refactoring on specialing relationships, here is the latest schema:
 Intermediate nodes allow you to add context and additional information to relationships, making your model more expressive and powerful.
 
 ### Intermediat Nodes
+
+#### Example of Adding intermediate node for handling hyperedges
+
+Example Instance Model:
+
+![example hyperedges](img/8.1-hyperedge.png)
+
+Query for creating this example:
+
+```SQL
+MERGE (p:Person {name: 'Mary Smith', dob: '1990-11-19'})
+MERGE (c:Company {name: 'Graph Inc.', city:'Malmo', country:'Sweden'})
+MERGE (p)-[w:WORKS_AT {dates:['2018-07-18 - 2019-10-15', '2019-10-16 - present'], roles: ['Software Engineer', 'Senior Software Engineer']}]->(c)
+RETURN p, w, c
+```
+
+Adding intermediate nodes:
+
+```SQL
+MATCH (p:Person {name: 'Mary Smith'})-[w:WORKS_AT]->(c:Company {name: 'Graph Inc.'})
+MERGE (e1:Employment {from:left(w.dates[0],10), to:right(w.dates[0],10)})
+MERGE (e2:Employment {from:left(w.dates[1],10), to:right(w.dates[1],10)})
+MERGE (s1:Role {name:w.roles[0]})
+MERGE (s2:Role {name:w.roles[1]})
+MERGE (p)-[w1:WORKED]->(e1)
+MERGE (p)-[w2:WORKED]->(e2)
+MERGE (e1)-[r1:IN_ROLE]->(s1)
+MERGE (e1)-[r2:AT_COMPANY]->(c)
+MERGE (e2)-[r3:IN_ROLE]->(s2)
+MERGE (e2)-[r4:AT_COMPANY]->(c)
+RETURN p, e1, e2, s1, s2, c, w1, w2, r1, r2, r3, r4
+```
+
+![model_after_hyperedge-handling](img/8.1-hyperedge-handling.png)
 
 ### Adding a Role Node
 
