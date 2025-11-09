@@ -44,6 +44,7 @@
       - [Use case #12: What `movies` did an `actor act` in for a particular `year`?](#use-case-12-what-movies-did-an-actor-act-in-for-a-particular-year)
       - [Use case #13: What `actors` or `directors` `worked in` a particular `year`?](#use-case-13-what-actors-or-directors-worked-in-a-particular-year)
     - [Specializing `RATED` Relationships (Use case #9)](#specializing-rated-relationships-use-case-9)
+    - [Data Model (Visualized) So Far](#data-model-visualized-so-far)
   - [08 Adding Intermediate Nodes](#08-adding-intermediate-nodes)
     - [Intermediat Nodes](#intermediat-nodes)
     - [Adding a Role Node](#adding-a-role-node)
@@ -706,6 +707,8 @@ RETURN COUNT(*) AS `Number of relationships added`;
 | Query after Specializing Relatiohship | Performance from PROFILE |
 | --- | --- |
 | MATCH (u:User)-[r:RATED_5]->(m:Movie)<br>WHERE m.title = 'Apollo 13'<br>RETURN u.name AS Reviewer, m.title | ![#09_after](img/usecase09_profile_after.png) |
+
+### Data Model (Visualized) So Far
 
 After above refactoring on specialing relationships, here is the latest schema:
 
