@@ -812,6 +812,8 @@ Schema after chapter 8:
 
 ## 09 Course Summary
 
+Complete DB Dump is here: [data-modeling-2025-11-09T02-43-32.dump](../db_dump/data-modeling-2025-11-09T02-43-32.dump), enjoy!
+
 ---
 
-Updated at: 2025-10-31
+Updated at: 2025-11-08
