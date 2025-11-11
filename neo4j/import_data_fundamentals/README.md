@@ -71,11 +71,18 @@ Potential options and tools for data importing:
 
 ### 1.3 Tools
 
-
+| Tool | Illustration |
+| --- | --- |
+| Data Importer | ![data importer](img/data-importer-clean.png) |
+| Cypher and LOAD CSV | ![load csv](img/cypher-load-csv.png) |
+| neo4j-admin | ![neo4j-admin](img/neo4j-admin.png)
+| ETL tools | [![apache-hop](img/apache-hop.png)](https://hop.apache.org/) |
+| Custom Application | A custom application will allow you complete control over the import process and integration with other systems and data sources. |
 
 ## 2. Neo4j Data Importer
 
 ### 2.1 Data Importer
+
 ### 2.2 Properties and Types
 ### 2.3 Add Movie Nodes
 ### 2.4 Unique IDs and Constraints
