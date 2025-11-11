@@ -7,6 +7,7 @@
     - [Types of Models](#types-of-models)
     - [Style Guidelines for Modeling](#style-guidelines-for-modeling)
     - [Practice](#practice)
+    - [DB Dump after Chapter 1](#db-dump-after-chapter-1)
   - [02 Modeling Nodes](#02-modeling-nodes)
     - [Defining Nodes](#defining-nodes)
     - [Creating Nodes](#creating-nodes)
@@ -165,6 +166,10 @@ MERGE (p2)-[r3:ACTED_IN {role:'Annie Reed'}]->(m2)
 MERGE (p3)-[r4:ACTED_IN {role:'Bobby Ciaro'}]->(m3)<-[r5:ACTED_IN {role:'Jimmy Hoffa'}]-(p4)
 RETURN p1, p2, p3, p4, m1, m2, m3, r1, r2, r3, r4, r5
 ```
+
+### DB Dump after Chapter 1
+
+[data-modeling-ch1-2025-11-11T18-40-24.dump](../db_dump/data-modeling-ch1-2025-11-11T18-40-24.dump)
 
 ## 02 Modeling Nodes
 
@@ -815,6 +820,8 @@ Schema after chapter 8:
 
 Complete DB Dump is here: [data-modeling-2025-11-09T02-43-32.dump](../db_dump/data-modeling-2025-11-09T02-43-32.dump), enjoy!
 
+Updated dump file: [data-modeling-2025-11-11T18-39-39.dump](../db_dump/data-modeling-2025-11-11T18-39-39.dump)
+
 ---
 
 ## Demo Course
@@ -835,4 +842,4 @@ Welcome to help promoting then! Looking forward to hear your comments and questi
 
 ---
 
-Updated at: 2025-11-08
+Updated at: 2025-11-11
