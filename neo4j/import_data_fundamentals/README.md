@@ -126,11 +126,72 @@ You can import multiple properties of different types from the same column in th
 
 Here is the [movies.csv](docs/movies.csv)
 
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//movies.csv' AS row
+MERGE (m:Movie {movieId: row.movieId})
+SET
+  m.title = row.title,
+  m.budget = row.budget,
+  m.countries = row.countries,
+  m.imdbId = row.movie_imdbId,
+  m.rating = row.imdbRating,
+  m.votes = row.imdbVotes,
+  m.languages = row.languages,
+  m.plot = row.plot,
+  m.poster = row.movie_poster,
+  m.released = row.released,
+  m.revenue = row.revenue,
+  m.runtime = row.runtime,
+  m.tmdbId = row.movie_tmdbId,
+  m.url = row.movie_url,
+  m.year = row.year,
+  m.genres = row.genres
+```
+
+![import movies](img/import_movies.png)
+
 ### 2.4 Unique IDs and Constraints
 
-When you set a unique ID, Data Importer will automatically create a constraint and index for the property.
+When you set a unique ID, Data Importer will automatically create a `constraint` and `index` for the property.
+
+```
+SHOW CONSTRAINT
+SHOW INDEX
+```
+
+![show index constraints](img/show_constraint_index.png)
+
+Create Constraint - `movie_imdbId`:
+
+```SQL
+CREATE CONSTRAINT movie_imdbId
+FOR (m:Movie) REQUIRE (m.imdbId) IS NODE KEY
+```
+
+`SHOW CONSTRAINT` as below:
+
+![movie_constraint](img/create_constraint.png)
+
+An index is created automatically for the unique ID property. For example, once you have above query to create a new constraint for unique `movie_imdbId`, a new index is created, see below through `SHOW INDEX`:
+
+![create index](img/create_index.png)
+
+Manually add new index from below Cypher:
+
+```SQL
+CREATE RANGE INDEX title_index IF NOT EXISTS
+FOR (m:Movie)
+ON (m.title)
+```
+
+A new `title_index` is added for property `title` in `Movie`, as below through `SHOW INDEX`:
+
+![create index manually](img/create_index_manually.png)
 
 ### 2.5 Creating Relationships
+
+
+
 ### 2.6 Add Directed Relationship
 ### 2.7 Add Users Ratings
 ### 2.8 Data Importer Considerations
