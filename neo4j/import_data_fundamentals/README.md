@@ -83,9 +83,53 @@ Potential options and tools for data importing:
 
 ### 2.1 Data Importer
 
+In order to create nodes using Data Importer, you must do:
+
+- Upload a source file
+- Create a node label
+- Set a unique identifier for each node
+- ... while, you don't have to update any perperty names.
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//person-import//persons.csv' AS row
+MERGE (p:Person {tmdbId: row.person_tmdbId})
+SET
+  p.bio = row.bio,
+  p.born = row.born,
+  p.bornIn = row.bornIn,
+  p.died = row.died,
+  p.imdbId = row.person_imdbId,
+  p.name = row.name,
+  p.poster = row.person_poster,
+  p.url = row.person_url
+```
+
+![import-persons.csv](img/import_persons.png)
+
 ### 2.2 Properties and Types
+
+Data Importer allow you to select specific properties to import and assign custom names and data types.
+
+Data Inporter supports following data types to be imported:
+
+| Data Type | Description |
+| --- | --- |
+| `string` | Text data of variable length |
+| `integer` | Whole numbers |
+| `float` | Decimal numbers |
+| `boolean` | True or False values |
+| `datetime` | Data and time values |
+
+You can import multiple properties of different types from the same column in the source file. For example, if your source data contained a field of `string` and `integer` values, you could import both as separate properties.
+
 ### 2.3 Add Movie Nodes
+
+Here is the [movies.csv](docs/movies.csv)
+
 ### 2.4 Unique IDs and Constraints
+
+When you set a unique ID, Data Importer will automatically create a constraint and index for the property.
+
 ### 2.5 Creating Relationships
 ### 2.6 Add Directed Relationship
 ### 2.7 Add Users Ratings
