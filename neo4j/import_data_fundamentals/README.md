@@ -253,11 +253,62 @@ You should see below relationships:
 ![query DIRECTED Relation](img/Query-DIRECTED-Relation.png)
 
 ### 2.7 Add Users Ratings
+
+Create `RATED` relationship base on the file [ratings.csv](docs/ratings.csv) in Cypher:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//ratings.csv' AS row
+MATCH (m:Movie)
+WHERE m.movieId = row.movieId
+MERGE (u:User {userID: row.userId, name: row.name})
+MERGE (u)-[r:RATED {rating: row.rating}]->(m)
+SET r.timestamp = row.timestamp
+RETURN u,r,m
+```
+
+Result is as below:
+
+![create RATED relation](img/Create_RATED_Relation.png)
+
+Check result from below query:
+
+```SQL
+MATCH (u:User)-[r:RATED]->(m:Movie)
+RETURN u,r,m
+LIMIT 25
+```
+
+You should see below relationships:
+
+![query RATED Relation](img/Query-RATED-Relation.png)
+
 ### 2.8 Data Importer Considerations
 
+- Data Formats - you can only import data from a CSV / TSV files.
+- Complex Schema Setup - there is no data manipulation or transformation functionality and some advanced schema options are not supported (e.g. multiple node labels, multiple constraints per node)
+- Dependency on Clean Data - the data must be clean and well-structured.
+- Automation - Data Importer is not suitable for automating data import tasks.
+- Real-time integration - there is no real-time integration with external data sources.
+- Data Volumes - Very large datasets may require a different approach.
+
+Other resources:
+- [Course: Importing CSV data inot Neo4j](https://graphacademy.neo4j.com/courses/importing-cypher/)
+- [Info: Other ways of importing data into Neo4j](https://neo4j.com/docs/data-importer/current/import-others/)
 
 ## 3. Source Data Considerations
 
 ### 3.1 Understanding the Source Data
+
+Before data importing, following factors should be understood first:
+- Data format and structure
+- Frequency of updates
+- Data quality: Accuracy, Validity, Completeness, Reliability, Consistency
+- Uniquely identifying data
+- 
 ### 3.2 Developing a Data Model
+
+Learn more Neo4j data type in [Neo4j Documentation](https://neo4j.com/docs/cypher-manual/current/values-and-types/)
+
 ### 3.3 Import your CSV File
+
+Online "kaggle" datasets library: https://www.kaggle.com/datasets
