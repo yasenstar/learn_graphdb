@@ -190,9 +190,68 @@ A new `title_index` is added for property `title` in `Movie`, as below through `
 
 ### 2.5 Creating Relationships
 
+The process for creating relationships is similar to creating nodes:
 
+1. Upload the data
+2. Creat the relationship in the model
+3. Map the fiels
+4. Run the import
+
+Create `ACTED_IN` relationship base on the file [acted_in.csv](docs/acted_in.csv) in Cypher:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//acted_in.csv' AS row
+MATCH (p:Person),(m:Movie)
+WHERE p.tmdbId = row.person_tmdbId AND m.movieId = row.movieId
+MERGE (p)-[a:ACTED_IN]->(m)
+SET a.role = row.role
+RETURN p, a, m
+```
+
+Result is as below:
+
+![create ACTED_IN relation](img/Create_ACTED_IN_Relation.png)
+
+Check the relationship through one sample:
+
+```SQL
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE m.title = 'Toy Story'
+RETURN p,r,m
+```
+
+You should see below four relationships from `Toy Story`:
+
+![query ACTED_IN Relation](img/Query-ACTED_IN-Relation.png)
 
 ### 2.6 Add Directed Relationship
+
+Create `DIRECTED` relationship base on the file [directed.csv](docs/directed.csv) in Cypher:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//directed.csv' AS row
+MATCH (p:Person),(m:Movie)
+WHERE p.tmdbId = row.person_tmdbId AND m.movieId = row.movieId
+MERGE (p)-[d:DIRECTED]->(m)
+RETURN p, d, m
+```
+
+Result is as below:
+
+![create DIRECTED relation](img/Create_DIRECTED_Relation.png)
+
+Check the relationship through one sample:
+
+```SQL
+MATCH (p:Person)-[d:DIRECTED]->(m:Movie)
+RETURN p,d,m
+LIMIT 25
+```
+
+You should see below relationships:
+
+![query DIRECTED Relation](img/Query-DIRECTED-Relation.png)
+
 ### 2.7 Add Users Ratings
 ### 2.8 Data Importer Considerations
 
