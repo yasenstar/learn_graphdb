@@ -1,7 +1,7 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
 <node TEXT="Importing Data Fundamentals&#xa;(Neo4j GraphAcademy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1762885523335" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.826">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false" show_icons="BESIDE_NODES" associatedTemplateLocation="template:/light_sky_element_template.mm" show_tags="UNDER_NODES" showTagCategories="false"/>
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -96,7 +96,7 @@
 <node TEXT="Custom application" POSITION="bottom_or_right" ID="ID_393330053" CREATED="1762889450559" MODIFIED="1762889450559"/>
 </node>
 </node>
-<node TEXT="2 Neo4j Data Importer" FOLDED="true" POSITION="bottom_or_right" ID="ID_1023119852" CREATED="1762885619876" MODIFIED="1762885655889">
+<node TEXT="2 Neo4j Data Importer" POSITION="bottom_or_right" ID="ID_1023119852" CREATED="1762885619876" MODIFIED="1762885655889">
 <node TEXT="2.1 Data Importer" ID="ID_709867865" CREATED="1762885720811" MODIFIED="1762885724894"/>
 <node TEXT="2.2 Properties and Types" ID="ID_1133221785" CREATED="1762885725069" MODIFIED="1762885729545"/>
 <node TEXT="2.3 Add Movie Nodes" ID="ID_1399563396" CREATED="1762885729718" MODIFIED="1762885741632"/>
@@ -112,8 +112,6 @@
 <node TEXT="3.3 Import your CSV File" ID="ID_1232271346" CREATED="1762885792558" MODIFIED="1762885801676"/>
 <node TEXT="3.4 Congratulations and Next Steps" ID="ID_836433749" CREATED="1762885801855" MODIFIED="1762885814818"/>
 </node>
-<node TEXT="P(A∩B)" POSITION="bottom_or_right" ID="ID_1150354258" CREATED="1762901055412" MODIFIED="1762901060078"/>
-<node TEXT="$ \cap $" POSITION="bottom_or_right" ID="ID_1046707740" CREATED="1762901077835" MODIFIED="1762901087529"/>
 <node TEXT="Neo4j Fundamentals" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="true" POSITION="top_or_left" ID="ID_90633945" CREATED="1409300609620" MODIFIED="1761934703738" VGAP_QUANTITY="3 pt" COLOR="#333333" BACKGROUND_COLOR="#ccffcc">
 <font BOLD="true"/>
 <node TEXT="1. Graph Thinking" POSITION="bottom_or_right" ID="ID_754145201" CREATED="1758938933624" MODIFIED="1758938940329">
