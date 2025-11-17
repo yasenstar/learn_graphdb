@@ -1,0 +1,810 @@
+{
+  "version": "1.4.0-beta.0",
+  "graph": {
+    "nodes": [
+      {
+        "id": "n0",
+        "position": {
+          "x": -155,
+          "y": -45
+        },
+        "caption": "Person"
+      },
+      {
+        "id": "n1",
+        "position": {
+          "x": -155,
+          "y": 293
+        },
+        "caption": "Movie"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "n0",
+        "type": "ACTED_IN",
+        "fromId": "n0",
+        "toId": "n1"
+      }
+    ]
+  },
+  "dataModel": {
+    "version": "1.4.0-beta.0",
+    "graphSchemaRepresentation": {
+      "version": "1.0.0",
+      "graphSchema": {
+        "nodeLabels": [
+          {
+            "$id": "nl:n0",
+            "token": "Person",
+            "properties": [
+              {
+                "$id": "p:1",
+                "token": "tmdbId",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:2",
+                "token": "bio",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:3",
+                "token": "born",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:4",
+                "token": "bornIn",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:5",
+                "token": "died",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:6",
+                "token": "imdbId",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:7",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:8",
+                "token": "poster",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:9",
+                "token": "url",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "nl:n1",
+            "token": "Movie",
+            "properties": [
+              {
+                "$id": "p:10",
+                "token": "movieId",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:11",
+                "token": "title",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:12",
+                "token": "budget",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:13",
+                "token": "countries",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:14",
+                "token": "imdbId",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:15",
+                "token": "imdbRating",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:16",
+                "token": "imdbVotes",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:17",
+                "token": "languages",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:18",
+                "token": "plot",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:19",
+                "token": "poster",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:20",
+                "token": "released",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:21",
+                "token": "revenue",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:22",
+                "token": "runtime",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:23",
+                "token": "tmdbId",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:24",
+                "token": "url",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:25",
+                "token": "year",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:26",
+                "token": "genres",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          }
+        ],
+        "relationshipTypes": [
+          {
+            "$id": "rt:n0",
+            "token": "ACTED_IN",
+            "properties": [
+              {
+                "$id": "p:27",
+                "token": "role",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          }
+        ],
+        "nodeObjectTypes": [
+          {
+            "$id": "n:n0",
+            "labels": [
+              {
+                "$ref": "#nl:n0"
+              }
+            ]
+          },
+          {
+            "$id": "n:n1",
+            "labels": [
+              {
+                "$ref": "#nl:n1"
+              }
+            ]
+          }
+        ],
+        "relationshipObjectTypes": [
+          {
+            "$id": "r:n0",
+            "type": {
+              "$ref": "#rt:n0"
+            },
+            "from": {
+              "$ref": "#n:n0"
+            },
+            "to": {
+              "$ref": "#n:n1"
+            }
+          }
+        ],
+        "constraints": [
+          {
+            "$id": "c:1",
+            "name": "tmdbId_Person_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1"
+              }
+            ]
+          },
+          {
+            "$id": "c:2",
+            "name": "movieId_Movie_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:10"
+              }
+            ]
+          }
+        ],
+        "indexes": [
+          {
+            "$id": "i:1",
+            "name": "tmdbId_Person_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1"
+              }
+            ]
+          },
+          {
+            "$id": "i:2",
+            "name": "movieId_Movie_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:10"
+              }
+            ]
+          },
+          {
+            "$id": "i:3",
+            "name": "title_Movie",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:11"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "graphSchemaExtensionsRepresentation": {
+      "nodeKeyProperties": [
+        {
+          "node": {
+            "$ref": "#n:n0"
+          },
+          "keyProperty": {
+            "$ref": "#p:1"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:n1"
+          },
+          "keyProperty": {
+            "$ref": "#p:10"
+          }
+        }
+      ]
+    },
+    "graphMappingRepresentation": {
+      "dataSourceSchema": {
+        "type": "local/csv",
+        "tableSchemas": [
+          {
+            "$id": "t:1",
+            "name": "persons.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "person_tmdbId",
+                "type": "integer",
+                "sample": "3",
+                "include": true
+              },
+              {
+                "name": "bio",
+                "type": "string",
+                "sample": "Legendary Hollywood Icon Harrison Ford was born on July 13, 1942 in Chicago, Illinois.   His family history includes a strong lineage of actors, radio personalities, and models.   Harrison attended public high school in Park Ridge, Illinois where he was a member of the school Radio Station WMTH.  Harrison worked as the lead voice for sports reporting at WMTH for several years.   Acting wasn’t a major interest to Ford until his junior year at Ripon College when he first took an acting class...",
+                "include": true
+              },
+              {
+                "name": "born",
+                "type": "datetime",
+                "sample": "1942-07-13",
+                "include": true
+              },
+              {
+                "name": "bornIn",
+                "type": "string",
+                "sample": "Chicago, Illinois, USA",
+                "include": true
+              },
+              {
+                "name": "died",
+                "type": "datetime",
+                "sample": "",
+                "include": true
+              },
+              {
+                "name": "person_imdbId",
+                "type": "integer",
+                "sample": "148",
+                "include": true
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "sample": "Harrison Ford",
+                "include": true
+              },
+              {
+                "name": "person_poster",
+                "type": "string",
+                "sample": "https://image.tmdb.org/t/p/w440_and_h660_face/5M7oN3sznp99hWYQ9sX0xheswWX.jpg",
+                "include": true
+              },
+              {
+                "name": "person_url",
+                "type": "string",
+                "sample": "https://themoviedb.org/person/3",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:2",
+            "name": "movies.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "movieId",
+                "type": "integer",
+                "sample": "1",
+                "include": true
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "sample": "Toy Story",
+                "include": true
+              },
+              {
+                "name": "budget",
+                "type": "float",
+                "sample": "30000000.0",
+                "include": true
+              },
+              {
+                "name": "countries",
+                "type": "string",
+                "sample": "USA",
+                "include": true
+              },
+              {
+                "name": "movie_imdbId",
+                "type": "integer",
+                "sample": "114709",
+                "include": true
+              },
+              {
+                "name": "imdbRating",
+                "type": "float",
+                "sample": "8.3",
+                "include": true
+              },
+              {
+                "name": "imdbVotes",
+                "type": "integer",
+                "sample": "591836",
+                "include": true
+              },
+              {
+                "name": "languages",
+                "type": "string",
+                "sample": "English",
+                "include": true
+              },
+              {
+                "name": "plot",
+                "type": "string",
+                "sample": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
+                "include": true
+              },
+              {
+                "name": "movie_poster",
+                "type": "string",
+                "sample": "https://image.tmdb.org/t/p/w440_and_h660_face/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
+                "include": true
+              },
+              {
+                "name": "released",
+                "type": "datetime",
+                "sample": "1995-11-22",
+                "include": true
+              },
+              {
+                "name": "revenue",
+                "type": "float",
+                "sample": "373554033.0",
+                "include": true
+              },
+              {
+                "name": "runtime",
+                "type": "integer",
+                "sample": "81",
+                "include": true
+              },
+              {
+                "name": "movie_tmdbId",
+                "type": "integer",
+                "sample": "862",
+                "include": true
+              },
+              {
+                "name": "movie_url",
+                "type": "string",
+                "sample": "https://themoviedb.org/movie/862",
+                "include": true
+              },
+              {
+                "name": "year",
+                "type": "integer",
+                "sample": "1995",
+                "include": true
+              },
+              {
+                "name": "genres",
+                "type": "string",
+                "sample": "Adventure|Animation|Children|Comedy|Fantasy",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:3",
+            "name": "acted_in.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "movieId",
+                "type": "integer",
+                "sample": "1",
+                "include": true
+              },
+              {
+                "name": "person_tmdbId",
+                "type": "integer",
+                "sample": "12899",
+                "include": true
+              },
+              {
+                "name": "role",
+                "type": "string",
+                "sample": "Slinky Dog (voice)",
+                "include": true
+              }
+            ]
+          }
+        ]
+      },
+      "nodeMappings": [
+        {
+          "node": {
+            "$ref": "#n:n0"
+          },
+          "tableSchema": {
+            "$ref": "#t:1"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "person_tmdbId",
+              "property": {
+                "$ref": "#p:1"
+              }
+            },
+            {
+              "fieldName": "bio",
+              "property": {
+                "$ref": "#p:2"
+              }
+            },
+            {
+              "fieldName": "born",
+              "property": {
+                "$ref": "#p:3"
+              }
+            },
+            {
+              "fieldName": "bornIn",
+              "property": {
+                "$ref": "#p:4"
+              }
+            },
+            {
+              "fieldName": "died",
+              "property": {
+                "$ref": "#p:5"
+              }
+            },
+            {
+              "fieldName": "person_imdbId",
+              "property": {
+                "$ref": "#p:6"
+              }
+            },
+            {
+              "fieldName": "name",
+              "property": {
+                "$ref": "#p:7"
+              }
+            },
+            {
+              "fieldName": "person_poster",
+              "property": {
+                "$ref": "#p:8"
+              }
+            },
+            {
+              "fieldName": "person_url",
+              "property": {
+                "$ref": "#p:9"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:n1"
+          },
+          "tableSchema": {
+            "$ref": "#t:2"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "movieId",
+              "property": {
+                "$ref": "#p:10"
+              }
+            },
+            {
+              "fieldName": "title",
+              "property": {
+                "$ref": "#p:11"
+              }
+            },
+            {
+              "fieldName": "budget",
+              "property": {
+                "$ref": "#p:12"
+              }
+            },
+            {
+              "fieldName": "countries",
+              "property": {
+                "$ref": "#p:13"
+              }
+            },
+            {
+              "fieldName": "movie_imdbId",
+              "property": {
+                "$ref": "#p:14"
+              }
+            },
+            {
+              "fieldName": "imdbRating",
+              "property": {
+                "$ref": "#p:15"
+              }
+            },
+            {
+              "fieldName": "imdbVotes",
+              "property": {
+                "$ref": "#p:16"
+              }
+            },
+            {
+              "fieldName": "languages",
+              "property": {
+                "$ref": "#p:17"
+              }
+            },
+            {
+              "fieldName": "plot",
+              "property": {
+                "$ref": "#p:18"
+              }
+            },
+            {
+              "fieldName": "movie_poster",
+              "property": {
+                "$ref": "#p:19"
+              }
+            },
+            {
+              "fieldName": "released",
+              "property": {
+                "$ref": "#p:20"
+              }
+            },
+            {
+              "fieldName": "revenue",
+              "property": {
+                "$ref": "#p:21"
+              }
+            },
+            {
+              "fieldName": "runtime",
+              "property": {
+                "$ref": "#p:22"
+              }
+            },
+            {
+              "fieldName": "movie_tmdbId",
+              "property": {
+                "$ref": "#p:23"
+              }
+            },
+            {
+              "fieldName": "movie_url",
+              "property": {
+                "$ref": "#p:24"
+              }
+            },
+            {
+              "fieldName": "year",
+              "property": {
+                "$ref": "#p:25"
+              }
+            },
+            {
+              "fieldName": "genres",
+              "property": {
+                "$ref": "#p:26"
+              }
+            }
+          ]
+        }
+      ],
+      "relationshipMappings": [
+        {
+          "relationship": {
+            "$ref": "#r:n0"
+          },
+          "tableSchema": {
+            "$ref": "#t:3"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "role",
+              "property": {
+                "$ref": "#p:27"
+              }
+            }
+          ],
+          "fromMapping": {
+            "fieldName": "person_tmdbId"
+          },
+          "toMapping": {
+            "fieldName": "movieId"
+          }
+        }
+      ]
+    },
+    "configurations": {
+      "idsToIgnore": []
+    }
+  }
+}
