@@ -133,6 +133,14 @@ SET
   p.url = row.person_url
 ```
 
+Create CONSTRAINT:
+
+```SQL
+CREATE CONSTRAINT `tmdbId_Person_uniq` IF NOT EXISTS
+FOR (n:Person)
+REQUIRE (n.tmdbId) IS UNIQUE
+```
+
 ![import-persons.csv](img/import_persons.png)
 
 ### 2.2 Properties and Types
