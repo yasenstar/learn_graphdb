@@ -90,6 +90,35 @@ In order to create nodes using Data Importer, you must do:
 - Set a unique identifier for each node
 - ... while, you don't have to update any perperty names.
 
+![data importer - Persons Node](img/data-importer-Persons.png)
+
+Cypher Key Statement:
+
+```SQL
+CYPHER 5 CREATE CONSTRAINT `tmdbId_Person_uniq` IF NOT EXISTS
+FOR (n: `Person`)
+REQUIRE (n.`tmdbId`) IS UNIQUE;
+```
+
+Cypher Load Statement:
+
+```SQL
+CYPHER 5 UNWIND $nodeRecords AS nodeRecord
+WITH *
+WHERE NOT nodeRecord.`person_tmdbId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`person_tmdbId`)) IS NULL
+MERGE (n: `Person` { `tmdbId`: toInteger(trim(nodeRecord.`person_tmdbId`)) })
+SET n.`bio` = nodeRecord.`bio`
+SET n.`born` = datetime(nodeRecord.`born`)
+SET n.`bornIn` = nodeRecord.`bornIn`
+SET n.`died` = datetime(nodeRecord.`died`)
+SET n.`imdbId` = toInteger(trim(nodeRecord.`person_imdbId`))
+SET n.`name` = nodeRecord.`name`
+SET n.`poster` = nodeRecord.`person_poster`
+SET n.`url` = nodeRecord.`person_url`;
+```
+
+Below is the reference offline `LOAD CSV` statement:
+
 ```SQL
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//person-import//persons.csv' AS row
 MERGE (p:Person {tmdbId: row.person_tmdbId})
