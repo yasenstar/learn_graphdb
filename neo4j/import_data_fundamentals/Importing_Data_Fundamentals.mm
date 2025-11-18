@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Importing Data Fundamentals&#xa;(Neo4j GraphAcademy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1762885523335" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.826">
+<node TEXT="Importing Data Fundamentals&#xa;(Neo4j GraphAcademy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1762885523335" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.75131476">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
@@ -9,7 +9,7 @@
 <font SIZE="24"/>
 <stylenode LOCALIZED_TEXT="styles.predefined" POSITION="bottom_or_right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="default" ID="ID_4172522" ICON_SIZE="12 pt" FORMAT_AS_HYPERLINK="false" COLOR="#051552" BACKGROUND_COLOR="#5cd5e8" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_WIDTH_LIKE_EDGE="false" BORDER_WIDTH="1.7 px" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#1164b0" BORDER_DASH_LIKE_EDGE="true" BORDER_DASH="SOLID" VGAP_QUANTITY="3 pt">
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_4172522" STARTINCLINATION="115.875 pt;0 pt;" ENDINCLINATION="115.875 pt;28.5 pt;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
+<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_4172522" STARTINCLINATION="116.25 pt;0 pt;" ENDINCLINATION="116.25 pt;28.5 pt;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" SIZE="10" BOLD="false" STRIKETHROUGH="false" ITALIC="false"/>
 <edge STYLE="bezier" COLOR="#051552" WIDTH="2" DASH="SOLID"/>
 <richcontent TYPE="DETAILS" CONTENT-TYPE="plain/auto"/>
@@ -85,10 +85,10 @@
 </hook>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<node TEXT="1 Importing Data into Neo4j" POSITION="bottom_or_right" ID="ID_1690362651" CREATED="1762885581132" MODIFIED="1762885654650">
+<node TEXT="1 Importing Data into Neo4j" FOLDED="true" POSITION="bottom_or_right" ID="ID_1690362651" CREATED="1762885581132" MODIFIED="1762885654650">
 <node TEXT="1.1 Getting Started" POSITION="bottom_or_right" ID="ID_764443780" CREATED="1762885637769" MODIFIED="1762885661891"/>
 <node TEXT="1.2 How can I import data into Neo4j?" POSITION="bottom_or_right" ID="ID_1048577681" CREATED="1762885662070" MODIFIED="1762885674130"/>
-<node TEXT="1.3 Tools" POSITION="bottom_or_right" ID="ID_1376548767" CREATED="1762885716597" MODIFIED="1762885719508">
+<node TEXT="1.3 Tools" FOLDED="true" POSITION="bottom_or_right" ID="ID_1376548767" CREATED="1762885716597" MODIFIED="1762885719508">
 <node TEXT="Data Importer" POSITION="bottom_or_right" ID="ID_687554732" CREATED="1762889450558" MODIFIED="1762889450558"/>
 <node TEXT="Cypher and LOAD CSV" POSITION="bottom_or_right" ID="ID_275397629" CREATED="1762889450558" MODIFIED="1762889450558"/>
 <node TEXT="neo4j-admin" POSITION="bottom_or_right" ID="ID_364682881" CREATED="1762889450559" MODIFIED="1762889450559"/>
@@ -97,7 +97,19 @@
 </node>
 </node>
 <node TEXT="2 Neo4j Data Importer" POSITION="bottom_or_right" ID="ID_1023119852" CREATED="1762885619876" MODIFIED="1762885655889">
-<node TEXT="2.1 Data Importer" ID="ID_709867865" CREATED="1762885720811" MODIFIED="1762885724894"/>
+<node TEXT="2.1 Data Importer" ID="ID_709867865" CREATED="1762885720811" MODIFIED="1762885724894">
+<node TEXT="(1) Access Data Importer" ID="ID_1080945931" CREATED="1763396745095" MODIFIED="1763396772111" LINK="https://workspace.neo4j.io/workspace/import"/>
+<node TEXT="(2) Creating Nodes" FOLDED="true" ID="ID_1688475345" CREATED="1763396772907" MODIFIED="1763396777617">
+<node TEXT="(2)-1 Connect to your sandbox" ID="ID_144458664" CREATED="1763396783997" MODIFIED="1763396794393"/>
+<node TEXT="(2)-2 Upload a file" ID="ID_504932804" CREATED="1763396841605" MODIFIED="1763396849942"/>
+<node TEXT="(2)-3 Create a Person node" ID="ID_88431181" CREATED="1763396861092" MODIFIED="1763396869509"/>
+<node TEXT="(2)-4 Update Properties" ID="ID_321997602" CREATED="1763396874969" MODIFIED="1763396881054"/>
+<node TEXT="(2)-5 Run the import" ID="ID_908301970" CREATED="1763396884836" MODIFIED="1763396890175"/>
+</node>
+<node TEXT="(3) View the data" ID="ID_118420522" CREATED="1763396895431" MODIFIED="1763396903675"/>
+<node TEXT="(4) Backup your work through &quot;Download model (with data)&quot;" ID="ID_614372349" CREATED="1763396917515" MODIFIED="1763396938471"/>
+<node TEXT="(5) Import locally through &quot;LOAD CSV&quot;" ID="ID_704603035" CREATED="1763396952173" MODIFIED="1763396972431"/>
+</node>
 <node TEXT="2.2 Properties and Types" ID="ID_1133221785" CREATED="1762885725069" MODIFIED="1762885729545"/>
 <node TEXT="2.3 Add Movie Nodes" ID="ID_1399563396" CREATED="1762885729718" MODIFIED="1762885741632"/>
 <node TEXT="2.4 Unique IDs and Constraints" ID="ID_1683224451" CREATED="1762885741735" MODIFIED="1762885750033"/>
