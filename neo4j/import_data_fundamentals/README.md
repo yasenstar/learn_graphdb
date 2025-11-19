@@ -141,6 +141,24 @@ SET
   p.url = row.person_url
 ```
 
+Updated Cypher with Data Type Converting:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//person-import//persons.csv' AS row
+MERGE (p:Person {tmdbId: toInteger(row.person_tmdbId)})
+SET
+  p.bio = toString(row.bio),
+  p.born = datetime(row.born),
+  p.bornIn = toString(row.bornIn),
+  p.died = datetime(row.died),
+  p.imdbId = toInteger(row.person_imdbId),
+  p.name = toString(row.name),
+  p.poster = toString(row.person_poster),
+  p.url = toString(row.person_url)
+```
+
+Note: you don't need to explicitly use `toString()`
+
 Create CONSTRAINT:
 
 ```SQL
@@ -233,6 +251,38 @@ SET
 ```
 
 ![import movies](img/import_movies.png)
+
+Updated Cypher with data type converting:
+
+```SQL
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//movies.csv' AS row
+MERGE (m:Movie {movieId: toInteger(trim(row.movieId))})
+SET
+  m.title = row.title,
+  m.budget = toFloat(trim(row.budget)),
+  m.countries = row.countries,
+  m.imdbId = toInteger(trim(row.movie_imdbId)),
+  m.rating = toFloat(trim(row.imdbRating)),
+  m.votes = row.imdbVotes,
+  m.languages = row.languages,
+  m.plot = row.plot,
+  m.poster = row.movie_poster,
+  m.released = datetime(row.released),
+  m.revenue = toFloat(trim(row.revenue)),
+  m.runtime = toInteger(trim(row.runtime)),
+  m.tmdbId = toInteger(trim(row.movie_tmdbId)),
+  m.url = row.movie_url,
+  m.year = toInteger(trim(row.year)),
+  m.genres = row.genres
+```
+
+Create Uniqueness Constraint:
+
+```SQL
+CREATE CONSTRAINT `movieId_Movie_uniq` IF NOT EXISTS
+FOR (m:Movie)
+REQUIRE (m.movieId) IS UNIQUE
+```
 
 ### 2.4 Unique IDs and Constraints
 
