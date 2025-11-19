@@ -8,8 +8,12 @@
     - [1.3 Tools](#13-tools)
   - [2. Neo4j Data Importer](#2-neo4j-data-importer)
     - [2.1 Data Importer](#21-data-importer)
+      - [Part 1 - Using Online Data Importer](#part-1---using-online-data-importer)
+      - [Part 2 - Using Desktop `LOAD CSV`](#part-2---using-desktop-load-csv)
     - [2.2 Properties and Types](#22-properties-and-types)
     - [2.3 Add Movie Nodes](#23-add-movie-nodes)
+      - [Part 1 - Using Online Data Importer](#part-1---using-online-data-importer-1)
+      - [Part 2 - Using Desktop `LOAD CSV`](#part-2---using-desktop-load-csv-1)
     - [2.4 Unique IDs and Constraints](#24-unique-ids-and-constraints)
     - [2.5 Creating Relationships](#25-creating-relationships)
     - [2.6 Add Directed Relationship](#26-add-directed-relationship)
@@ -83,6 +87,8 @@ Potential options and tools for data importing:
 
 ### 2.1 Data Importer
 
+#### Part 1 - Using Online Data Importer
+
 In order to create nodes using Data Importer, you must do:
 
 - Upload a source file
@@ -116,6 +122,8 @@ SET n.`name` = nodeRecord.`name`
 SET n.`poster` = nodeRecord.`person_poster`
 SET n.`url` = nodeRecord.`person_url`;
 ```
+
+#### Part 2 - Using Desktop `LOAD CSV`
 
 Below is the reference offline `LOAD CSV` statement:
 
@@ -161,7 +169,46 @@ You can import multiple properties of different types from the same column in th
 
 ### 2.3 Add Movie Nodes
 
+#### Part 1 - Using Online Data Importer
+
 Here is the [movies.csv](docs/movies.csv)
+
+![data importer - Movies.csv](img/data-importer-Movies-result.png)
+
+Key Statement:
+
+```SQL
+CYPHER 5 CREATE CONSTRAINT `movieId_Movie_uniq` IF NOT EXISTS
+FOR (n: `Movie`)
+REQUIRE (n.`movieId`) IS UNIQUE;
+```
+
+Load Statement:
+
+```SQL
+CYPHER 5 UNWIND $nodeRecords AS nodeRecord
+WITH *
+WHERE NOT nodeRecord.`movieId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`movieId`)) IS NULL
+MERGE (n: `Movie` { `movieId`: toInteger(trim(nodeRecord.`movieId`)) })
+SET n.`title` = nodeRecord.`title`
+SET n.`budget` = toFloat(trim(nodeRecord.`budget`))
+SET n.`countries` = nodeRecord.`countries`
+SET n.`imdbId` = toInteger(trim(nodeRecord.`movie_imdbId`))
+SET n.`imdbRating` = toFloat(trim(nodeRecord.`imdbRating`))
+SET n.`imdbVotes` = toInteger(trim(nodeRecord.`imdbVotes`))
+SET n.`languages` = nodeRecord.`languages`
+SET n.`plot` = nodeRecord.`plot`
+SET n.`poster` = nodeRecord.`movie_poster`
+SET n.`released` = datetime(nodeRecord.`released`)
+SET n.`revenue` = toFloat(trim(nodeRecord.`revenue`))
+SET n.`runtime` = toInteger(trim(nodeRecord.`runtime`))
+SET n.`tmdbId` = toInteger(trim(nodeRecord.`movie_tmdbId`))
+SET n.`url` = nodeRecord.`movie_url`
+SET n.`year` = toInteger(trim(nodeRecord.`year`))
+SET n.`genres` = nodeRecord.`genres`;
+```
+
+#### Part 2 - Using Desktop `LOAD CSV`
 
 ```SQL
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//movies.csv' AS row
