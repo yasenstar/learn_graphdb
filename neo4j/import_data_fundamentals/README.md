@@ -356,11 +356,11 @@ SET r.`role` = relRecord.`role`;
 Create `ACTED_IN` relationship base on the file [acted_in.csv](docs/acted_in.csv) in Cypher:
 
 ```SQL
-LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//acted_in.csv' AS row
-MATCH (p:Person),(m:Movie)
-WHERE p.tmdbId = row.person_tmdbId AND m.movieId = row.movieId
-MERGE (p)-[a:ACTED_IN]->(m)
-SET a.role = row.role
+LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//acted_in.csv' as row
+MATCH (p:Person)
+MATCH (m:Movie)
+WHERE p.tmdbId = toInteger(trim(row.person_tmdbId))  AND m.movieId = toInteger(trim(row.movieId))
+MERGE (p)-[a:ACTED_IN {role: row.role}]->(m)
 RETURN p, a, m
 ```
 
