@@ -16,6 +16,8 @@
       - [Part 2 - Using Desktop `LOAD CSV`](#part-2---using-desktop-load-csv-1)
     - [2.4 Unique IDs and Constraints](#24-unique-ids-and-constraints)
     - [2.5 Creating Relationships](#25-creating-relationships)
+      - [Part 1: using Data Importer](#part-1-using-data-importer)
+      - [Part 2: using `LOAD CSV`](#part-2-using-load-csv)
     - [2.6 Add Directed Relationship](#26-add-directed-relationship)
     - [2.7 Add Users Ratings](#27-add-users-ratings)
     - [2.8 Data Importer Considerations](#28-data-importer-considerations)
@@ -289,8 +291,8 @@ REQUIRE (m.movieId) IS UNIQUE
 When you set a unique ID, Data Importer will automatically create a `constraint` and `index` for the property.
 
 ```
-SHOW CONSTRAINT
-SHOW INDEX
+SHOW CONSTRAINT(S)
+SHOW INDEX(ES)
 ```
 
 ![show index constraints](img/show_constraint_index.png)
@@ -324,12 +326,30 @@ A new `title_index` is added for property `title` in `Movie`, as below through `
 
 ### 2.5 Creating Relationships
 
+#### Part 1: using Data Importer
+
 The process for creating relationships is similar to creating nodes:
 
 1. Upload the data
 2. Creat the relationship in the model
 3. Map the fiels
 4. Run the import
+
+Importing Result:
+
+![2.5 ACTED_IN](img/2.5-ACTED_IN_result.png)
+
+Cypher for this Relationship import:
+
+```SQL
+CYPHER 5 UNWIND $relRecords AS relRecord
+MATCH (source: `Person` { `tmdbId`: toInteger(trim(relRecord.`person_tmdbId`)) })
+MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
+MERGE (source)-[r: `ACTED_IN`]->(target)
+SET r.`role` = relRecord.`role`;
+```
+
+#### Part 2: using `LOAD CSV`
 
 Create `ACTED_IN` relationship base on the file [acted_in.csv](docs/acted_in.csv) in Cypher:
 
