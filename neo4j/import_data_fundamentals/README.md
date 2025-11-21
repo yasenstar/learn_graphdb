@@ -22,6 +22,8 @@
       - [Part 1: Using Data Importer](#part-1-using-data-importer-1)
       - [Part 2: Using Neo4j Desktop](#part-2-using-neo4j-desktop)
     - [2.7 Add Users Ratings](#27-add-users-ratings)
+      - [Part 1: Using Data Importer](#part-1-using-data-importer-2)
+      - [Part 2: Using Neo4j Desktop](#part-2-using-neo4j-desktop-1)
     - [2.8 Data Importer Considerations](#28-data-importer-considerations)
   - [3. Source Data Considerations](#3-source-data-considerations)
     - [3.1 Understanding the Source Data](#31-understanding-the-source-data)
@@ -422,6 +424,21 @@ You should see below relationships:
 ![query DIRECTED Relation](img/Query-DIRECTED-Relation.png)
 
 ### 2.7 Add Users Ratings
+
+#### Part 1: Using Data Importer
+
+![2.7 RATED](img/2.7-RATED_result.png)
+
+```SQL
+CYPHER 5 UNWIND $relRecords AS relRecord
+MATCH (source: `User` { `userId`: toInteger(trim(relRecord.`userId`)) })
+MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
+MERGE (source)-[r: `RATED`]->(target)
+SET r.`rating` = toFloat(trim(relRecord.`rating`))
+SET r.`timestamp` = datetime(relRecord.`timestamp`);
+```
+
+#### Part 2: Using Neo4j Desktop
 
 Create `RATED` relationship base on the file [ratings.csv](docs/ratings.csv) in Cypher:
 
