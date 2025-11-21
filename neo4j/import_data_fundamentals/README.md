@@ -19,6 +19,8 @@
       - [Part 1: using Data Importer](#part-1-using-data-importer)
       - [Part 2: using `LOAD CSV`](#part-2-using-load-csv)
     - [2.6 Add Directed Relationship](#26-add-directed-relationship)
+      - [Part 1: Using Data Importer](#part-1-using-data-importer-1)
+      - [Part 2: Using Neo4j Desktop](#part-2-using-neo4j-desktop)
     - [2.7 Add Users Ratings](#27-add-users-ratings)
     - [2.8 Data Importer Considerations](#28-data-importer-considerations)
   - [3. Source Data Considerations](#3-source-data-considerations)
@@ -379,6 +381,19 @@ You should see below four relationships from `Toy Story`:
 ![query ACTED_IN Relation](img/Query-ACTED_IN-Relation.png)
 
 ### 2.6 Add Directed Relationship
+
+#### Part 1: Using Data Importer
+
+![2.6 DIRECTED](img/2.6-DIRECTED_result.png)
+
+```SQL
+CYPHER 5 UNWIND $relRecords AS relRecord
+MATCH (source: `Person` { `tmdbId`: toInteger(trim(relRecord.`person_tmdbId`)) })
+MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
+MERGE (source)-[r: `DIRECTED`]->(target);
+```
+
+#### Part 2: Using Neo4j Desktop
 
 Create `DIRECTED` relationship base on the file [directed.csv](docs/directed.csv) in Cypher:
 
