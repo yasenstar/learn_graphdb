@@ -1,6 +1,6 @@
 <map version="freeplane 1.12.1">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
-<node TEXT="Importing Data Fundamentals&#xa;(Neo4j GraphAcademy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1762885523335" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff">
+<node TEXT="Importing Data Fundamentals&#xa;(Neo4j GraphAcademy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1762885523335" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.9090909">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
@@ -96,7 +96,7 @@
 <node TEXT="Custom application" POSITION="bottom_or_right" ID="ID_393330053" CREATED="1762889450559" MODIFIED="1762889450559"/>
 </node>
 </node>
-<node TEXT="2 Neo4j Data Importer" POSITION="bottom_or_right" ID="ID_1023119852" CREATED="1762885619876" MODIFIED="1762885655889">
+<node TEXT="2 Neo4j Data Importer" FOLDED="true" POSITION="bottom_or_right" ID="ID_1023119852" CREATED="1762885619876" MODIFIED="1762885655889">
 <node TEXT="2.1 Data Importer" FOLDED="true" ID="ID_709867865" CREATED="1762885720811" MODIFIED="1762885724894">
 <node TEXT="(1) Access Data Importer" ID="ID_1080945931" CREATED="1763396745095" MODIFIED="1763396772111" LINK="https://workspace.neo4j.io/workspace/import"/>
 <node TEXT="(2) Creating Nodes" FOLDED="true" ID="ID_1688475345" CREATED="1763396772907" MODIFIED="1763396777617">
@@ -114,17 +114,29 @@
 <node TEXT="Using Data Importer" ID="ID_1582852320" CREATED="1763512683228" MODIFIED="1763512695021"/>
 <node TEXT="Using &quot;LOAD CSV&quot;" ID="ID_445092936" CREATED="1763512695213" MODIFIED="1763512700096"/>
 </node>
-<node TEXT="2.3 Add Movie Nodes" ID="ID_1399563396" CREATED="1762885729718" MODIFIED="1762885741632">
+<node TEXT="2.3 Add Movie Nodes" FOLDED="true" ID="ID_1399563396" CREATED="1762885729718" MODIFIED="1762885741632">
 <node TEXT="Using Data Importer" POSITION="bottom_or_right" ID="ID_1739200279" CREATED="1763512683228" MODIFIED="1763512695021"/>
 <node TEXT="Using &quot;LOAD CSV&quot;" POSITION="bottom_or_right" ID="ID_459975127" CREATED="1763512695213" MODIFIED="1763512700096"/>
 </node>
-<node TEXT="2.4 Unique IDs and Constraints" ID="ID_1683224451" CREATED="1762885741735" MODIFIED="1762885750033"/>
-<node TEXT="2.5 Creating Relationships" ID="ID_76099303" CREATED="1762885750209" MODIFIED="1762885754862"/>
-<node TEXT="2.6 Add Directed Relationship" ID="ID_274362000" CREATED="1762885755039" MODIFIED="1762885761881"/>
-<node TEXT="2.7 Add Users Ratings" ID="ID_343318457" CREATED="1762885762060" MODIFIED="1762885768211"/>
+<node TEXT="2.4 Unique IDs and Constraints" FOLDED="true" ID="ID_1683224451" CREATED="1762885741735" MODIFIED="1762885750033">
+<node TEXT="Using Data Importer" ID="ID_1688484804" CREATED="1763512683228" MODIFIED="1763512695021"/>
+<node TEXT="Using Neo4j Desktop" ID="ID_972115763" CREATED="1763512695213" MODIFIED="1763687319128"/>
+</node>
+<node TEXT="2.5 Creating Relationships" FOLDED="true" ID="ID_76099303" CREATED="1762885750209" MODIFIED="1762885754862">
+<node TEXT="Using Data Importer" ID="ID_153464571" CREATED="1763512683228" MODIFIED="1763512695021"/>
+<node TEXT="Using &quot;LOAD CSV&quot;" ID="ID_553351072" CREATED="1763512695213" MODIFIED="1763512700096"/>
+</node>
+<node TEXT="2.6 Add Directed Relationship" FOLDED="true" ID="ID_274362000" CREATED="1762885755039" MODIFIED="1762885761881">
+<node TEXT="Using Data Importer" ID="ID_1098839088" CREATED="1763512683228" MODIFIED="1763512695021"/>
+<node TEXT="Using &quot;LOAD CSV&quot;" ID="ID_1686864235" CREATED="1763512695213" MODIFIED="1763512700096"/>
+</node>
+<node TEXT="2.7 Add Users Ratings" FOLDED="true" ID="ID_343318457" CREATED="1762885762060" MODIFIED="1762885768211">
+<node TEXT="Using Data Importer" ID="ID_1237435476" CREATED="1763512683228" MODIFIED="1763512695021"/>
+<node TEXT="Using &quot;LOAD CSV&quot;" ID="ID_893789230" CREATED="1763512695213" MODIFIED="1763512700096"/>
+</node>
 <node TEXT="2.8 Data Importer Considerations" ID="ID_590031241" CREATED="1762885768361" MODIFIED="1762885774888"/>
 </node>
-<node TEXT="3 Source Data Considerations" FOLDED="true" POSITION="bottom_or_right" ID="ID_66028820" CREATED="1762885627405" MODIFIED="1762885657301">
+<node TEXT="3 Source Data Considerations" POSITION="bottom_or_right" ID="ID_66028820" CREATED="1762885627405" MODIFIED="1762885657301">
 <node TEXT="3.1 Understanding the Source Data" ID="ID_1764306680" CREATED="1762885776834" MODIFIED="1762885783214"/>
 <node TEXT="3.2 Developing a Data Model" ID="ID_130120544" CREATED="1762885783373" MODIFIED="1762885788521"/>
 <node TEXT="3.3 Import your CSV File" ID="ID_1232271346" CREATED="1762885792558" MODIFIED="1762885801676"/>

@@ -9,21 +9,75 @@
 
 ## 1.3 Tools
 
+### Data Importer
+
+### Cypher and LOAD CSV
+
+### neo4j-admin
+
+### ETL tools
+
+### Custom application
+
 # 2 Neo4j Data Importer
 
 ## 2.1 Data Importer
 
+### (1) Access Data Importer
+
+### (2) Creating Nodes
+
+#### (2)-1 Connect to your sandbox
+
+#### (2)-2 Upload a file
+
+#### (2)-3 Create a Person node
+
+#### (2)-4 Update Properties
+
+#### (2)-5 Run the import
+
+### (3) View the data
+
+### (4) Backup your work through "Download model (with data)"
+
+### (5) Import locally through "LOAD CSV"
+
 ## 2.2 Properties and Types
+
+### Using Data Importer
+
+### Using "LOAD CSV"
 
 ## 2.3 Add Movie Nodes
 
+### Using Data Importer
+
+### Using "LOAD CSV"
+
 ## 2.4 Unique IDs and Constraints
+
+### Using Data Importer
+
+### Using Neo4j Desktop
 
 ## 2.5 Creating Relationships
 
+### Using Data Importer
+
+### Using "LOAD CSV"
+
 ## 2.6 Add Directed Relationship
 
+### Using Data Importer
+
+### Using "LOAD CSV"
+
 ## 2.7 Add Users Ratings
+
+### Using Data Importer
+
+### Using "LOAD CSV"
 
 ## 2.8 Data Importer Considerations
 
