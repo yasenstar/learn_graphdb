@@ -429,6 +429,26 @@ You should see below relationships:
 
 ![2.7 RATED](img/2.7-RATED_result.png)
 
+Create `User` node:
+
+```SQL
+CYPHER 5 UNWIND $nodeRecords AS nodeRecord
+WITH *
+WHERE NOT nodeRecord.`userId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`userId`)) IS NULL
+MERGE (n: `User` { `userId`: toInteger(trim(nodeRecord.`userId`)) })
+SET n.`name` = nodeRecord.`name`;
+```
+
+Create constraint automatically:
+
+```SQL
+CYPHER 5 CREATE CONSTRAINT `userId_User_uniq` IF NOT EXISTS
+FOR (n: `User`)
+REQUIRE (n.`userId`) IS UNIQUE;
+```
+
+Creae `RATED` relationship:
+
 ```SQL
 CYPHER 5 UNWIND $relRecords AS relRecord
 MATCH (source: `User` { `userId`: toInteger(trim(relRecord.`userId`)) })
