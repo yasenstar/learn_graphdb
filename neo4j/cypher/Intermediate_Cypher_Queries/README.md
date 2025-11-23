@@ -270,6 +270,30 @@ LIMIT 5
 
 ![3.1.2_1](img/3.1.2_1.png)
 
+Reference: [Aggregating Functions in Neo4j Cypher](https://neo4j.com/docs/cypher-manual/current/functions/aggregating/?_gl=1*1u6pg51*_gcl_au*MTM2MDA4NTA5MC4xNzYzODExOTk1*_ga*MTk3MzcxMjU0Ni4xNzYzODExOTk1*_ga_DL38Q8KGQC*czE3NjM4NjgyMjQkbzMkZzEkdDE3NjM4NjgyMjkkajU1JGwwJGgw*_ga_DZP8Z65KK4*czE3NjM4NjgyMjQkbzMkZzEkdDE3NjM4NjgyMjkkajU1JGwwJGgw)
+
+| `COUNT()` | `SIZE()` |
+| --- | --- |
+| Count the number of rows, or alternatively, return the size of the collected results. | Returns the number of elements in a list. |
+
+```cypher
+MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
+RETURN actor.name, director.name,
+size(collect(m)) AS collaborations,
+collect(m.title) AS movies
+```
+
+![3.1.2_2](img/3.1.2_2.png)
+
+Besides the performance, `size(collect(m)) AS numMovies` is same results as `count(m) AS numMovies`.
+
+Question: return the list of names of actors in the movie Toy Story as a single row.
+
+```cypher
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie {title: 'Toy Story'})
+RETURN collect(p.name) AS Actors
+```
+
 ### 3.2 Counting Results
 
 ### 3.3 Creating Lists
