@@ -17,6 +17,8 @@ Updated at: 2025-11-22
     - [2.10 Conditionally Returning Data](#210-conditionally-returning-data)
   - [3. Workign with Cypher](#3-workign-with-cypher)
     - [3.1 Aggregating Data](#31-aggregating-data)
+      - [3.1.1 COUNT](#311-count)
+      - [3.1.2 COLLECT() to create a list](#312-collect-to-create-a-list)
     - [3.2 Counting Results](#32-counting-results)
     - [3.3 Creating Lists](#33-creating-lists)
     - [3.4 How Many Actors?](#34-how-many-actors)
@@ -210,6 +212,8 @@ ORDER BY runtime
 
 ### 3.1 Aggregating Data
 
+#### 3.1.1 COUNT
+
 Using `count()` to aggregate data:
 
 ```cypher
@@ -251,6 +255,20 @@ WITH c, COUNT(*) AS cnt
 WHERE cnt > 100000
 RETURN c.name, cnt
 ```
+
+#### 3.1.2 COLLECT() to create a list
+
+```cypher
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+RETURN
+    p.name,
+    count(*) AS total,
+    collect(m.title) AS movies
+ORDER BY total DESC
+LIMIT 5
+```
+
+![3.1.2_1](img/3.1.2_1.png)
 
 ### 3.2 Counting Results
 
