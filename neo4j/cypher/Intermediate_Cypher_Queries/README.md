@@ -36,8 +36,25 @@ Updated at: 2025-11-22
     - [4.6 Actors 4 Hops Away](#46-actors-4-hops-away)
     - [4.7 Actors Up to 4 Hops Away](#47-actors-up-to-4-hops-away)
   - [5. Pipelining Queries](#5-pipelining-queries)
+    - [5.1 Scoping Variables](#51-scoping-variables)
+    - [5.2 Tom Hanks Movies](#52-tom-hanks-movies)
+    - [5.3 Highest Revenue Movies](#53-highest-revenue-movies)
+    - [5.4 Top Movies](#54-top-movies)
+    - [5.5 Adding Genres](#55-adding-genres)
+    - [5.6 Pipelining Queries](#56-pipelining-queries)
+    - [5.7 Highest Rated Tom Hanks Movie](#57-highest-rated-tom-hanks-movie)
+    - [5.8 Highest Average Rating](#58-highest-average-rating)
+    - [5.9 Unwinding Lists](#59-unwinding-lists)
+    - [5.10 UK Movies](#510-uk-movies)
+    - [5.11 Swizerland Movies](#511-swizerland-movies)
   - [6. Reducing Memory](#6-reducing-memory)
+    - [6.1 Subqueries](#61-subqueries)
+    - [6.2 Using Subqueries](#62-using-subqueries)
+    - [6.3 Combining Results](#63-combining-results)
   - [7. Using Parameters](#7-using-parameters)
+    - [7.1 Parameters in Cypher](#71-parameters-in-cypher)
+    - [7.2 Setting Parameters](#72-setting-parameters)
+    - [7.3 Application Examples Using Parameters](#73-application-examples-using-parameters)
 
 ## 1. Filtering Queries
 
@@ -491,6 +508,40 @@ RETURN COUNT(DISTINCT others.name)
 
 ## 5. Pipelining Queries
 
+### 5.1 Scoping Variables
+
+### 5.2 Tom Hanks Movies
+
+### 5.3 Highest Revenue Movies
+
+### 5.4 Top Movies
+
+### 5.5 Adding Genres
+
+### 5.6 Pipelining Queries
+
+### 5.7 Highest Rated Tom Hanks Movie
+
+### 5.8 Highest Average Rating
+
+### 5.9 Unwinding Lists
+
+### 5.10 UK Movies
+
+### 5.11 Swizerland Movies
+
 ## 6. Reducing Memory
 
+### 6.1 Subqueries
+
+### 6.2 Using Subqueries
+
+### 6.3 Combining Results
+
 ## 7. Using Parameters
+
+### 7.1 Parameters in Cypher
+
+### 7.2 Setting Parameters
+
+### 7.3 Application Examples Using Parameters
