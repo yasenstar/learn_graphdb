@@ -210,6 +210,48 @@ ORDER BY runtime
 
 ### 3.1 Aggregating Data
 
+Using `count()` to aggregate data:
+
+```SQL
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = "Tom Hanks"
+RETURN p.name AS actorName, count(*) AS numMovies
+```
+
+![3.1_1](img/3.1_1.png)
+
+```SQL
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Director)
+RETURN
+    p.name as actorName,
+    d.name as directorName,
+    count(*) AS numMovies
+ORDER BY numMovies DESC
+```
+
+![3.1_2](img/3.1_2.png)
+
+Eager Aggregation: When you aggreate in a Cypher statement, the query must process all patterns in the `MATCH` clause to complete the aggregation to return results.
+
+Here is a comparison of the `COUNT()` clause in **SQL** vs **Cypher**:
+
+| Feature | SQL | Cypher |
+| --- | --- | --- |
+| Primary Purpose | Counts rows or non-NULL values in a column | Counts nodes, relationships, rows, or expressions. |
+| Basic Syntax | `COUNT(*)` - counts all rows<br>`COUNT(expression)` - counts non-NULL values | `COUNT(*)` - counts all rows (including those with nulls)<br>`COUNT(expression)` - counts non-null values of the expression (e.g. `COUNT(n)`) |
+| Counting all returned rows | `SELECT COUNT(*) FROM table` | `RETURN COUNT(*)` (inside `WITH` or `RETURN` after aggregation; counts all matching rows from `MATCH`) |
+| Counting distinct values | `COUNT(DISTINCT column)` | `COUNT(DISTINCT expression)` - works the same way |
+| Aggregation requirement | **Must** be used with `GROUP BY` when mixed with non-aggregated columns | When you use `COUNT()` together with non-aggregated columns, must use `WITH` or `RETURN` with grouping keys |
+
+Sample: chaining with `WITH` for filtering aggregates (SQL `HAVING` equivalent):
+
+```cypher
+MATCH (c:City)<-[:LIVES_IN]-(p:Persion)
+WITH c, COUNT(*) AS cnt
+WHERE cnt > 100000
+RETURN c.name, cnt
+```
+
 ### 3.2 Counting Results
 
 ### 3.3 Creating Lists
