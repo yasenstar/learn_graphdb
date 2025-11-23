@@ -106,7 +106,7 @@ In order to create nodes using Data Importer, you must do:
 
 Cypher Key Statement:
 
-```SQL
+```cypher
 CYPHER 5 CREATE CONSTRAINT `tmdbId_Person_uniq` IF NOT EXISTS
 FOR (n: `Person`)
 REQUIRE (n.`tmdbId`) IS UNIQUE;
@@ -114,7 +114,7 @@ REQUIRE (n.`tmdbId`) IS UNIQUE;
 
 Cypher Load Statement:
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $nodeRecords AS nodeRecord
 WITH *
 WHERE NOT nodeRecord.`person_tmdbId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`person_tmdbId`)) IS NULL
@@ -133,7 +133,7 @@ SET n.`url` = nodeRecord.`person_url`;
 
 Below is the reference offline `LOAD CSV` statement:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//person-import//persons.csv' AS row
 MERGE (p:Person {tmdbId: row.person_tmdbId})
 SET
@@ -149,7 +149,7 @@ SET
 
 Updated Cypher with Data Type Converting:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//person-import//persons.csv' AS row
 MERGE (p:Person {tmdbId: toInteger(row.person_tmdbId)})
 SET
@@ -167,7 +167,7 @@ Note: you don't need to explicitly use `toString()`
 
 Create CONSTRAINT:
 
-```SQL
+```cypher
 CREATE CONSTRAINT `tmdbId_Person_uniq` IF NOT EXISTS
 FOR (n:Person)
 REQUIRE (n.tmdbId) IS UNIQUE
@@ -201,7 +201,7 @@ Here is the [movies.csv](docs/movies.csv)
 
 Key Statement:
 
-```SQL
+```cypher
 CYPHER 5 CREATE CONSTRAINT `movieId_Movie_uniq` IF NOT EXISTS
 FOR (n: `Movie`)
 REQUIRE (n.`movieId`) IS UNIQUE;
@@ -209,7 +209,7 @@ REQUIRE (n.`movieId`) IS UNIQUE;
 
 Load Statement:
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $nodeRecords AS nodeRecord
 WITH *
 WHERE NOT nodeRecord.`movieId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`movieId`)) IS NULL
@@ -234,7 +234,7 @@ SET n.`genres` = nodeRecord.`genres`;
 
 #### Part 2 - Using Desktop `LOAD CSV`
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//movies.csv' AS row
 MERGE (m:Movie {movieId: row.movieId})
 SET
@@ -260,7 +260,7 @@ SET
 
 Updated Cypher with data type converting:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//movies.csv' AS row
 MERGE (m:Movie {movieId: toInteger(trim(row.movieId))})
 SET
@@ -284,7 +284,7 @@ SET
 
 Create Uniqueness Constraint:
 
-```SQL
+```cypher
 CREATE CONSTRAINT `movieId_Movie_uniq` IF NOT EXISTS
 FOR (m:Movie)
 REQUIRE (m.movieId) IS UNIQUE
@@ -303,7 +303,7 @@ SHOW INDEX(ES)
 
 Create Constraint - `movie_imdbId`:
 
-```SQL
+```cypher
 CREATE CONSTRAINT movie_imdbId
 FOR (m:Movie) REQUIRE (m.imdbId) IS NODE KEY
 ```
@@ -318,7 +318,7 @@ An index is created automatically for the unique ID property. For example, once 
 
 Manually add new index from below Cypher:
 
-```SQL
+```cypher
 CREATE RANGE INDEX title_index IF NOT EXISTS
 FOR (m:Movie)
 ON (m.title)
@@ -345,7 +345,7 @@ Importing Result:
 
 Cypher for this Relationship import:
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $relRecords AS relRecord
 MATCH (source: `Person` { `tmdbId`: toInteger(trim(relRecord.`person_tmdbId`)) })
 MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
@@ -357,7 +357,7 @@ SET r.`role` = relRecord.`role`;
 
 Create `ACTED_IN` relationship base on the file [acted_in.csv](docs/acted_in.csv) in Cypher:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//acted_in.csv' as row
 MATCH (p:Person)
 MATCH (m:Movie)
@@ -372,7 +372,7 @@ Result is as below:
 
 Check the relationship through one sample:
 
-```SQL
+```cypher
 MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
 WHERE m.title = 'Toy Story'
 RETURN p,r,m
@@ -388,7 +388,7 @@ You should see below four relationships from `Toy Story`:
 
 ![2.6 DIRECTED](img/2.6-DIRECTED_result.png)
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $relRecords AS relRecord
 MATCH (source: `Person` { `tmdbId`: toInteger(trim(relRecord.`person_tmdbId`)) })
 MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
@@ -399,7 +399,7 @@ MERGE (source)-[r: `DIRECTED`]->(target);
 
 Create `DIRECTED` relationship base on the file [directed.csv](docs/directed.csv) in Cypher:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//directed.csv' AS row
 MATCH (p:Person), (m:Movie)
 WHERE p.tmdbId = toInteger(trim(row.person_tmdbId)) AND m.movieId = toInteger(trim(row.movieId))
@@ -413,7 +413,7 @@ Result is as below:
 
 Check the relationship through one sample:
 
-```SQL
+```cypher
 MATCH (p:Person)-[d:DIRECTED]->(m:Movie)
 RETURN p,d,m
 LIMIT 25
@@ -431,7 +431,7 @@ You should see below relationships:
 
 Create `User` node:
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $nodeRecords AS nodeRecord
 WITH *
 WHERE NOT nodeRecord.`userId` IN $idsToSkip AND NOT toInteger(trim(nodeRecord.`userId`)) IS NULL
@@ -441,7 +441,7 @@ SET n.`name` = nodeRecord.`name`;
 
 Create constraint automatically:
 
-```SQL
+```cypher
 CYPHER 5 CREATE CONSTRAINT `userId_User_uniq` IF NOT EXISTS
 FOR (n: `User`)
 REQUIRE (n.`userId`) IS UNIQUE;
@@ -449,7 +449,7 @@ REQUIRE (n.`userId`) IS UNIQUE;
 
 Creae `RATED` relationship:
 
-```SQL
+```cypher
 CYPHER 5 UNWIND $relRecords AS relRecord
 MATCH (source: `User` { `userId`: toInteger(trim(relRecord.`userId`)) })
 MATCH (target: `Movie` { `movieId`: toInteger(trim(relRecord.`movieId`)) })
@@ -462,7 +462,7 @@ SET r.`timestamp` = datetime(relRecord.`timestamp`);
 
 Create `RATED` relationship base on the file [ratings.csv](docs/ratings.csv) in Cypher:
 
-```SQL
+```cypher
 LOAD CSV WITH HEADERS FROM 'file:///D://GitHub//learn_graphdb//neo4j//import_data_fundamentals//docs//ratings.csv' AS row
 MATCH (m:Movie)
 WHERE m.movieId = row.movieId
@@ -478,7 +478,7 @@ Result is as below:
 
 Check result from below query:
 
-```SQL
+```cypher
 MATCH (u:User)-[r:RATED]->(m:Movie)
 RETURN u,r,m
 LIMIT 25
