@@ -508,13 +508,99 @@ RETURN COUNT(DISTINCT others.name)
 
 ## 5. Pipelining Queries
 
+In this module, you will learn how to use the Cypher `WITH` clause to set values and control query processing.
+
+- Initialize data for a `MATCH` clause.
+- Define and name a subset of data for a query.
+- Limit data that is processed.
+- Pass data from one part of a query to the next part of the query (pipelining).
+- Unwind a temporary list for processing in a later part of a query.
+
 ### 5.1 Scoping Variables
+
+Method 1:
+
+```cypher
+WITH  'toy story' AS mt, 'Tom Hanks' AS actorName
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = actorName
+AND toLower(m.title) CONTAINS mt
+RETURN m.title AS movies
+```
+
+![5.1_1](img/5.1_1.png)
+
+Method 2:
+
+```cypher
+WITH  'toy story' AS mt, 'Tom Hanks' AS actorName
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH m, toLower(m.title) AS movieTitle
+WHERE p.name = actorName
+AND movieTitle CONTAINS mt
+RETURN m.title AS movies, movieTitle
+```
+
+![5.1_2](img/5.1_2.png)
+
+Question: return the name of the actor (Clint Eastwood) and all the movies that he acted in that contain the string 'high'.
+
+```cypher
+WITH "Clint Eastwood" AS a, 'high' AS t
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p, m, toLower(m.title) AS movieTitle
+WHERE p.name = a AND movieTitle CONTAINS t
+RETURN p.name AS actor, m.title AS movie
+```
+
+![5.1_3](img/5.1_3.png)
 
 ### 5.2 Tom Hanks Movies
 
+Question: use a `WITH` clause to create a variable for the actor's name
+
+```cypher
+WITH 'Tom Hanks' AS actorName
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = actorName
+RETURN m.title AS title
+```
+
+Answer is 38 movies titles.
+
 ### 5.3 Highest Revenue Movies
 
+Question: update `WITH` clause to scope
+
+```cypher
+WITH 'Tom Hanks' AS theActor
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = theActor
+AND m.revenue IS NOT NULL
+WITH theActor, m  ORDER BY m.revenue DESC LIMIT 1
+RETURN theActor, m.title AS title, m.revenue AS revenue
+```
+
+![5.3](img/5.3.png)
+
 ### 5.4 Top Movies
+
+Question: use `WITH` to return a map projection of the top 10 movies by IMDBrating
+
+```cypher
+MATCH (n:Movie)
+WHERE n.imdbRating IS NOT NULL
+WITH n {
+  .title,
+  .imdbRating,
+  .plot,
+  .released,
+  .countries
+}
+ORDER BY n.imdbRating DESC
+LIMIT 10
+RETURN collect(n)
+```
 
 ### 5.5 Adding Genres
 
