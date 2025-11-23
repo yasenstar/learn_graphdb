@@ -245,7 +245,7 @@ Here is a comparison of the `COUNT()` clause in **SQL** vs **Cypher**:
 
 Sample: chaining with `WITH` for filtering aggregates (SQL `HAVING` equivalent):
 
-```cypher
+```cypher:cypher
 MATCH (c:City)<-[:LIVES_IN]-(p:Persion)
 WITH c, COUNT(*) AS cnt
 WHERE cnt > 100000
