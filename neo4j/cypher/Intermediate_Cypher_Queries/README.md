@@ -26,6 +26,15 @@ Updated at: 2025-11-22
     - [3.6 Duration](#36-duration)
     - [3.7 Duration in Minutes](#37-duration-in-minutes)
   - [4. Graph Traversal](#4-graph-traversal)
+    - [4.1 Graph Traversal](#41-graph-traversal)
+    - [4.2 Traversing the Graph](#42-traversing-the-graph)
+    - [4.3 Relationships Traversed](#43-relationships-traversed)
+    - [4.4 Varying Length Traversal](#44-varying-length-traversal)
+      - [4.4.1 Shortest path](#441-shortest-path)
+      - [4.4.2 Varying length traversal](#442-varying-length-traversal)
+    - [4.5 Actors 2 Hops Away](#45-actors-2-hops-away)
+    - [4.6 Actors 4 Hops Away](#46-actors-4-hops-away)
+    - [4.7 Actors Up to 4 Hops Away](#47-actors-up-to-4-hops-away)
   - [5. Pipelining Queries](#5-pipelining-queries)
   - [6. Reducing Memory](#6-reducing-memory)
   - [7. Using Parameters](#7-using-parameters)
@@ -276,6 +285,11 @@ Reference: [Aggregating Functions in Neo4j Cypher](https://neo4j.com/docs/cypher
 | --- | --- |
 | Count the number of rows, or alternatively, return the size of the collected results. | Returns the number of elements in a list. |
 
+Compare `Size()` and `Count`:
+- `size(movies)` return the number of elements in a list of Movie nodes
+- `size(collect(moview))` is not same as above, since movies is already a list so do not need to create another list
+- `count()` used to count the number of rows or variables returned, not used to return the number of elements in a list
+
 ```cypher
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
 RETURN actor.name, director.name,
@@ -296,17 +310,184 @@ RETURN collect(p.name) AS Actors
 
 ### 3.2 Counting Results
 
+Question: find hte highest number of movies directed by a single director
+
+```cypher
+MATCH (d:Director)-[:DIRECTED]->(m:Movie)
+RETURN
+    d.name AS director,
+    count(m) AS numMovies,
+    collect(m.title) AS Movies
+ORDER BY numMovies DESC
+```
+
+![3.2](img/3.2.png)
+
 ### 3.3 Creating Lists
+
+Question: return a list actors who have appeared in movies with the smae title
+
+```cypher
+MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+RETURN
+    m.title AS movie,
+    size(collect(a.name)) AS numActors,
+    collect(a.name) AS actors
+ORDER BY size(actors) DESC
+```
+
+![3.3](img/3.3.png)
 
 ### 3.4 How Many Actors?
 
+Question: return the number of actors in movies with the same title
+
+The question in 3.3 already have the needed column, answer is "Hamlet".
+
 ### 3.5 Working with Dates and Times
+
+Cypher has 3 basic formats for storing date and time data:
+
+```cypher
+RETURN date(), datetime(), time()
+```
+
+Other reference: [Temporal Functions section of the Neo4j Cypher Manual](https://neo4j.com/docs/cypher-manual/current/functions/temporal/?_gl=1*1s8a3jd*_gcl_au*MTM2MDA4NTA5MC4xNzYzODExOTk1*_ga*MTk3MzcxMjU0Ni4xNzYzODExOTk1*_ga_DL38Q8KGQC*czE3NjM4NzYzOTgkbzQkZzEkdDE3NjM4NzgzNzMkajU3JGwwJGgw*_ga_DZP8Z65KK4*czE3NjM4NzYzOTgkbzQkZzEkdDE3NjM4NzgzNzMkajU3JGwwJGgw)
+
+Question: how long did Charlie Chaplin live?
+
+```cypher
+MATCH (p:Person {name: 'Charlie Chaplin'})
+RETURN duration.between(p.born, p.died).years
+```
 
 ### 3.6 Duration
 
+Question: calculate the number of days between the `date1` and `date2` properties of the `Test` node:
+
+```cypher
+MATCH (x:Test {id: 1})
+RETURN duration.inDays(x.date1,x.date2).days
+```
+
+Answer is 165 days.
+
 ### 3.7 Duration in Minutes
 
+Question: calculate the number of minutes between the `datetime1` and `datetime2`properties of the `Test` node
+
+```cypher
+MATCH (x:Test {id: 1})
+RETURN duration.between(x.datetime1,x.datetime2).Minutes
+```
+
+Answer is 400
+
 ## 4. Graph Traversal
+
+### 4.1 Graph Traversal
+
+Question: the best performed query to return a list of names of reviewers who rated the movie.
+
+```cypher
+MATCH (movie:Movie)<-[:RATED]-(reviewer)
+WHERE movie.title = 'Toy Story'
+RETURN reviewer.name
+```
+
+Explanation: it uses a label for the anchor node, Movie and specifies the relationship type. You need not specify a label for non-anchor nodes in the pattern. Specifying the relationship type in a pattern will always yield better performance.
+
+### 4.2 Traversing the Graph
+
+Question: Co-actors of Robert Blake
+
+```cypher
+MATCH (p:Person {name: 'Robert Blake'})-[:ACTED_IN]->(m:Movie),
+ (coActors:Person)-[:ACTED_IN]->(m)
+RETURN m.title, collect(coActors.name)
+```
+
+Through PROFILE, there're 16 relationship expanded to find coActors
+
+![4.2](img/4.2.png)
+
+### 4.3 Relationships Traversed
+
+Question: find actors in movies that Robert Black acted in
+
+```cypher
+MATCH (p:Person {name: 'Robert Blake'})-[:ACTED_IN]->(m:Movie)
+MATCH (allActors:Person)-[:ACTED_IN]->(m)
+RETURN m.title, collect(allActors.name)
+```
+
+Answer: 20 relationships are traversed to return the result.
+
+### 4.4 Varying Length Traversal
+
+#### 4.4.1 Shortest path
+
+```cypher
+MATCH p = shortestPath((p1:Person)-[*]-(p2:Person))
+WHERE p1.name = "Eminem" ANd p2.name = "Charlton Heston"
+RETURN p
+```
+
+![4.4.1_1](img/4.4.1_1.png)
+
+Limit the relaitonship to `:ACTED_IN`:
+
+```cypher
+MATCH p = shortestPath((p1:Person)-[:ACTED_IN*]-(p2:Person))
+WHERE p1.name = "Eminem" ANd p2.name = "Charlton Heston"
+RETURN p
+```
+
+![4.4.1_2](img/4.4.1_2.png)
+
+Using `allShortestPaths` instead:
+
+```cypher
+MATCH p = allShortestPaths((p1:Person)-[:ACTED_IN*]-(p2:Person))
+WHERE p1.name = "Eminem" ANd p2.name = "Charlton Heston"
+RETURN p
+```
+
+![4.4.1_3](img/4.4.1_3.png)
+
+#### 4.4.2 Varying length traversal
+
+### 4.5 Actors 2 Hops Away
+
+Question: return the names of actors taht are 2 hops away from Robert Blake using hte ACTED_IN relationship
+
+```cypher
+MATCH (p:Person)-[:ACTED_IN*2]-(others:Person)
+WHERE p.name = "Robert Blake"
+RETURN count(others)
+```
+
+Answer is 12
+
+### 4.6 Actors 4 Hops Away
+
+Question: return the unique names of actors that are 4 hops aways from Robert Blake using hte ACTED_IN relationship
+
+```SQL
+MATCH (p:Person {name: "Robert Blake"})-[:ACTED_IN*4]-(others:Person)
+RETURN COUNT(DISTINCT others.name)
+```
+
+Answer is 253
+
+### 4.7 Actors Up to 4 Hops Away
+
+Question: return the unique names of actors that are up to 4 hops away from Robert Blake using the ACTED_IN relationship.
+
+```cypher
+MATCH (p:Person {name: "Robert Blake"})-[:ACTED_IN*1..4]-(others:Person)
+RETURN COUNT(DISTINCT others.name)
+```
 
 ## 5. Pipelining Queries
 
