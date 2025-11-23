@@ -1,6 +1,6 @@
 # Neo4j - Intermediate Cypher Queries
 
-Updated at: 2025-11-22
+Updated at: 2025-11-23
 
 - [Neo4j - Intermediate Cypher Queries](#neo4j---intermediate-cypher-queries)
   - [1. Filtering Queries](#1-filtering-queries)
@@ -42,6 +42,10 @@ Updated at: 2025-11-22
     - [5.4 Top Movies](#54-top-movies)
     - [5.5 Adding Genres](#55-adding-genres)
     - [5.6 Pipelining Queries](#56-pipelining-queries)
+      - [5.6.1 Using `WITH` for aggregation](#561-using-with-for-aggregation)
+      - [5.6.2 Using `WITH` for collecting](#562-using-with-for-collecting)
+      - [5.6.3 Using `LIMIT` early](#563-using-limit-early)
+      - [5.6.4 Use `DISTINCT` when necessary](#564-use-distinct-when-necessary)
     - [5.7 Highest Rated Tom Hanks Movie](#57-highest-rated-tom-hanks-movie)
     - [5.8 Highest Average Rating](#58-highest-average-rating)
     - [5.9 Unwinding Lists](#59-unwinding-lists)
@@ -49,12 +53,24 @@ Updated at: 2025-11-22
     - [5.11 Swizerland Movies](#511-swizerland-movies)
   - [6. Reducing Memory](#6-reducing-memory)
     - [6.1 Subqueries](#61-subqueries)
-    - [6.2 Using Subqueries](#62-using-subqueries)
+      - [6.1.1 Performing subqueires with `CALL`](#611-performing-subqueires-with-call)
+      - [6.1.2 Passing variables into a subquery](#612-passing-variables-into-a-subquery)
+      - [6.1.3 Combining query results with `UNION`](#613-combining-query-results-with-union)
+      - [6.1.4 Using `UNION` with subqueries](#614-using-union-with-subqueries)
+    - [6.2 Using](#62-using)
     - [6.3 Combining Results](#63-combining-results)
   - [7. Using Parameters](#7-using-parameters)
     - [7.1 Parameters in Cypher](#71-parameters-in-cypher)
+      - [7.1.1 Using Cypher parameters](#711-using-cypher-parameters)
+      - [7.1.2 Setting a parameter](#712-setting-a-parameter)
+      - [7.1.3 Setting Integers](#713-setting-integers)
+      - [7.1.4 Setting multiple parameters](#714-setting-multiple-parameters)
+      - [7.1.5 Using multiple parameters](#715-using-multiple-parameters)
+      - [7.1.6 Viewing parameters](#716-viewing-parameters)
+      - [7.1.7 Removing parameters](#717-removing-parameters)
     - [7.2 Setting Parameters](#72-setting-parameters)
-    - [7.3 Application Examples Using Parameters](#73-application-examples-using-parameters)
+    - [7.3 Using Parameters](#73-using-parameters)
+    - [7.4 Application Examples Using Parameters](#74-application-examples-using-parameters)
 
 ## 1. Filtering Queries
 
@@ -604,30 +620,304 @@ RETURN collect(n)
 
 ### 5.5 Adding Genres
 
+```cypher
+MATCH (n:Movie)
+WHERE n.imdbRating IS NOT NULL
+WITH n {
+  .title,
+  .imdbRating,
+  actors: [ (n)<-[:ACTED_IN]-(p) | p { .imdbId, .name } ],
+  genres: [ (n)-[:IN_GENRE]->(g) | g {.name} ]
+}
+ORDER BY n.imdbRating DESC
+LIMIT 10
+RETURN collect(n)
+```
+
 ### 5.6 Pipelining Queries
+
+#### 5.6.1 Using `WITH` for aggregation
+
+```cypher
+MATCH (:Movie {title:'Toy Story'})-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(m)
+WHERE m.imdbRating IS NOT NULL
+WITH g.name AS genre, count(m) AS moviesInCommon, sum(m.imdbRating) AS total
+RETURN genre, moviesInCommon, total/moviesInCommon AS score
+ORDER BY score DESC
+```
+
+```cypher
+MATCH (u:User {name: "Misty Williams"})-[r:RATED]->(:Movie)
+WITH u, avg(r.rating) AS average
+MATCH (u)-[r:RATED]->(m:Movie)
+WHERE r.rating < average
+RETURN average, m.title AS movie, r.rating as rating
+ORDER BY rating DESC
+```
+
+#### 5.6.2 Using `WITH` for collecting
+
+```cypher
+MATCH (m:Movie)--(a:Actor)
+WHERE m.title CONTAINS 'New York'
+WITH m, collect(a.name) AS actors, count(*) AS numActors
+RETURN m.title AS movieTitle, actors
+ORDER BY numActors DESC
+```
+
+![5.6.2_1](img/5.6.2_1.png)
+
+```cypher
+MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor)
+WHERE m.title CONTAINS 'New York'
+WITH m, collect (a.name) AS actors,
+count(*) AS numActors
+ORDER BY numActors DESC
+RETURN collect(m { .title, actors, numActors }) AS movies
+```
+
+![5.6.2_2](img/5.6.2_2.png)
+
+#### 5.6.3 Using `LIMIT` early
+
+A **best practice** is to execute queries that minimze the number of rows processed in the query, one way to do that is to limit early in the query.
+
+#### 5.6.4 Use `DISTINCT` when necessary
 
 ### 5.7 Highest Rated Tom Hanks Movie
 
+Question: determine the highest average rating for a Tom Hanks movie
+
+```cypher
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[r:RATED]-(:User)
+WHERE p.name = "Tom Hanks"
+WITH m, avg(r.rating) AS avgRating
+WHERE avgRating > 4
+RETURN m.title AS Movie, avgRating AS `AverageRating`
+ORDER BY avgRating DESC
+```
+
+![5.7](img/5.7.png)
+
 ### 5.8 Highest Average Rating
+
+Question: what is the highest average rating for a moview acted in by Tom Hanks?
+
+Answer is 4.2
 
 ### 5.9 Unwinding Lists
 
+`UNWIND` returns a row for each element of a list.
+
+```cypher
+MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
+WHERE a.name = 'Tom Hanks'
+UNWIND m.languages AS lang
+RETURN m.title AS movie, m.languages AS languages, lang AS language
+```
+
+![5.9](img/5.9.png)
+
 ### 5.10 UK Movies
+
+Question: use `UNWIND` to find the number of movies in each country
+
+```cypher
+MATCH (m:Movie)
+UNWIND m.countries AS coun
+WITH m, trim(coun) AS country
+WITH country, collect(m.title) AS movies
+RETURN country, size(movies)
+```
+
+Answer is 1386 Movies in UK country
+
+![5.10](img/5.10.png)
 
 ### 5.11 Swizerland Movies
 
+Question: Add a `WHERE` clause to filter the movies produced in Switzerland
+
+```cypher
+MATCH (m:Movie)
+UNWIND m.countries AS coun
+WITH m, trim(coun) AS country
+WITH country, collect(m.title) AS movies
+WHERE country = "Switzerland"
+RETURN country, size(movies)
+```
+
+Answer is 50 movies produced in Switzerland.
+
 ## 6. Reducing Memory
+
+Limiting Results and Filtering your queries are the easiest ways to reduce memory requirements.
+- Using `CALL` to perform a subquery
+- Using `UNION` to combine the results of multiple queries
 
 ### 6.1 Subqueries
 
-### 6.2 Using Subqueries
+A subquery is a set of Cypher statements that execute within their own scope.
+
+A subquery is typically called from an outer enclosing query.
+
+Using a subquery, you can limit the number of rows that need to be processed.
+
+Some important things about a subquery:
+- A subquery returns values referred to by the variables in the `RETURN` clause
+- A subquery cannot return variables with the same name used in the enclosing query
+- You must explicitly pass in variables from the enclosing query to a subquery
+
+#### 6.1.1 Performing subqueires with `CALL`
+
+```cypher
+CALL {
+    MATCH (m:Movie {year: 2000})
+    RETURN m
+    ORDER BY m.imdbRating DESC
+    LIMIT 10
+}
+MATCH (:User)-[r:RATED]->(m)
+RETURN m.title, round(avg(r.rating),2)
+```
+
+![6.1.1](img/6.1.1.png)
+
+The subquery is demarcated by the `{...}` pair.
+
+#### 6.1.2 Passing variables into a subquery
+
+```cypher
+MATCH (m:Movie)
+CALL {
+    WITH m
+    MATCH (m)<-[r:RATED]-(u:User)
+    WHERE r.rating = 5
+    RETURN count(u) AS numReviews
+}
+RETURN m.title, numReviews
+ORDER BY numReviews DESC
+```
+
+![6.1.2](img/6.1.2.png)
+
+#### 6.1.3 Combining query results with `UNION`
+
+#### 6.1.4 Using `UNION` with subqueries
+
+### 6.2 Using 
+
+Question: find the number of movies in each genre that have a `imdbRating` greater than 9
+
+```cypher
+MATCH (g:Genre)
+CALL { 
+    WITH g
+    MATCH (g)<-[:IN_GENRE]-(m) WHERE m.imdbRating > 9
+    RETURN count(m) AS numMovies
+}
+RETURN g.name AS Genre, numMovies 
+ORDER BY numMovies DESC
+```
+
+![6.2](img/6.2.png)
 
 ### 6.3 Combining Results
+
+```cypher
+MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
+WHERE m.year = 2015
+RETURN 
+    "Actor" AS type,
+    p.name AS name,
+    collect(m.title) AS movies
+UNION ALL
+MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
+WHERE m.year = 2015
+RETURN 
+    "Actor" AS type,
+    p.name AS name,
+    collect(m.title) AS movies
+```
+
+![6.3](img/6.3.png)
 
 ## 7. Using Parameters
 
 ### 7.1 Parameters in Cypher
 
+A best practice is to parameterize values in your Cypher statements.
+
+#### 7.1.1 Using Cypher parameters
+
+```cypher
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.name = $actorName
+RETURN m.released AS releaseDate,
+m.title AS title
+ORDER BY m.released DESC
+```
+
+#### 7.1.2 Setting a parameter
+
+```cypher
+:param actorName: 'Tom Hanks'
+```
+
+![7.1.2](img/7.1.2.png)
+
+Now, execute statements in 7.1.1, with following result:
+
+![7.1.1](img/7.1.1.png)
+
+#### 7.1.3 Setting Integers
+
+Due to a discrepancy between integers in JavaScript and the Neo4j type system, any integers are converted to floating point values when the parameter is set. This is designed to avoid any data loss on large numbers.
+
+```cypher
+:param number: 10
+```
+
+![7.1.3_1](img/7.1.3_1.png)
+
+Instead, to force the number to be an integer, you can use the `⇒` operator.
+
+```cypher
+:param number=> 10
+```
+
+![7.1.3_2](img/7.1.3_2.png)
+
+#### 7.1.4 Setting multiple parameters
+
+You can also use the JSON-style syntax to set all of the parameters in your Neo4j Browser session.
+
+The values you can specify in this object are numbers, strings, and booleans.
+
+```cypher
+:params {actorName: 'Tom Cruise', movieName: 'Top Gun'}
+```
+
+![7.1.4](img/7.1.4.png)
+
+#### 7.1.5 Using multiple parameters
+
+#### 7.1.6 Viewing parameters
+
+```cypher
+:params
+```
+
+![7.1.6](img/7.1.6.png)
+
+#### 7.1.7 Removing parameters
+
+```python
+:params {}
+```
+
 ### 7.2 Setting Parameters
 
-### 7.3 Application Examples Using Parameters
+### 7.3 Using Parameters
+
+### 7.4 Application Examples Using Parameters
