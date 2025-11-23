@@ -40,7 +40,7 @@ Updated at: 2025-11-22
 
 ### 2.4 Ordering Multiple Values
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE m.imdbRating IS NOT NULL AND p.born IS NOT NULL
 RETURN p.name, p.born, m.title, m.imdbRating
@@ -54,14 +54,14 @@ Answer: Scott Grimes
 
 What movies have reviews:
 
-```SQL
+```cypher
 MATCH ()-[:RATED]->(m:Movie)
 RETURN DISTINCT m.title
 ```
 
 ### 2.6 Limiting Results
 
-```SQL
+```cypher
 MATCH (m:Movie)
 WHERE m.imdbRating IS NOT NULL
 RETURN m.title, m.imdbRating
@@ -74,7 +74,7 @@ Question: the lowest m.imdbRating = 1.6, while there're two movies - "Ring of Te
 
 Without `DISTINCT`: there're 183 rows
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN | DIRECTED]->(m)
 WHERE m.title = 'Toy Story'
 MATCH (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(p2:Person)
@@ -83,7 +83,7 @@ RETURN p.name, p2.name
 
 With `DISCTING`: there're 166 rows
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN | DIRECTED]->(m)
 WHERE m.title = 'Toy Story'
 MATCH (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(p2:Person)
@@ -92,7 +92,7 @@ RETURN DISTINCT p.name, p2.name
 
 ### 2.8 Map Projections to Return Data
 
-```SQL
+```cypher
 MATCH (p:Person)
 WHERE p.name CONTAINS "Thomas"
 RETURN p AS person
@@ -105,7 +105,7 @@ It returns `identity`, `labels`, `properties`, `elementsId` in every row, not re
 
 Return the title and release date as Movie objects for all Woody Allen movies:
 
-```SQL
+```cypher
 MATCH (d:Director)-[:DIRECTED]->(m:Movie)
 WHERE d.name = 'Woody Allen'
 RETURN m {.title, .released} AS Movie
@@ -114,7 +114,7 @@ ORDER BY m.released
 
 ### 2.9 Change Resutls Returned
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE
     m.title CONTAINS 'Toy Story' AND
@@ -128,7 +128,7 @@ RETURN
 
 ![2.9_1](img/2.9_1.png)
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE
     m.title CONTAINS 'Toy Story' AND
@@ -144,7 +144,7 @@ RETURN
 
 Conditional data return using `CASE`:
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE
     m.title CONTAINS 'Toy Story'
@@ -168,7 +168,7 @@ AS ageThisYear_or_ageOfDied
 
 Question
 
-```SQL
+```cypher
 MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
 WHERE m.title CONTAINS 'Toy Story'
 RETURN m.title AS movie,
@@ -180,7 +180,7 @@ AS ageThisYear
 
 My query:
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE m.title CONTAINS 'Toy Story'
 RETURN DISTINCT
@@ -194,7 +194,7 @@ AS age
 
 ### 2.10 Conditionally Returning Data
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = "Charlie Chaplin"
 RETURN m.title AS movie,
@@ -212,7 +212,7 @@ ORDER BY runtime
 
 Using `count()` to aggregate data:
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = "Tom Hanks"
 RETURN p.name AS actorName, count(*) AS numMovies
@@ -220,7 +220,7 @@ RETURN p.name AS actorName, count(*) AS numMovies
 
 ![3.1_1](img/3.1_1.png)
 
-```SQL
+```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Director)
 RETURN
     p.name as actorName,
