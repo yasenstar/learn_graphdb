@@ -85,7 +85,7 @@
 </hook>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<node TEXT="1. Indexes and Constraints in Neo4j" POSITION="bottom_or_right" ID="ID_936933566" CREATED="1766736119713" MODIFIED="1766736127955">
+<node TEXT="1. Indexes and Constraints in Neo4j" FOLDED="true" POSITION="bottom_or_right" ID="ID_936933566" CREATED="1766736119713" MODIFIED="1766736127955">
 <node TEXT="1.1 Constraints and Indexes in Neo4j" ID="ID_242000445" CREATED="1766736174193" MODIFIED="1766736182017">
 <node TEXT="A constraint is implemented internally as an index and is used to constrain what is added to the graph." ID="ID_133593147" CREATED="1766737120380" MODIFIED="1766737793160">
 <node TEXT="Three type of Constraints" ID="ID_1819908468" CREATED="1766738617443" MODIFIED="1766738624520">
@@ -113,9 +113,59 @@
 <node TEXT="The index on multiple properties or relationships called Composite Index." ID="ID_1298354475" CREATED="1766738666210" MODIFIED="1766738690870"/>
 </node>
 </node>
-<node TEXT="1.2 Identifying What Constraints and Indexes to Create" ID="ID_1688858449" CREATED="1766736182191" MODIFIED="1766736193762"/>
+<node TEXT="1.2 Identifying What Constraints and Indexes to Create" ID="ID_1688858449" CREATED="1766736182191" MODIFIED="1766736193762">
+<node TEXT="Steps of Creating Constraints and Indexes" ID="ID_1636507771" CREATED="1766752778305" MODIFIED="1766752795801">
+<node TEXT="1) Identify constraints" ID="ID_1761460794" CREATED="1766752795803" MODIFIED="1766752805341"/>
+<node TEXT="2) Create constraints" ID="ID_865110068" CREATED="1766752805785" MODIFIED="1766752817930"/>
+<node TEXT="3) Load the data" ID="ID_310814504" CREATED="1766752818105" MODIFIED="1766752822372"/>
+<node TEXT="4) Identify indexes" ID="ID_469322799" CREATED="1766752825609" MODIFIED="1766752835114"/>
+<node TEXT="5) Create indexes" ID="ID_1695889144" CREATED="1766752835560" MODIFIED="1766752840802"/>
 </node>
-<node TEXT="2. Using Constraints in Neo4j" POSITION="bottom_or_right" ID="ID_567924869" CREATED="1766736128113" MODIFIED="1766736134213"/>
+<node TEXT="When to create indexes and constraints?" ID="ID_135788748" CREATED="1766752714533" MODIFIED="1766752735923">
+<node TEXT="Create the constraints before you load data into the graph" ID="ID_1385950185" CREATED="1766752735927" MODIFIED="1766752750270"/>
+<node TEXT="Create the indexes after you load the data into the graph" ID="ID_495636228" CREATED="1766752750434" MODIFIED="1766752763940"/>
+</node>
+</node>
+</node>
+<node TEXT="2. Using Constraints in Neo4j" POSITION="bottom_or_right" ID="ID_567924869" CREATED="1766736128113" MODIFIED="1766736134213">
+<node TEXT="2.1 Constraints in Neo4j" ID="ID_302713476" CREATED="1766752878999" MODIFIED="1766752887946">
+<node TEXT="Uniqueness constraints" ID="ID_62610042" CREATED="1766753894199" MODIFIED="1766753899377">
+<node TEXT="A graph data modeling best practice is to always identify a node with a given label in the graph where a node will typically represent the business entities in your application." POSITION="bottom_or_right" ID="ID_1103214996" CREATED="1766753368083" MODIFIED="1766753407045"/>
+<node TEXT="Neo4j implements a uniqueness constraints as an index." POSITION="bottom_or_right" ID="ID_1838114360" CREATED="1766753495698" MODIFIED="1766753512356"/>
+<node TEXT="MERGE is the best practice for creating nodes and relationships in the graph" POSITION="bottom_or_right" ID="ID_1459785714" CREATED="1766753785289" MODIFIED="1766753801989"/>
+</node>
+<node TEXT="Existence constraints" ID="ID_355541417" CREATED="1766753910735" MODIFIED="1766753925584"/>
+<node TEXT="Key constraints" ID="ID_167887151" CREATED="1766754110357" MODIFIED="1766754114119">
+<node TEXT="A key is a specialized type of constraint in the graph that enables your to define a set of properties for a node label or relationship type that must:" ID="ID_647244209" CREATED="1766754121964" MODIFIED="1766754162139">
+<node TEXT="1) Exist for all nodes or relationships with taht label or type" ID="ID_523505670" CREATED="1766754162142" MODIFIED="1766754176501"/>
+<node TEXT="2) Be unique for all values" ID="ID_939324315" CREATED="1766754176996" MODIFIED="1766754185707"/>
+</node>
+</node>
+</node>
+<node TEXT="2.2 Creating Uniqueness Constraints" ID="ID_7649270" CREATED="1766752888112" MODIFIED="1766752895499">
+<node TEXT="Syntax (for a single property):" ID="ID_1972242250" CREATED="1766754591137" MODIFIED="1766754933690">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE x.&lt;property_key&gt; IS UNIQUE" ID="ID_2342652" CREATED="1766754596719" MODIFIED="1766755066340">
+<font SIZE="10"/>
+</node>
+</node>
+<node TEXT="You typically create constraints before the data is loaded into the graph" ID="ID_1555725088" CREATED="1766754872760" MODIFIED="1766754893544"/>
+<node TEXT="Syntax (for multiple properties):" ID="ID_366882706" CREATED="1766754898647" MODIFIED="1766754947911">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE (x.&lt;property_key1&gt;, x.&lt;property_key2&gt;) IS UNIQUE" ID="ID_1394778544" CREATED="1766754947914" MODIFIED="1766755066328">
+<font SIZE="10"/>
+</node>
+</node>
+</node>
+<node TEXT="2.3 Creating Existence Constraints for Node Properties" ID="ID_945499683" CREATED="1766752910199" MODIFIED="1766752920527">
+<node TEXT="Existence constraints are only available in Enterprise Edition" ID="ID_1719439188" CREATED="1766756932573" MODIFIED="1766757030157"/>
+<node TEXT="Syntax (on a node):" ID="ID_154489689" CREATED="1766757036357" MODIFIED="1766757053652">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE x.&lt;property_key&gt; IS NOT NULL" ID="ID_1916990486" CREATED="1766757053654" MODIFIED="1766757093518"/>
+</node>
+</node>
+<node TEXT="2.4 Creating Existing Constraints on Relationship Properties" ID="ID_821011649" CREATED="1766752920807" MODIFIED="1766752943600"/>
+<node TEXT="2.5 Creating Node Key Constraints" ID="ID_177797768" CREATED="1766752945167" MODIFIED="1766752953351"/>
+<node TEXT="2.6 Managing Constraints in Neo4j" ID="ID_1583148804" CREATED="1766752954543" MODIFIED="1766752963250"/>
+<node TEXT="2.7 Dropping Constraints" ID="ID_36500850" CREATED="1766752963406" MODIFIED="1766752968593"/>
+</node>
 <node TEXT="3. Using Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1772466565" CREATED="1766736140224" MODIFIED="1766736145538"/>
 <node TEXT="4. Using Full-text Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_640817603" CREATED="1766736145696" MODIFIED="1766736153298"/>
 <node TEXT="5. Index Usage in Neo4j" POSITION="bottom_or_right" ID="ID_1637802720" CREATED="1766736153472" MODIFIED="1766736162513"/>
