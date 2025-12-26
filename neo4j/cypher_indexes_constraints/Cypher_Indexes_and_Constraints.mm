@@ -1,0 +1,123 @@
+<map version="freeplane 1.12.1">
+<!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
+<node TEXT="Cypher Indexes and Constraints&#xa;(Neo4j Graph Academy)" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1766736044378" VGAP_QUANTITY="3 pt"><hook NAME="MapStyle" background="#d6e8e8ff" zoom="0.826">
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/light_sky_element_template.mm" fit_to_viewport="false" show_icons="BESIDE_NODES"/>
+    <tags category_separator="::"/>
+
+<map_styles>
+<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
+<font SIZE="24"/>
+<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="default" ID="ID_4172522" ICON_SIZE="12 pt" FORMAT_AS_HYPERLINK="false" COLOR="#051552" BACKGROUND_COLOR="#5cd5e8" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_WIDTH_LIKE_EDGE="false" BORDER_WIDTH="1.7 px" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#1164b0" BORDER_DASH_LIKE_EDGE="true" BORDER_DASH="SOLID" VGAP_QUANTITY="3 pt">
+<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_4172522" STARTINCLINATION="116.25 pt;0 pt;" ENDINCLINATION="116.25 pt;28.5 pt;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
+<font NAME="SansSerif" SIZE="10" BOLD="false" STRIKETHROUGH="false" ITALIC="false"/>
+<edge STYLE="bezier" COLOR="#051552" WIDTH="2" DASH="SOLID"/>
+<richcontent TYPE="DETAILS" CONTENT-TYPE="plain/auto"/>
+<richcontent TYPE="NOTE" CONTENT-TYPE="plain/auto"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.details" COLOR="#fff024" BACKGROUND_COLOR="#000000"/>
+<stylenode LOCALIZED_TEXT="defaultstyle.tags">
+<font SIZE="10"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.attributes">
+<font SIZE="9"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.note" COLOR="#000000" BACKGROUND_COLOR="#f6f9a1" TEXT_ALIGN="LEFT">
+<icon BUILTIN="clock2"/>
+<font SIZE="10" ITALIC="true"/>
+<edge COLOR="#000000"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.floating">
+<edge STYLE="hide_edge"/>
+<cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.selection" COLOR="#ffffff" BACKGROUND_COLOR="#cc7212" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#1164b0"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="styles.important" ID="ID_1823054225" COLOR="#fff024" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#9d5e19">
+<icon BUILTIN="yes"/>
+<arrowlink COLOR="#9d5e19" TRANSPARENCY="255" DESTINATION="ID_1823054225"/>
+<font SIZE="11" BOLD="true"/>
+<edge COLOR="#9d5e19"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="styles.flower" COLOR="#ffffff" BACKGROUND_COLOR="#255aba" STYLE="oval" TEXT_ALIGN="CENTER" BORDER_WIDTH_LIKE_EDGE="false" BORDER_WIDTH="22 pt" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#f9d71c" BORDER_DASH_LIKE_EDGE="false" BORDER_DASH="CLOSE_DOTS" MAX_WIDTH="6 cm" MIN_WIDTH="3 cm"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#ffffff" BACKGROUND_COLOR="#053d8b" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="10 pt" SHAPE_VERTICAL_MARGIN="10 pt" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#2c2b29" BORDER_DASH_LIKE_EDGE="true">
+<font SIZE="18"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,1" COLOR="#ffffff" BACKGROUND_COLOR="#1164b0" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_COLOR="#2c2b29">
+<font SIZE="16"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,2" COLOR="#ffffff" BACKGROUND_COLOR="#298bc8" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_COLOR_LIKE_EDGE="true" BORDER_COLOR="#f0f0f0">
+<font SIZE="14"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,3" COLOR="#ffffff" BACKGROUND_COLOR="#3fb7db" STYLE="bubble" SHAPE_HORIZONTAL_MARGIN="8 pt" SHAPE_VERTICAL_MARGIN="5 pt" BORDER_COLOR_LIKE_EDGE="true" BORDER_COLOR="#f0f0f0">
+<font SIZE="12"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,4" COLOR="#051552" BACKGROUND_COLOR="#5cd5e8" BORDER_COLOR_LIKE_EDGE="true" BORDER_COLOR="#f0f0f0">
+<font SIZE="11"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,5" BORDER_COLOR_LIKE_EDGE="true" BORDER_COLOR="#f0f0f0">
+<font SIZE="11"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,6" BORDER_COLOR_LIKE_EDGE="true" BORDER_COLOR="#f0f0f0">
+<font SIZE="10"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,7" BORDER_COLOR="#f0f0f0">
+<font SIZE="10"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,8" BORDER_COLOR="#f0f0f0">
+<font SIZE="10"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,9" BORDER_COLOR="#f0f0f0">
+<font SIZE="10"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,10" BORDER_COLOR="#f0f0f0">
+<font SIZE="9"/>
+</stylenode>
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level,11" BORDER_COLOR="#f0f0f0">
+<font SIZE="9"/>
+</stylenode>
+</stylenode>
+</stylenode>
+</map_styles>
+</hook>
+<hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
+<font BOLD="true"/>
+<node TEXT="1. Indexes and Constraints in Neo4j" POSITION="bottom_or_right" ID="ID_936933566" CREATED="1766736119713" MODIFIED="1766736127955">
+<node TEXT="1.1 Constraints and Indexes in Neo4j" ID="ID_242000445" CREATED="1766736174193" MODIFIED="1766736182017">
+<node TEXT="A constraint is implemented internally as an index and is used to constrain what is added to the graph." ID="ID_133593147" CREATED="1766737120380" MODIFIED="1766737793160">
+<node TEXT="Three type of Constraints" ID="ID_1819908468" CREATED="1766738617443" MODIFIED="1766738624520">
+<node TEXT="Uniqueness for a single node property value" POSITION="bottom_or_right" ID="ID_687937766" CREATED="1766737796200" MODIFIED="1766737825947"/>
+<node TEXT="Existence for a property of a node or relationship" POSITION="bottom_or_right" ID="ID_1285660333" CREATED="1766737826120" MODIFIED="1766737836299"/>
+<node TEXT="Existence and uniqueness for a set of node property value (called a Node key)" POSITION="bottom_or_right" ID="ID_496281459" CREATED="1766737836472" MODIFIED="1766737853994"/>
+</node>
+</node>
+<node TEXT="An index in Neo4j is a data structure that allows the graph engine to retrieve data quickly." ID="ID_1443700301" CREATED="1766738272836" MODIFIED="1766738476537">
+<node TEXT="After the data is loaded, creating indexes can make queries perform faster." ID="ID_212380497" CREATED="1766738561571" MODIFIED="1766738584228"/>
+<node TEXT="Using indexes makes writing data slower, but retrieving is faster." ID="ID_1334452674" CREATED="1766738584403" MODIFIED="1766738599621"/>
+<node TEXT="Type of indexes in Neo4j" ID="ID_613125490" CREATED="1766738631076" MODIFIED="1766738641219">
+<node TEXT="RANGE" ID="ID_1560928689" CREATED="1766738641223" MODIFIED="1766738719272">
+<icon BUILTIN="button_ok"/>
+</node>
+<node TEXT="LOOKUP" ID="ID_1965726357" CREATED="1766738644162" MODIFIED="1766738719274">
+<icon BUILTIN="button_ok"/>
+</node>
+<node TEXT="TEXT" ID="ID_823226353" CREATED="1766738646498" MODIFIED="1766738719274">
+<icon BUILTIN="button_ok"/>
+</node>
+<node TEXT="POINT" ID="ID_1853839953" CREATED="1766738648226" MODIFIED="1766738649364"/>
+<node TEXT="Full-text" ID="ID_1815321537" CREATED="1766738649522" MODIFIED="1766738653220"/>
+</node>
+<node TEXT="The index on multiple properties or relationships called Composite Index." ID="ID_1298354475" CREATED="1766738666210" MODIFIED="1766738690870"/>
+</node>
+</node>
+<node TEXT="1.2 Identifying What Constraints and Indexes to Create" ID="ID_1688858449" CREATED="1766736182191" MODIFIED="1766736193762"/>
+</node>
+<node TEXT="2. Using Constraints in Neo4j" POSITION="bottom_or_right" ID="ID_567924869" CREATED="1766736128113" MODIFIED="1766736134213"/>
+<node TEXT="3. Using Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1772466565" CREATED="1766736140224" MODIFIED="1766736145538"/>
+<node TEXT="4. Using Full-text Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_640817603" CREATED="1766736145696" MODIFIED="1766736153298"/>
+<node TEXT="5. Index Usage in Neo4j" POSITION="bottom_or_right" ID="ID_1637802720" CREATED="1766736153472" MODIFIED="1766736162513"/>
+</node>
+</map>
