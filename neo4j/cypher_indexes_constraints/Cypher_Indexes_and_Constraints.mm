@@ -160,13 +160,62 @@
 <node TEXT="Syntax (on a node):" ID="ID_154489689" CREATED="1766757036357" MODIFIED="1766757053652">
 <node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE x.&lt;property_key&gt; IS NOT NULL" ID="ID_1916990486" CREATED="1766757053654" MODIFIED="1766757093518"/>
 </node>
+<node TEXT="You typically create constraints before the data is loaded into the graph" ID="ID_1920008392" CREATED="1766757284445" MODIFIED="1766757304133"/>
 </node>
-<node TEXT="2.4 Creating Existing Constraints on Relationship Properties" ID="ID_821011649" CREATED="1766752920807" MODIFIED="1766752943600"/>
-<node TEXT="2.5 Creating Node Key Constraints" ID="ID_177797768" CREATED="1766752945167" MODIFIED="1766752953351"/>
-<node TEXT="2.6 Managing Constraints in Neo4j" ID="ID_1583148804" CREATED="1766752954543" MODIFIED="1766752963250"/>
-<node TEXT="2.7 Dropping Constraints" ID="ID_36500850" CREATED="1766752963406" MODIFIED="1766752968593"/>
+<node TEXT="2.4 Creating Existing Constraints on Relationship Properties" ID="ID_821011649" CREATED="1766752920807" MODIFIED="1766752943600">
+<node TEXT="Syntax (for a relationship)" ID="ID_187503837" CREATED="1766761314697" MODIFIED="1766761364584">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR ()-[x:&lt;RELATIOINSHIP_TYPE&gt;]-()&#xa;REQUIRE x.&lt;property_key&gt; IS NOT NULL" ID="ID_654856167" CREATED="1766761364587" MODIFIED="1766761448092"/>
 </node>
-<node TEXT="3. Using Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1772466565" CREATED="1766736140224" MODIFIED="1766736145538"/>
+</node>
+<node TEXT="2.5 Creating Node Key Constraints" ID="ID_177797768" CREATED="1766752945167" MODIFIED="1766752953351">
+<node TEXT="A Node key is a specialized type of constraint for the properties of a node, it combines existence with uniqueness." ID="ID_542097668" CREATED="1766761911061" MODIFIED="1766761945392"/>
+<node TEXT="Syntax (for a single property)" ID="ID_1142070707" CREATED="1766761957346" MODIFIED="1766761967210">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE x.&lt;property_key&gt; IS NODE KEY" ID="ID_849163220" CREATED="1766761967213" MODIFIED="1766762106316"/>
+</node>
+<node TEXT="Syntax (for multiple properties)" ID="ID_1933227329" CREATED="1766762085763" MODIFIED="1766762094914">
+<node TEXT="CREATE CONSTRAINT &lt;constraint_name&gt; IF NOT EXISTS&#xa;FOR (x:&lt;node_label&gt;)&#xa;REQUIRE (x.&lt;property_key1&gt;, x.&lt;property_key2&gt;) IS NODE KEY" ID="ID_1633018913" CREATED="1766762094917" MODIFIED="1766762163027"/>
+</node>
+</node>
+<node TEXT="2.6 Managing Constraints in Neo4j" ID="ID_1583148804" CREATED="1766752954543" MODIFIED="1766752963250">
+<node TEXT="Creating constraints (CREATE CONSTRAINT...)" ID="ID_1696800484" CREATED="1766762363224" MODIFIED="1766762379459"/>
+<node TEXT="Listing constraints (SHOW CONSTRAINTS)" ID="ID_1648360756" CREATED="1766762379600" MODIFIED="1766762392027"/>
+</node>
+<node TEXT="2.7 Dropping Constraints" ID="ID_36500850" CREATED="1766752963406" MODIFIED="1766752968593">
+<node TEXT="DROP CONSTRAINT &lt;constraint_name&gt;" POSITION="bottom_or_right" ID="ID_736550126" CREATED="1766762408481" MODIFIED="1766762420452"/>
+<node TEXT="Creating list of constraints to drop" POSITION="bottom_or_right" ID="ID_1322782427" CREATED="1766762450152" MODIFIED="1766762459580">
+<node TEXT="SHOW CONSTRAINTS YIELD name RETURN collect(&apos;DROP CONSTRAINT &apos; + name + &apos;;&apos;) AS Statements" ID="ID_29981924" CREATED="1766762475376" MODIFIED="1766762523667"/>
+</node>
+<node TEXT="Using APOC for dropping all indexes and constraints" POSITION="bottom_or_right" ID="ID_427327568" CREATED="1766762536432" MODIFIED="1766762549240">
+<node TEXT="CALL apoc.schema.assert({}, {}, tru)" ID="ID_1860079770" CREATED="1766762549245" MODIFIED="1766762563156"/>
+</node>
+</node>
+</node>
+<node TEXT="3. Using Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1772466565" CREATED="1766736140224" MODIFIED="1766736145538">
+<node TEXT="3.1 Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1606434730" CREATED="1766762392208" MODIFIED="1766762818834">
+<node TEXT="Indexes are used to provide faster Cypher queries." ID="ID_787569994" CREATED="1766762985791" MODIFIED="1766762998691"/>
+<node TEXT="An index in Neo4j is a data structure that allows the graph engine to retrieve data quickly." ID="ID_751401369" CREATED="1766763078847" MODIFIED="1766763098306"/>
+<node TEXT="Using indexes makes writing data slower, but retrieving it faster." ID="ID_283984857" CREATED="1766763130438" MODIFIED="1766763148153"/>
+<node TEXT="Types of Indexes" ID="ID_971257419" CREATED="1766763158943" MODIFIED="1766763166983">
+<node TEXT="Uniqueness constraints" ID="ID_1325878099" CREATED="1766763166987" MODIFIED="1766763173248"/>
+<node TEXT="RANGE" ID="ID_463796942" CREATED="1766763173398" MODIFIED="1766763175114"/>
+<node TEXT="Composite" ID="ID_1554868108" CREATED="1766763175279" MODIFIED="1766763177594"/>
+<node TEXT="TEXT" ID="ID_957405409" CREATED="1766763177758" MODIFIED="1766763180945"/>
+<node TEXT="POINT" ID="ID_218744950" CREATED="1766763181214" MODIFIED="1766763183090"/>
+<node TEXT="Full-text" ID="ID_1055466931" CREATED="1766763183358" MODIFIED="1766763186329"/>
+</node>
+</node>
+<node TEXT="3.2 Creating Single Property Indexes" POSITION="bottom_or_right" ID="ID_311695092" CREATED="1766762819006" MODIFIED="1766762836761"/>
+<node TEXT="3.3 Creating a RANGE Index on a Node Property" POSITION="bottom_or_right" ID="ID_1838263042" CREATED="1766762837031" MODIFIED="1766762851880"/>
+<node TEXT="3.4 Creating a RANGE Index on a Relationship Property" POSITION="bottom_or_right" ID="ID_1672130984" CREATED="1766762884575" MODIFIED="1766762897059"/>
+<node TEXT="3.5 Creating Multi-Property Indexes" POSITION="bottom_or_right" ID="ID_943182062" CREATED="1766762852008" MODIFIED="1766762883691"/>
+<node TEXT="3.6 Creating a Composite Index on a Node Property" POSITION="bottom_or_right" ID="ID_1995193974" CREATED="1766762897863" MODIFIED="1766762911633"/>
+<node TEXT="3.7 Creating TEXT Indexes" POSITION="bottom_or_right" ID="ID_1208306943" CREATED="1766762911823" MODIFIED="1766762918603"/>
+<node TEXT="3.8 Using a TEXT index" POSITION="bottom_or_right" ID="ID_1279579003" CREATED="1766762918760" MODIFIED="1766762924779"/>
+<node TEXT="3.9 Using Full-text Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_1937938993" CREATED="1766762924959" MODIFIED="1766762943522"/>
+<node TEXT="3.10 Full-text Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_174751735" CREATED="1766762943695" MODIFIED="1766762952873"/>
+<node TEXT="3.11 Creating and Using Full-text Indexes" POSITION="bottom_or_right" ID="ID_1808817897" CREATED="1766762953030" MODIFIED="1766762963443"/>
+<node TEXT="3.12 Using a full-text Index on a Relationship Property" POSITION="bottom_or_right" ID="ID_1384140254" CREATED="1766762963622" MODIFIED="1766762975833"/>
+</node>
 <node TEXT="4. Using Full-text Indexes in Neo4j" POSITION="bottom_or_right" ID="ID_640817603" CREATED="1766736145696" MODIFIED="1766736153298"/>
 <node TEXT="5. Index Usage in Neo4j" POSITION="bottom_or_right" ID="ID_1637802720" CREATED="1766736153472" MODIFIED="1766736162513"/>
 </node>
