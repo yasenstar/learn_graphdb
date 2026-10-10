@@ -5,6 +5,7 @@
   - [Graph Technology Landscape 2024](#graph-technology-landscape-2024)
   - [Information on Graph](#information-on-graph)
   - [My Learnings on Graph](#my-learnings-on-graph)
+  - [Other Reference Graph DB Tools](#other-reference-graph-db-tools)
 
 ## Classification of Databases
 
@@ -31,6 +32,11 @@ Thanks for posting by [Linkurious](https://www.linkedin.com/company/linkurious/)
   - [Cypher Fundamentals (English)](neo4j/cypher/cypher_fundamentals/)
   - [Graph Data Modeling Fundamentals (English)](neo4j/graph_data_modeling/) - learning
 
+## Other Reference Graph DB Tools
+
+- [minigraf](https://github.com/project-minigraf/minigraf/): Embedded graph memory for AI agents, mobile apps, and the browser -- the SQLite of bi-temporal graph databases
+
+
 ---
 
-Updated at: 2025-11-07
+Updated at: 2026-10-10
